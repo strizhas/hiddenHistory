@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+{% if maps %}
+    <ul>
+
+      {% for map in maps %}
+      <li class="map-list-item">
+      	<div class="map-img-preview">
+			<a href="{{ map.get_absolute_url }}">
+				<img  width="200" src="/media/{{ map.img }}"/>
+			</a>
+		</div>
+      	<div class="map-list-right-section">
+        	<div class="map-creation-date help-text">город: {{ map.location }}</div>
+			<div class="map-creation-date help-text">координаты: {{ map.position }}</div>
+        	<div class="map-author help-text">автор: {{ map.uploader }}</div>
+
+    	</div>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Пока ещё не создано ни одной карты</p>
+{% endif %}
+{% endblock %}
