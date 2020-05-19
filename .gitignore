@@ -11,6 +11,15 @@ uwsgi.ini
 log/**
 !log/placeholder
 
+# виртуальное окружение
+/bin/
+/bin/*
+
+/lib/
+/lib/*
+
+pyvenv.cfg
+
 # Приватные файлы
 /private/*
 token.pickle
