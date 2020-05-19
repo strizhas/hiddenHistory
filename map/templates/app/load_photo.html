@@ -1,0 +1,27 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
+{% endblock %}
+{% block content %}
+
+    <form action="/upload_with_exif" method="post" class="ajax-update-form" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="input-element">
+            <input type="file" name="files" multiple/>
+        </div>
+        <div class="input-element">
+            <div class="form-operation-status"></div>
+            <input type="submit" value="загрузить">
+        </div>
+        <div class="operation-result-message"></div>
+    </form>
+<script type="text/javascript">
+    $('.ajax-update-form').on('submit', function(event) {
+        var form = $(this);
+        submitUpdateForm(event, this, function() {
+            console.log("ok")
+        });
+    })
+</script>
+{% endblock %}

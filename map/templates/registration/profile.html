@@ -1,0 +1,13 @@
+{% extends "base_low_access.html" %}
+
+{% block content %}
+профиль
+
+<form id="logoutform" method="POST" action="{% url 'logout' %}">
+{% csrf_token %}
+<input type="hidden">
+</form>
+
+ <a href="#" onClick="document.getElementById('logoutform').submit()"><button type="button">Logout</button></a>
+
+{% endblock %}

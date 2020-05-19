@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../DJANGO/django-location-field-master/example/.idea/example.iml" filepath="$PROJECT_DIR$/../../DJANGO/django-location-field-master/example/.idea/example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/hiddenhistory.iml" filepath="$PROJECT_DIR$/.idea/hiddenhistory.iml" />
+    </modules>
+  </component>
+</project>
