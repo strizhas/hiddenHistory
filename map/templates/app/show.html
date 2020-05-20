@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
 
+
 {% if maps %}
     <ul>
 
@@ -8,7 +9,7 @@
       <li class="map-list-item">
       	<div class="map-img-preview">
 			<a href="{{ map.get_absolute_url }}">
-				<img  width="200" src="/media/{{ map.img }}"/>
+				<img  width="200" src="/media/{{ map.img_small }}"/>
 			</a>
 		</div>
       	<div class="map-list-right-section">

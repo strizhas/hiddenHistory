@@ -4,6 +4,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.contrib.auth.models import User
 
@@ -12,17 +13,46 @@ from .forms import PhotoForm
 
 
 def show(request):
-    maps = Photo.objects.all()
-    return render(request, 'app/map.html', context={'maps': maps})
+    return render(request, 'app/map.html')
 
 
 @login_required(login_url='/accounts/login/')
 def load_photo(request):
     form = PhotoForm()
-
     return render(request, 'app/load_photo.html', {'form': form})
 
 
+def get_photo(request):
+    photo_id = request.GET.get("id")
+    p = Photo.objects.get(pk=photo_id)
+    context = {
+        "url": p.img_medium.url,
+        "url_full": p.img.url,
+        "author": p.author,
+        "uploader": p.uploader,
+        "uploaded": p.uploaded
+    }
+    print(p)
+    print(context)
+    data = render_to_string('app/img-frame.html', context=context)
+    return JsonResponse(data, safe=False)
+
+
+def get_photos_data(request):
+    data = []
+    for item in Photo.objects.values():
+        data.append({
+            "latitude": item["latitude"],
+            "longitude": item["longitude"],
+            "direction": item["direction"],
+            "altitude": item["altitude"],
+            "id": item["id"]
+        })
+
+    return JsonResponse(data, safe=False)
+
+
+@login_required(login_url='/accounts/login/')
 def upload_img(request):
     if request.method != 'POST':
         return
@@ -37,6 +67,7 @@ def upload_img(request):
         return HttpResponse('image upload success')
 
 
+@login_required(login_url='/accounts/login/')
 def upload_with_exif(request):
     if request.method != 'POST':
         return

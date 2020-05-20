@@ -1,8 +1,14 @@
+import PIL
+import os
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
 
+from django.dispatch import receiver
 import exifread as ef
+from PIL import Image
+from imagekit.models.fields import ImageSpecField
+from imagekit.processors import ResizeToFit, Adjust, ResizeToFill
 
 
 def _convert_to_degress(value):
@@ -59,11 +65,11 @@ def get_gps(img):
         altitude_value = None
 
     return {
-            'latitude': lat_value,
-            'longitude': lon_value,
-            'direction': direction_value,
-            'altitude': altitude_value
-            }
+        'latitude': lat_value,
+        'longitude': lon_value,
+        'direction': direction_value,
+        'altitude': altitude_value
+    }
 
 
 class Photo(models.Model):
@@ -72,10 +78,19 @@ class Photo(models.Model):
     uploaded = models.DateTimeField(default=timezone.now)
     author = models.CharField(max_length=200, null=True)
     taken = models.CharField(max_length=50, null=True)
+    source = models.CharField(max_length=200, null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
     altitude = models.IntegerField(null=True)
     direction = models.FloatField(null=True)
+    img_small = ImageSpecField(source='img',
+                               processors=[ResizeToFill(100, 80)],
+                               format='JPEG',
+                               options={'quality': 60})
+    img_medium = ImageSpecField(source='img',
+                                processors=[ResizeToFill(640, 480)],
+                                format='JPEG',
+                                options={'quality': 60})
 
     @staticmethod
     def save_with_exif(img):
@@ -95,3 +110,22 @@ class Photo(models.Model):
             p.altitude = int(gps['altitude'])
 
         p.save()
+
+
+@receiver(models.signals.post_delete, sender=Photo)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    Deletes file from filesystem
+    when corresponding `MediaFile` object is deleted.
+    """
+    if instance.img:
+        if os.path.isfile(instance.img.path):
+            os.remove(instance.img.path)
+
+    if instance.img_small:
+        if os.path.isfile(instance.img_small.path):
+            os.remove(instance.img_small.path)
+
+    if instance.img_medium:
+        if os.path.isfile(instance.img_medium.path):
+            os.remove(instance.img_medium.path)

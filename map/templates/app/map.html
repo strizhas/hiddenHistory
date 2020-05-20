@@ -1,4 +1,5 @@
 {% extends "base_generic.html" %}
+{% load static %}
 {% block head %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -26,14 +27,67 @@
 
 {% endblock %}
 {% block content %}
+    <div id="legend-container" class="legend-container">
+        <h3>цехи основного производства</h3>
+        <table class="legend-table">
+            <tr>
+                <td>1</td>
+                <td>сортопрокатный цех</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>отделение термообработки</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>станы "250" и "350"</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>цех легированной проволоки</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>блок ремонтных цехов</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>листопрокатный цех</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>цех нержавеющей ленты</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>ремонтно-механический цех</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>электросталеплавильный цех</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>термокалибровочный цех</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>цех горячей прокатки полос и листов</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>холодное отделение листопрокатного цеха</td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>скалад ферросплавов</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>склад хранения заготовок и длинномеров</td>
+            </tr>
+        </table>
+    </div>
     <div id="map"></div>
-    <script type="text/javascript">
-        var mymap = L.map('map', {
-            center: [55.7507898, 37.6946124],
-            zoom: 15
-        });
-        L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
-            maxZoom: 18,
-        }).addTo(mymap);
-    </script>
+    <script type="text/javascript" src="{% static 'js/map.js' %}"></script>
 {% endblock %}

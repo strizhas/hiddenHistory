@@ -8,10 +8,11 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.load_photo),
-    path('new', views.load_photo, name='load_photo'),
-    path('show', views.show, name='show'),
+    path('', views.show),
+    path('upload', views.load_photo, name='load_photo'),
     path('upload_img', views.upload_img),
+    path('get_photo', views.get_photo),
+    path('get_photos_data', views.get_photos_data),
     path('upload_with_exif', views.upload_with_exif),
     path('accounts/', include('django.contrib.auth.urls')),
 

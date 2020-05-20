@@ -4,11 +4,16 @@
     <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
 {% endblock %}
 {% block content %}
-
+    <div class="centered-content-wrapper">
+        <h3>Загрузка фотографий с геоданными, содержащимися в их метаданных</h3>
     <form action="/upload_with_exif" method="post" class="ajax-update-form" enctype="multipart/form-data">
     {% csrf_token %}
         <div class="input-element">
-            <input type="file" name="files" multiple/>
+            <span class="input-header">источник фотографий</span>
+            <input type="text" name="source" class="text-input" placeholder="example-source.ru"/>
+        </div>
+        <div class="input-element">
+            <input type="file" name="files" multiple required/>
         </div>
         <div class="input-element">
             <div class="form-operation-status"></div>
@@ -16,6 +21,7 @@
         </div>
         <div class="operation-result-message"></div>
     </form>
+    </div>
 <script type="text/javascript">
     $('.ajax-update-form').on('submit', function(event) {
         var form = $(this);

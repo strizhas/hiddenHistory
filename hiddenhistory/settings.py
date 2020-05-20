@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'location_field.apps.DefaultConfig',
+    'imagekit',
     'map'
 ]
 
@@ -45,6 +46,8 @@ LOCATION_FIELD = {
     'map.provider': 'openstreetmap',
     'search.provider': 'google',
 }
+
+IMAGEKIT_DEFAULT_CACHEFILE_STRATEGY = 'imagekit.cachefiles.strategies.Optimistic'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
