@@ -1,3 +1,7 @@
 Django~=3.0.6
+Pillow
 django-imagekit
 exifread
+django-storages
+boto3
+django-location-field
