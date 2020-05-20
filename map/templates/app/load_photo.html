@@ -2,15 +2,21 @@
 {% load static %}
 {% block head %}
     <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
+
 {% endblock %}
 {% block content %}
     <div class="centered-content-wrapper">
-        <h3>Загрузка фотографий с геоданными, содержащимися в их метаданных</h3>
+        <h2>Загрузка фотографий с геоданными, содержащимися в их метаданных</h2>
+        <p>Обработка фотографий может занять много времени, просьба запастись терпением. Ограничение на размер разовой загрузки составляет 1 ГБ</p>
     <form action="/upload_with_exif" method="post" class="ajax-update-form" enctype="multipart/form-data">
     {% csrf_token %}
         <div class="input-element">
-            <span class="input-header">источник фотографий</span>
+            <span class="input-header">Источник фотографий</span>
             <input type="text" name="source" class="text-input" placeholder="example-source.ru"/>
+        </div>
+        <div class="input-element">
+            <span class="input-header">Год, когда сделаны фотографии</span>
+            <input type="number" max="2050" name="year" class="text-input"/>
         </div>
         <div class="input-element">
             <input type="file" name="files" multiple required/>

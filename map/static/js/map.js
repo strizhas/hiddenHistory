@@ -32,7 +32,7 @@ function markerOptions(size, rotation, marker_id) {
   return {
     draggable: false,
     icon: L.divIcon(iconOptions),
-    rotation: rotation
+    rotation: 360 - rotation
   }
 }
 

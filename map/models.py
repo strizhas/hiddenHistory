@@ -77,7 +77,7 @@ class Photo(models.Model):
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     uploaded = models.DateTimeField(default=timezone.now)
     author = models.CharField(max_length=200, null=True)
-    taken = models.CharField(max_length=50, null=True)
+    year = models.IntegerField(null=True)
     source = models.CharField(max_length=200, null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
