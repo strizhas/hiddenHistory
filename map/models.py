@@ -135,10 +135,7 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     if settings.DEFAULT_FILE_STORAGE == 'map.s3utils.CustomS3Boto3Storage':
         if instance.img:
             instance.img.delete()
-        if instance.img_small:
-            instance.img_small.delete()
-        if instance.img_medium:
-            instance.img_medium.delete()
+
     else:
         if instance.img:
             if os.path.isfile(instance.img.path):

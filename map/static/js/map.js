@@ -45,7 +45,6 @@ function request_single_photo(e) {
     var marker_id = e.target.options.icon.options.id
 
     if (marker_id in loaded) {
-        console.log("loaded")
         return;
     }
     var url="/get_photo?id=" + marker_id;
@@ -78,8 +77,8 @@ function request_photos() {
     });
 }
 
-var corner1 = L.latLng(55.7554495,37.6799716)
-var corner2 = L.latLng(55.7480644,37.708999)
+var corner1 = L.latLng(55.76,37.675)
+var corner2 = L.latLng(55.742,37.716)
 var bounds = L.latLngBounds(corner1, corner2);
 
 var map = L.map('map', {
@@ -93,6 +92,7 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{
     maxZoom: 18,
 }).addTo(map);
 map.fitBounds(bounds)
-map.setMaxBounds(map.getBounds());
+console.log(map.getBounds())
+map.setMaxBounds(bounds);
 
 request_photos()

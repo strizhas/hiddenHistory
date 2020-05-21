@@ -16,7 +16,7 @@ p {
 	margin: 0;
 	margin-bottom: 30px;
 	margin-top: 20px;
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 25px;
 
 }
@@ -44,7 +44,7 @@ h4 {
 }
 
 .help-text {
-    font-size: 16px;
+    font-size: 14px;
     color: #B1B1B1;
 }
 
@@ -58,7 +58,7 @@ body {
     margin-top: 0;
     margin-bottom: 0;
 	background: #f2f2f2;
-	font-size: 20px;
+	font-size: 18px;
 	min-height: 100vh;
 }
 
@@ -102,7 +102,7 @@ input, select {
 .form-operation-status{
 	min-height: 20px;
 	padding-bottom: 10px;
-	font-size: 20px;
+	font-size: 18px;
 	color: #545454;
 }
 
@@ -138,14 +138,6 @@ input, select {
     height: auto;
 }
 
-.leaflet-popup-content-wrapper {
-    marin-left: -400px
-}
-
-.leaflet-popup-content {
-    width: 640px !important;
-    height: 600px;
-}
 
 /*----------------------- Карта ------------------------------ */
 
@@ -154,7 +146,7 @@ input, select {
         top: 0;
         left: 0;
         height: 100vh;
-        width: calc(100vw - 440px)
+        width: calc(100vw - 400px)
     }
 
 /*----------------------- Легенда ------------------------------ */
@@ -162,7 +154,7 @@ input, select {
     position: absolute;
     top: 0px;
     right: 0px;
-    width: 440px;
+    width: 400px;
     height: 100vh;
     background: #fff;
     z-index: 500;
@@ -191,17 +183,25 @@ input, select {
 
 
 /*----------------------- Попап----------------------------- */
+
+
+.leaflet-popup-content-wrapper {
+    marin-left: -400px
+}
+
 .leaflet-popup-content {
+    width: 640px !important;
     position: relative;
+    height: 600px;
 }
 
 .leaflet-popup-content .photo-captions .main-section * {
-    font-size: 20px;
+    font-size: 18px;
     display: inline-block;
 }
 
 .leaflet-popup-content .img-download-link {
-    font-size: 16px;
+    font-size: 14px;
     display: block;
     margin: 0 0 10px 0;
 }
@@ -210,4 +210,50 @@ input, select {
     background: #e3e3e3;
     text-align: center;
     font-size: 0;
+}
+
+@media only screen and (max-width: 1440px) {
+    .popup-img-frame img {
+        max-width: 520px;
+    }
+
+    .leaflet-popup-content {
+        width: 520px !important;
+        height: 500px;
+        margin: 10px;
+    }
+
+    .leaflet-popup-content-wrapper {
+        marin-left: -250px
+    }
+
+
+}
+
+@media only screen and (max-width: 1024px) {
+    #map {
+        width: 100vw;
+    }
+
+    .sidebar-container {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+
+    .popup-img-frame img {
+        max-width: calc(80vw - 20px);
+    }
+
+    .leaflet-popup-content {
+        width: 80vw !important;
+        max-height: 500px;
+        height: auto;
+        margin: 10px;
+    }
+
+    .leaflet-popup-content-wrapper {
+        marin-left: -40vw;
+    }
 }
