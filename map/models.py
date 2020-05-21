@@ -1,17 +1,12 @@
-import PIL
 import os
-from django.db import models
-from django.conf import settings
-from django.utils import timezone
 
-from django.dispatch import receiver
 import exifread as ef
-from PIL import Image
+from django.conf import settings
+from django.db import models
+from django.dispatch import receiver
+from django.utils import timezone
+from imagekit import register
 from imagekit.models.fields import ImageSpecField
-from imagekit.processors import ResizeToFit, Adjust, ResizeToFill, Transpose
-
-from imagekit import ImageSpec, register
-from imagekit.utils import get_field_info
 
 from . import processors
 

@@ -28,6 +28,8 @@ dataRussia.db
 credentials.json
 
 # медиа файлы
+hiddenhistory/media
+hiddenhistory/media/*
 media/*
 media/**
 !media/**/init.txt
