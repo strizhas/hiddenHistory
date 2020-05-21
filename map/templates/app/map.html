@@ -8,26 +8,13 @@
 
     <!-- Include the Leaflet JS Library -->
     <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
-    <style>
-        html, body {
-        padding: 0;
-        margin: 0;
-        bottom: 0;
-        height: 100vh;
-        overflow: hidden;
-    }
-
-    #map {
-        position: absolute;
-        bottom: 0;
-        height: 100vh;
-        width: 100vw;
-    }
-    </style>
-
 {% endblock %}
 {% block content %}
-    <div id="legend-container" class="legend-container">
+    <div id="legend-container" class="sidebar-container">
+        <div class="sidebar-wrapper">
+            <h2>Металлургический завод "Серп и молот"</h2>
+            <span class="secondary-text">интерактивный интернет-архив</span>
+            <br><br>
         <h3>цехи основного производства</h3>
         <table class="legend-table">
             <tr>
@@ -87,6 +74,7 @@
                 <td>склад хранения заготовок и длинномеров</td>
             </tr>
         </table>
+        </div>
     </div>
     <div id="map"></div>
     <script type="text/javascript" src="{% static 'js/map.js' %}"></script>

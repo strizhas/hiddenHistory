@@ -1,18 +1,21 @@
+html, body {
+        padding: 0;
+        margin: 0;
+        bottom: 0;
+        height: 100vh;
+        overflow: hidden;
+    }
+
 html {
 	font-size: 3.2vw;
 	background: #414141;
 	font-family: 'PT Sans', sans-serif;
 }
 
-.body-low-access {
-    max-width: 600px;
-    padding: 40px;
-    margin: 0 auto;
-}
-
 p {
 	margin: 0;
 	margin-bottom: 30px;
+	margin-top: 20px;
 	font-size: 20px;
 	line-height: 25px;
 
@@ -21,7 +24,7 @@ p {
 h2, h3, h4 {
     font-family: 'PT Sans', sans-serif;
     font-weight: bold;
-    margin: 0 0 20px 0;
+    margin: 0;
 }
 h2 {
 	font-size: 32px;
@@ -34,6 +37,10 @@ h3 {
 
 h4 {
 	margin-bottom: 10px;
+}
+
+.secondary-text {
+    color: #B1B1B1;
 }
 
 /*----------------------- Общие стили ------------------------------ */
@@ -135,19 +142,33 @@ input, select {
     height: 600px;
 }
 
+/*----------------------- Карта ------------------------------ */
+
+#map {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: calc(100vw - 440px)
+    }
+
 /*----------------------- Легенда ------------------------------ */
-.legend-container {
-    position: fixed;
-    top: 40px;
-    right: 40px;
-    width: 300px;
+.sidebar-container {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 440px;
+    height: 100vh;
     background: #fff;
-    padding: 20px;
     z-index: 500;
     -webkit-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
     -moz-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
     box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
 
+}
+
+.sidebar-wrapper {
+    padding: 20px;
 }
 
 .legend-table {
@@ -161,4 +182,21 @@ input, select {
 
 .legend-table tr td:first-child {
     padding-right: 10px;
+}
+
+
+/*----------------------- Попап----------------------------- */
+.leaflet-popup-content {
+    position: relative;
+}
+
+.leaflet-popup-content .photo-captions .main-section * {
+    font-size: 20px;
+    display: inline-block;
+}
+
+.leaflet-popup-content .img-download-link {
+    font-size: 16px;
+    display: block;
+    margin: 0 0 10px 0;
 }

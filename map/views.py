@@ -30,7 +30,9 @@ def get_photo(request):
         "url_full": p.img.url,
         "author": p.author,
         "uploader": p.uploader,
-        "uploaded": p.uploaded
+        "uploaded": p.uploaded,
+        "source": p.source,
+        "year": p.year,
     }
     print(p)
     print(context)
@@ -73,8 +75,16 @@ def upload_with_exif(request):
         return
 
     failed = []
+    data = {
+        "uploader": User.objects.get(id=request.user.id),
+        "source": request.POST.get("source"),
+        "year": request.POST.get("year")
+    }
+
+    print(data)
+
     for file in request.FILES.getlist("files"):
-        if Photo.save_with_exif(file) is False:
+        if Photo.save_with_exif(file, data) is False:
             failed.append(file.name)
 
     if len(failed) == 0:

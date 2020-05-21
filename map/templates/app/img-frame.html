@@ -1,8 +1,18 @@
+<a href="{{ url_full }}" target="_blank" class="img-download-link">скачать в полном размере</a>
 <div class="map-img-preview">
     <img src="{{ url }}"/>
 </div>
 <div class="photo-captions">
+    <div class="main-section">
+        {% if year %}
+            <div class="photo-year-caption">{{ year }},</div>
+        {% endif %}
+        {% if source %}
+            <div class="">источник: {{ source }}</div>
+        {% else %}
+             <div class="">источник не указан</div>
+        {% endif %}
+    </div>
     <div class="map-creation-date help-text">дата загрузки: {{ uploaded }}</div>
     <div class="map-author help-text">загузил: {{ uploader }}</div>
-    <a href="{{ url_full }}" target="_blank">скачать в полном размере</a>
 </div>

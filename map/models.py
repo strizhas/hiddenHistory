@@ -8,7 +8,15 @@ from django.dispatch import receiver
 import exifread as ef
 from PIL import Image
 from imagekit.models.fields import ImageSpecField
-from imagekit.processors import ResizeToFit, Adjust, ResizeToFill
+from imagekit.processors import ResizeToFit, Adjust, ResizeToFill, Transpose
+
+from imagekit import ImageSpec, register
+from imagekit.utils import get_field_info
+
+from . import processors
+
+register.generator('hh:photo:img_medium', processors.MediumOrientedImage)
+register.generator('hh:photo:img_small', processors.SmallOrientedImage)
 
 
 def _convert_to_degress(value):
@@ -38,6 +46,7 @@ def get_gps(img):
     direction = tags.get('GPS GPSImgDirection')
     direction_ref = tags.get('GPS GPSImgDirectionRef')
     altitude = tags.get('GPS GPSAltitude')
+    orientation = tags.get("Image Orientation")
 
     if latitude:
         lat_value = _convert_to_degress(latitude)
@@ -64,11 +73,17 @@ def get_gps(img):
     else:
         altitude_value = None
 
+    if orientation:
+        orientation_value = orientation.values[0]
+    else:
+        orientation_value = 1
+
     return {
         'latitude': lat_value,
         'longitude': lon_value,
         'direction': direction_value,
-        'altitude': altitude_value
+        'altitude': altitude_value,
+        'orientation': orientation_value
     }
 
 
@@ -82,18 +97,13 @@ class Photo(models.Model):
     latitude = models.FloatField()
     longitude = models.FloatField()
     altitude = models.IntegerField(null=True)
+    orientation = models.IntegerField(default=1)
     direction = models.FloatField(null=True)
-    img_small = ImageSpecField(source='img',
-                               processors=[ResizeToFill(100, 80)],
-                               format='JPEG',
-                               options={'quality': 60})
-    img_medium = ImageSpecField(source='img',
-                                processors=[ResizeToFill(640, 480)],
-                                format='JPEG',
-                                options={'quality': 60})
+    img_small = ImageSpecField(source='img', id='hh:photo:img_small')
+    img_medium = ImageSpecField(source='img', id='hh:photo:img_medium')
 
     @staticmethod
-    def save_with_exif(img):
+    def save_with_exif(img, data):
         gps = get_gps(img)
         print(gps)
         if not gps:
@@ -103,6 +113,13 @@ class Photo(models.Model):
         p.img = img
         p.longitude = gps['longitude']
         p.latitude = gps['latitude']
+        p.orientation = gps['orientation']
+        p.uploader = data['uploader']
+
+        if data['year']:
+            p.year = data['year']
+        if data['source']:
+            p.source = data['source']
 
         if gps['direction'] is not None:
             p.direction = gps['direction']
