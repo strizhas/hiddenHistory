@@ -1,3 +1,5 @@
+
+
 (function() {
   // Save original method before overwriting it below.
   const _setPosOriginal = L.Marker.prototype._setPos
@@ -21,6 +23,8 @@
   })
 })()
 
+var loaded = {}
+
 function markerOptions(size, rotation, marker_id) {
   const iconOptions = {
     iconSize  : [size, size],
@@ -40,11 +44,16 @@ function request_single_photo(e) {
     var popup = e.target.getPopup();
     var marker_id = e.target.options.icon.options.id
 
+    if (marker_id in loaded) {
+        console.log("loaded")
+        return;
+    }
     var url="/get_photo?id=" + marker_id;
 
     $.get(url).done(function(data) {
         popup.setContent(data);
         popup.update();
+        loaded[marker_id] = true;
     });
 }
 

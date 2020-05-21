@@ -43,6 +43,11 @@ h4 {
     color: #B1B1B1;
 }
 
+.help-text {
+    font-size: 16px;
+    color: #B1B1B1;
+}
+
 /*----------------------- Общие стили ------------------------------ */
 
 body {
@@ -199,4 +204,10 @@ input, select {
     font-size: 16px;
     display: block;
     margin: 0 0 10px 0;
+}
+
+.popup-img-frame {
+    background: #e3e3e3;
+    text-align: center;
+    font-size: 0;
 }

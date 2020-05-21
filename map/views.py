@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 from .models import Photo
 from .forms import PhotoForm
@@ -77,11 +78,10 @@ def upload_with_exif(request):
     failed = []
     data = {
         "uploader": User.objects.get(id=request.user.id),
+        "uploaded": timezone.now(),
         "source": request.POST.get("source"),
         "year": request.POST.get("year")
     }
-
-    print(data)
 
     for file in request.FILES.getlist("files"):
         if Photo.save_with_exif(file, data) is False:

@@ -35,9 +35,6 @@ class RotateEXIF(object):
         self.orientation = orientation
 
     def process(self, image):
-        print("RotateEXIF")
-        print(type(self.orientation))
-        print(self)
         orientation = self.orientation
         if orientation == 3:
             image = image.rotate(180, expand=True)

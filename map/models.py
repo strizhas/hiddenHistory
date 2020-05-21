@@ -100,7 +100,7 @@ class Photo(models.Model):
     @staticmethod
     def save_with_exif(img, data):
         gps = get_gps(img)
-        print(gps)
+
         if not gps:
             return False
 
@@ -110,6 +110,7 @@ class Photo(models.Model):
         p.latitude = gps['latitude']
         p.orientation = gps['orientation']
         p.uploader = data['uploader']
+        p.uploaded = data['uploaded']
 
         if data['year']:
             p.year = data['year']
@@ -130,14 +131,23 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     Deletes file from filesystem
     when corresponding `MediaFile` object is deleted.
     """
-    if instance.img:
-        if os.path.isfile(instance.img.path):
-            os.remove(instance.img.path)
 
-    if instance.img_small:
-        if os.path.isfile(instance.img_small.path):
-            os.remove(instance.img_small.path)
+    if settings.DEFAULT_FILE_STORAGE == 'map.s3utils.CustomS3Boto3Storage':
+        if instance.img:
+            instance.img.delete()
+        if instance.img_small:
+            instance.img_small.delete()
+        if instance.img_medium:
+            instance.img_medium.delete()
+    else:
+        if instance.img:
+            if os.path.isfile(instance.img.path):
+                os.remove(instance.img.path)
 
-    if instance.img_medium:
-        if os.path.isfile(instance.img_medium.path):
-            os.remove(instance.img_medium.path)
+        if instance.img_small:
+            if os.path.isfile(instance.img_small.path):
+                os.remove(instance.img_small.path)
+
+        if instance.img_medium:
+            if os.path.isfile(instance.img_medium.path):
+                os.remove(instance.img_medium.path)
