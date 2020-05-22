@@ -1,6 +1,11 @@
 from django.contrib import admin
 from map.models import Photo
 
-admin.site.register(Photo)
+
+class PhotoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'img', 'uploaded')
+
+
+admin.site.register(Photo, PhotoAdmin)
 
 # Register your models here.
