@@ -43,16 +43,21 @@ def get_photo(request):
 
 def get_photos_data(request):
     data = []
+    years = []
+
     for item in Photo.objects.values():
         data.append({
             "latitude": item["latitude"],
             "longitude": item["longitude"],
             "direction": item["direction"],
             "altitude": item["altitude"],
+            "year": item["year"],
             "id": item["id"]
         })
+        if item["year"] not in years:
+            years.append(item["year"])
 
-    return JsonResponse(data, safe=False)
+    return JsonResponse({"data": data, "years": years}, safe=False)
 
 
 @login_required(login_url='/accounts/login/')
@@ -99,4 +104,5 @@ def upload_with_exif(request):
             "state": "error",
             "message": message
         }
+
     return JsonResponse(response)

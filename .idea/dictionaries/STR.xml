@@ -1,8 +1,10 @@
 <component name="ProjectDictionaryState">
   <dictionary name="STR">
     <words>
+      <w>basemap</w>
       <w>imagekit</w>
       <w>openstreetmap</w>
+      <w>tileset</w>
     </words>
   </dictionary>
 </component>

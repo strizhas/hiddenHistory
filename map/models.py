@@ -1,4 +1,5 @@
 import os
+import json
 
 import exifread as ef
 from django.conf import settings
@@ -7,6 +8,7 @@ from django.dispatch import receiver
 from django.utils import timezone
 from imagekit import register
 from imagekit.models.fields import ImageSpecField
+from django.core.files.storage import default_storage
 
 from . import processors
 
