@@ -72,10 +72,12 @@ def save_changes(request, pk):
 
     if form.is_valid():
         if Photo.edit_with_exif(img, form.cleaned_data, pk):
+            p = Photo.objects.get(pk=pk)
             response = {
                 "state": "success",
                 "message": "фотография обновлена",
-                "src": Photo.objects.get(pk=pk).img.url
+                "src": p.img.url,
+                "name": p.img.name
             }
         else:
             response = {
