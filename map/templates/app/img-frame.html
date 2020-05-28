@@ -15,4 +15,7 @@
     </div>
     <div class="help-text">дата загрузки: {{ uploaded }}</div>
     <div class="help-text">загузил: {{ uploader }}</div>
+    {% if owner == True %}
+        <a href="edit_photo/{{ id }}" target="_blank">редактировать</a>
+    {% endif %}
 </div>

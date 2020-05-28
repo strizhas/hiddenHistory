@@ -1,0 +1,53 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block head %}
+    <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
+
+{% endblock %}
+{% block content %}
+    <div class="centered-content-wrapper">
+        <span id="img-url-span" class="help-text">{{ name }}</span>
+    <form action="/save_changes/{{pk}}" method="post" class="ajax-update-form" enctype="multipart/form-data">
+        <img width="100%" src="{{ url }}"/>
+        {% csrf_token %}
+        <div class="input-element">
+            <span class="input-header">Источник фотографий</span>
+            <input type="text" name="source" class="text-input" value="{{ source }}"/>
+        </div>
+        <div class="input-element">
+            <span class="input-header">Год, когда сделаны фотографии</span>
+            <input type="number" max="2050" name="year" class="text-input" value="{{ year }}"/>
+        </div>
+        <span class="help-text">в фотографии должны содержаться GPS данные в формате EXIF</span>
+        <div class="input-element">
+            <input type="file" name="files"/>
+        </div>
+
+        <div class="input-element">
+            <div class="form-operation-status"></div>
+            <input type="submit" value="сохранить изменения">
+        </div>
+        <div class="operation-result-message"></div>
+    </form>
+    </div>
+<script type="text/javascript">
+    $('.ajax-update-form').on('submit', function(event) {
+        var form = $(this);
+        submitUpdateForm(event, this, function(response) {
+            if (!('src' in response)) {
+                return;
+            }
+
+            var img = form.find('img').eq(0);
+            var cont = img.parent();
+            var imgCopy = img.clone();
+
+            imgCopy.attr('src', response['src']);
+            cont.prepend(imgCopy);
+            img.remove();
+
+            $('#img-url-span').text(response['src'])
+        });
+    })
+</script>
+{% endblock %}

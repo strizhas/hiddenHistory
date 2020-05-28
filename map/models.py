@@ -99,6 +99,24 @@ class Photo(models.Model):
     img_small = ImageSpecField(source='img', id='hh:photo:img_small')
     img_medium = ImageSpecField(source='img', id='hh:photo:img_medium')
 
+    def delete_img(self):
+        if settings.DEFAULT_FILE_STORAGE == 'map.s3utils.CustomS3Boto3Storage':
+            if self.img:
+                self.img.delete()
+            return
+
+        if self.img:
+            if os.path.isfile(self.img.path):
+                os.remove(self.img.path)
+
+        if self.img_small:
+            if os.path.isfile(self.img_small.path):
+                os.remove(self.img_small.path)
+
+        if self.img_medium:
+            if os.path.isfile(self.img_medium.path):
+                os.remove(self.img_medium.path)
+
     @staticmethod
     def save_with_exif(img, data):
         gps = get_gps(img)
@@ -126,6 +144,35 @@ class Photo(models.Model):
 
         p.save()
 
+    @staticmethod
+    def edit_with_exif(img, data, pk):
+
+        p = Photo.objects.get(pk=pk)
+
+        if img is not None:
+            gps = get_gps(img)
+            if not gps:
+                return False
+
+            p.delete_img()
+            p.img = img
+            p.longitude = gps['longitude']
+            p.latitude = gps['latitude']
+            p.orientation = gps['orientation']
+
+            if gps['direction'] is not None:
+                p.direction = gps['direction']
+            if gps['altitude'] is not None:
+                p.altitude = int(gps['altitude'])
+
+        if data['year']:
+            p.year = data['year']
+        if data['source']:
+            p.source = data['source']
+
+        p.save()
+        return True
+
 
 @receiver(models.signals.post_delete, sender=Photo)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
@@ -134,19 +181,4 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     when corresponding `MediaFile` object is deleted.
     """
 
-    if settings.DEFAULT_FILE_STORAGE == 'map.s3utils.CustomS3Boto3Storage':
-        if instance.img:
-            instance.img.delete()
-
-    else:
-        if instance.img:
-            if os.path.isfile(instance.img.path):
-                os.remove(instance.img.path)
-
-        if instance.img_small:
-            if os.path.isfile(instance.img_small.path):
-                os.remove(instance.img_small.path)
-
-        if instance.img_medium:
-            if os.path.isfile(instance.img_medium.path):
-                os.remove(instance.img_medium.path)
+    instance.delete_img()

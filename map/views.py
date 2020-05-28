@@ -11,6 +11,7 @@ from django.utils import timezone
 
 from .models import Photo
 from .forms import PhotoForm
+from .forms import EditForm
 
 
 def show(request):
@@ -34,11 +35,65 @@ def get_photo(request):
         "uploaded": p.uploaded,
         "source": p.source,
         "year": p.year,
+        "id": p.id,
+        "owner": p.uploader.id == request.user.id
     }
-    print(p)
-    print(context)
+
     data = render_to_string('app/img-frame.html', context=context)
     return JsonResponse(data, safe=False)
+
+
+@login_required(login_url='/accounts/login/')
+def edit_photo(request, pk):
+    p = Photo.objects.get(pk=pk)
+
+    context = {
+        "url": p.img.url,
+        "name": p.img.name,
+        "author": p.author,
+        "source": p.source,
+        "year": p.year,
+        "pk": pk
+    }
+    return render(request, 'app/edit_photo.html', context)
+
+
+@login_required(login_url='/accounts/login/')
+def save_changes(request, pk):
+    if request.method != 'POST':
+        return
+
+    form = EditForm(request.POST.copy())
+
+    if len(request.FILES.getlist("files")) != 0:
+        img = request.FILES.getlist("files")[0]
+    else:
+        img = None
+
+    if form.is_valid():
+        if Photo.edit_with_exif(img, form.cleaned_data, pk):
+            response = {
+                "state": "success",
+                "message": "фотография обновлена",
+                "src": Photo.objects.get(pk=pk).img.url
+            }
+        else:
+            response = {
+                "state": "error",
+                "message": "В фотографии нет GPS данных"
+            }
+    else:
+        errors = ''
+        for field in form:
+            for error in field.errors:
+                errors += field.name + ":\n\r"
+                errors += error + "\n\r"
+        response = {
+            "state": "error",
+            "message": errors
+        }
+
+    return JsonResponse(response)
 
 
 def get_photos_data(request):

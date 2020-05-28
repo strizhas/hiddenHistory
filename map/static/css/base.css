@@ -2,8 +2,6 @@ html, body {
         padding: 0;
         margin: 0;
         bottom: 0;
-        height: 100vh;
-        overflow: hidden;
     }
 
 html {
@@ -216,7 +214,6 @@ input, select {
 .leaflet-popup-content {
     width: 640px !important;
     position: relative;
-    height: 600px;
 }
 
 .leaflet-popup-content .photo-captions .main-section * {
@@ -243,7 +240,6 @@ input, select {
 
     .leaflet-popup-content {
         width: 520px !important;
-        height: 500px;
         margin: 10px;
     }
 
