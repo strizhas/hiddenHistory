@@ -1,5 +1,5 @@
 import os
-import json
+from uuid import uuid4
 
 import exifread as ef
 from django.conf import settings
@@ -8,12 +8,38 @@ from django.dispatch import receiver
 from django.utils import timezone
 from imagekit import register
 from imagekit.models.fields import ImageSpecField
-from django.core.files.storage import default_storage
 
 from . import processors
 
 register.generator('hh:photo:img_medium', processors.MediumOrientedImage)
 register.generator('hh:photo:img_small', processors.SmallOrientedImage)
+
+
+def update_decade():
+    ps = Photo.objects.all()
+    for p in ps:
+        if p.decade is not None or p.year is None:
+            continue
+
+        d = str(p.year)[0:3] + '0'
+        p.decade = d
+        p.save()
+
+
+def path_and_rename(instance, filename):
+    path = 'photos'
+    ext = filename.split('.')[-1]
+
+    if instance.year is not None:
+        year = instance.year
+    else:
+        if instance.decade is not None:
+            year = str(instance.decade) + 's'
+        else:
+            year = '0000'
+    filename = '{}_{}_{}.{}'.format('pic', year, uuid4().hex[:16], ext)
+
+    return os.path.join(path, filename)
 
 
 def _convert_to_degress(value):
@@ -85,11 +111,12 @@ def get_gps(img):
 
 
 class Photo(models.Model):
-    img = models.ImageField(upload_to='photos/')
+    img = models.ImageField(upload_to=path_and_rename)
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     uploaded = models.DateTimeField(default=timezone.now)
     author = models.CharField(max_length=200, null=True)
     year = models.IntegerField(null=True)
+    decade = models.IntegerField(null=True)
     source = models.CharField(max_length=200, null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -132,6 +159,8 @@ class Photo(models.Model):
         p.uploader = data['uploader']
         p.uploaded = data['uploaded']
 
+        if data['decade']:
+            p.decade = data['decade']
         if data['year']:
             p.year = data['year']
         if data['source']:
@@ -169,6 +198,8 @@ class Photo(models.Model):
             p.year = data['year']
         if data['source']:
             p.source = data['source']
+        if data['decade']:
+            p.decade = data['decade']
 
         p.save()
         return True

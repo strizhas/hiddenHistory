@@ -51,8 +51,9 @@ def edit_photo(request, pk):
         "url": p.img.url,
         "name": p.img.name,
         "author": p.author,
-        "source": p.source,
-        "year": p.year,
+        "source": p.source or '',
+        "year": p.year or '',
+        "decade": p.decade or '',
         "pk": pk
     }
     return render(request, 'app/edit_photo.html', context)
@@ -142,7 +143,8 @@ def upload_with_exif(request):
         "uploader": User.objects.get(id=request.user.id),
         "uploaded": timezone.now(),
         "source": request.POST.get("source"),
-        "year": request.POST.get("year")
+        "year": request.POST.get("year"),
+        "decade": request.POST.get("decade")
     }
 
     for file in request.FILES.getlist("files"):

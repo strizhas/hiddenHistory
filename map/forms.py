@@ -9,5 +9,6 @@ class PhotoForm(forms.Form):
 
 
 class EditForm(forms.Form):
-    year = forms.CharField(help_text="год, когда сделана фотография")
-    source = forms.CharField(help_text="источник")
+    year = forms.CharField(help_text="год, когда сделана фотография", required=False)
+    decade = forms.CharField(help_text="десятилетие", required=False)
+    source = forms.CharField(help_text="источник", required=False)

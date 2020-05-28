@@ -16,7 +16,26 @@
         </div>
         <div class="input-element">
             <span class="input-header">Год, когда сделаны фотографии</span>
-            <input type="number" max="2050" name="year" class="text-input"/>
+            <input type="number" min="1880" max="2050" name="year" id="year-input" class="text-input"/>
+        </div>
+        <div class="input-element">
+            <span class="input-header">Десятилетие</span>
+            <select name="decade" id="decade-select">
+                <option value="1900">1900</option>
+                <option value="1910">1910</option>
+                <option value="1920">1920</option>
+                <option value="1930">1930</option>
+                <option value="1940">1940</option>
+                <option value="1950">1950</option>
+                <option value="1960">1960</option>
+                <option value="1970">1970</option>
+                <option value="1980">1980</option>
+                <option value="1990">1990</option>
+                <option value="2000">2000</option>
+                <option value="2010">2010</option>
+                <option value="2020">2020</option>
+                <option value="" selected>неизвестно</option>
+            </select>
         </div>
         <div class="input-element">
             <input type="file" name="files" multiple required/>
@@ -34,6 +53,17 @@
         submitUpdateForm(event, this, function() {
             console.log("ok")
         });
+    })
+
+    $('#year-input').on('change', function() {
+        var year = $(this).val();
+        if (year == "") {
+            var decade = ""
+        } else {
+            var decade = year.substring(0,3) + 0;
+        }
+
+        $('#decade-select').val(decade)
     })
 </script>
 {% endblock %}

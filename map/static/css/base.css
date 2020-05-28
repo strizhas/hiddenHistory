@@ -137,10 +137,10 @@ input, select {
     min-height: 500px;
 }
 
-.automated-graphic-container img {
-    width: 100%;
-    max-width: 700px;
-    height: auto;
+.ajax-update-form img {
+    height: 400px;
+    width: auto;
+    max-width: 100%;
 }
 
 
