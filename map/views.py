@@ -67,6 +67,7 @@ def edit_photo(request, pk):
         "author": p.author,
         'sources': sources,
         'source': p.source_obj.id,
+        'source_old': p.source,
         "year": p.year or '',
         "decade": p.decade or '',
         "pk": pk

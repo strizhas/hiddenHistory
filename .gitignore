@@ -34,7 +34,6 @@ media/*
 media/**
 !media/**/init.txt
 project/media/
-*.png
 
 **/__pycache__/**
 **/migrations/**
