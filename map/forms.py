@@ -12,3 +12,8 @@ class EditForm(forms.Form):
     year = forms.CharField(help_text="год, когда сделана фотография", required=False)
     decade = forms.CharField(help_text="десятилетие", required=False)
     source = forms.CharField(help_text="источник", required=False)
+
+
+class SourceForm(forms.Form):
+    name = forms.CharField(help_text="название")
+    url = forms.CharField(help_text="ссылка на название", required=False)

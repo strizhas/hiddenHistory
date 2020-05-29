@@ -10,8 +10,10 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 from .models import Photo
+from .models import Source
 from .forms import PhotoForm
 from .forms import EditForm
+from .forms import SourceForm
 
 
 def show(request):
@@ -21,19 +23,30 @@ def show(request):
 @login_required(login_url='/accounts/login/')
 def load_photo(request):
     form = PhotoForm()
-    return render(request, 'app/load_photo.html', {'form': form})
+    sources = Source.objects.values()
+    context = {
+        'form': form,
+        'sources': sources
+    }
+    return render(request, 'app/load_photo.html', context)
 
 
 def get_photo(request):
     photo_id = request.GET.get("id")
     p = Photo.objects.get(pk=photo_id)
+
+    if p.source_obj is not None:
+        source_name = p.source_obj.name
+    else:
+        source_name = None
+
     context = {
         "url": p.img_medium.url,
         "url_full": p.img.url,
         "author": p.author,
         "uploader": p.uploader,
         "uploaded": p.uploaded,
-        "source": p.source,
+        "source": source_name,
         "year": p.year,
         "id": p.id,
         "owner": p.uploader.id == request.user.id
@@ -46,12 +59,14 @@ def get_photo(request):
 @login_required(login_url='/accounts/login/')
 def edit_photo(request, pk):
     p = Photo.objects.get(pk=pk)
+    sources = Source.objects.values()
 
     context = {
         "url": p.img.url,
         "name": p.img.name,
         "author": p.author,
-        "source": p.source or '',
+        'sources': sources,
+        'source': p.source_obj.id,
         "year": p.year or '',
         "decade": p.decade or '',
         "pk": pk
@@ -162,6 +177,42 @@ def upload_with_exif(request):
         response = {
             "state": "error",
             "message": message
+        }
+
+    return JsonResponse(response)
+
+
+def require_source_form(request):
+    if request.method != 'GET':
+        return
+
+    data = render_to_string('app/source-form.html')
+    return JsonResponse(data, safe=False)
+
+
+def save_new_source(request):
+    if request.method != 'POST':
+        return
+
+    form = SourceForm(request.POST)
+    if form.is_valid():
+        s = Source()
+
+        s.name = form.cleaned_data['name']
+        s.url = form.cleaned_data['url']
+        response = {
+            "state": "error",
+            "message": "Источник создан"
+        }
+    else:
+        errors = ''
+        for field in form:
+            for error in field.errors:
+                errors += field.name + ":\n\r"
+                errors += error + "\n\r"
+        response = {
+            "state": "error",
+            "message": errors
         }
 
     return JsonResponse(response)

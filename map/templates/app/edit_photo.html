@@ -14,7 +14,13 @@
         {% csrf_token %}
         <div class="input-element">
             <span class="input-header">Источник фотографий</span>
-            <input type="text" name="source" class="text-input" value="{{ source }}"/>
+            <select name="source" id="source-select">
+        {% if sources %}
+            {% for s in sources %}
+                <option value="{{s.id}}">{{s.name}}</option>
+            {% endfor %}
+        {% endif %}
+            </select>
         </div>
         <div class="input-element">
             <span class="input-header">Год, когда сделаны фотографии</span>
@@ -53,6 +59,7 @@
     </div>
 <script type="text/javascript">
     var decade = '{{decade}}'
+    var source = '{{source}}'
     $('.ajax-update-form').on('submit', function(event) {
         var form = $(this);
         submitUpdateForm(event, this, function(response) {
@@ -85,6 +92,10 @@
     console.log(decade)
     if (decade != '') {
         $('#decade-select').val(decade);
+    }
+
+    if (source != '') {
+        $('#source-select').val(source);
     }
 
 </script>

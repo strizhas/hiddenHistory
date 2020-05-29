@@ -1,5 +1,6 @@
 from django.contrib import admin
 from map.models import Photo
+from map.models import Source
 
 
 class PhotoAdmin(admin.ModelAdmin):
@@ -8,5 +9,6 @@ class PhotoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Photo, PhotoAdmin)
+admin.site.register(Source)
 
 # Register your models here.

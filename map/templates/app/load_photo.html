@@ -12,12 +12,19 @@
     {% csrf_token %}
         <div class="input-element">
             <span class="input-header">Источник фотографий</span>
-            <input type="text" name="source" class="text-input" placeholder="example-source.ru"/>
+            <select name="source">
+        {% if sources %}
+            {% for s in sources %}
+                <option value="{{s.id}}">{{s.name}}</option>
+            {% endfor %}
+        {% endif %}
+            </select>
         </div>
         <div class="input-element">
             <span class="input-header">Год, когда сделаны фотографии</span>
             <input type="number" min="1880" max="2050" name="year" id="year-input" class="text-input"/>
         </div>
+
         <div class="input-element">
             <span class="input-header">Десятилетие</span>
             <select name="decade" id="decade-select">
@@ -64,6 +71,25 @@
         }
 
         $('#decade-select').val(decade)
+    })
+
+    $('#new-source-button').on('click', function(e) {
+        e.preventDefault();
+        $.ajax({
+        url : "/require_source_form",
+        type : "GET",
+        success : function(response) {
+            $('<div>', {
+                'html': response,
+                'class': 'popup-container',
+                }).appendTo($(document.body))
+
+        },
+        error : function(xhr,errmsg,err) {
+        },
+        complete: function() {
+        }
+    });
     })
 </script>
 {% endblock %}

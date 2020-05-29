@@ -18,6 +18,8 @@ urlpatterns = [
     path('get_photos_data', views.get_photos_data),
     path('upload_with_exif', views.upload_with_exif),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('require_source_form', views.require_source_form),
+    path('save_new_source', views.save_new_source)
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

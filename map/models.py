@@ -15,17 +15,6 @@ register.generator('hh:photo:img_medium', processors.MediumOrientedImage)
 register.generator('hh:photo:img_small', processors.SmallOrientedImage)
 
 
-def update_decade():
-    ps = Photo.objects.all()
-    for p in ps:
-        if p.decade is not None or p.year is None:
-            continue
-
-        d = str(p.year)[0:3] + '0'
-        p.decade = d
-        p.save()
-
-
 def path_and_rename(instance, filename):
     path = 'photos'
     ext = filename.split('.')[-1]
@@ -110,6 +99,11 @@ def get_gps(img):
     }
 
 
+class Source(models.Model):
+    name = models.CharField(max_length=100)
+    url = models.CharField(max_length=200, null=True, blank=True)
+
+
 class Photo(models.Model):
     img = models.ImageField(upload_to=path_and_rename)
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
@@ -118,6 +112,7 @@ class Photo(models.Model):
     year = models.IntegerField(null=True)
     decade = models.IntegerField(null=True)
     source = models.CharField(max_length=200, null=True)
+    source_obj = models.ForeignKey(Source, on_delete=models.SET_NULL, null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
     altitude = models.IntegerField(null=True)
@@ -164,7 +159,7 @@ class Photo(models.Model):
         if data['year']:
             p.year = data['year']
         if data['source']:
-            p.source = data['source']
+            p.source_obj = Source.objects.get(pk=data['source'])
 
         if gps['direction'] is not None:
             p.direction = gps['direction']
@@ -197,11 +192,12 @@ class Photo(models.Model):
         if data['year']:
             p.year = data['year']
         if data['source']:
-            p.source = data['source']
+            p.source_obj = Source.objects.get(pk=data['source'])
         if data['decade']:
             p.decade = data['decade']
 
         p.save()
+        print(p.source_obj)
         return True
 
 

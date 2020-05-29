@@ -1,0 +1,16 @@
+<form action="/upload_with_exif" method="post" class="ajax-update-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-element">
+            <span class="input-header">Источник фотографий</span>
+            <input type="text" name="name" class="text-input" placeholder="название" required/>
+        </div>
+        <div class="input-element">
+            <span class="input-header">Ссылка на источник</span>
+            <input type="text" name="url" class="text-input" placeholder="example.com"/>
+        </div>
+        <div class="input-element">
+            <div class="form-operation-status"></div>
+            <input type="submit" value="загрузить">
+        </div>
+        <div class="operation-result-message"></div>
+    </form>
