@@ -8,13 +8,16 @@
             <div class="photo-year-caption">{{ year }},</div>
         {% endif %}
         {% if source %}
-            <div class="">источник: {{ source }}</div>
+            <div>источник: {{ source }}</div>
         {% else %}
-             <div class="">источник не указан</div>
+             <div>источник не указан</div>
         {% endif %}
+        {% if author %}
+            <div>| автор: {{ author }}</div>
+        {% endif %}
+
     </div>
-    <div class="help-text">дата загрузки: {{ uploaded }}</div>
-    <div class="help-text">загузил: {{ uploader }}</div>
+    <div class="help-text">загузил: {{ uploader }}, {{ uploaded }}</div>
     {% if owner == True %}
         <a href="edit_photo/{{ id }}" target="_blank">редактировать</a>
     {% endif %}

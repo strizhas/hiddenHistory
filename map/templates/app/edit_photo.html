@@ -2,11 +2,13 @@
 {% load static %}
 {% block head %}
     <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
-
+    <script type="text/javascript" src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
 {% endblock %}
 {% block content %}
     <div class="centered-content-wrapper">
-        <span id="img-url-span" class="help-text">{{ name }}</span>
+        <span class="help-text">{{ source_old }}  </span>
+        <span id="img-url-span" class="help-text">{{ filename }}</span>
     <form action="/save_changes/{{pk}}" method="post" class="ajax-update-form" enctype="multipart/form-data">
         <div class="edit-img-container">
             <img width="100%" src="{{ url }}"/>
@@ -22,7 +24,11 @@
         {% endif %}
             </select>
         </div>
-        {{ source_old }}
+
+        <div class="input-element">
+            <span class="input-header">Автор фотографии</span>
+            <input type="text" name="author" class="text-input" value="{{ author }}"/>
+        </div>
         <div class="input-element">
             <span class="input-header">Год, когда сделаны фотографии</span>
             <input type="number" max="2050" id="year-input" name="year" class="text-input" value="{{ year }}"/>
@@ -88,9 +94,10 @@
             var decade = year.substring(0,3) + 0;
         }
 
-        $('#decade-select').val(decade)
+        $('#decade-select').val(decade);
+        $('select').niceSelect('update');
     })
-    console.log(decade)
+
     if (decade != '') {
         $('#decade-select').val(decade);
     }
@@ -98,6 +105,10 @@
     if (source != '') {
         $('#source-select').val(source);
     }
+
+    $(document).ready(function() {
+      $('select').niceSelect();
+    });
 
 </script>
 {% endblock %}

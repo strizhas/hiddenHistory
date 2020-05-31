@@ -2,7 +2,8 @@
 {% load static %}
 {% block head %}
     <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
-
+    <script type="text/javascript" src="{% static 'js/jquery.nice-select.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
 {% endblock %}
 {% block content %}
     <div class="centered-content-wrapper">
@@ -19,6 +20,10 @@
             {% endfor %}
         {% endif %}
             </select>
+        </div>
+        <div class="input-element">
+            <span class="input-header">Автор фотографии</span>
+            <input type="text" name="author" class="text-input"/>
         </div>
         <div class="input-element">
             <span class="input-header">Год, когда сделаны фотографии</span>
@@ -69,27 +74,30 @@
         } else {
             var decade = year.substring(0,3) + 0;
         }
-
-        $('#decade-select').val(decade)
+        $('#decade-select').val(decade);
+        $('select').niceSelect('update');
     })
 
     $('#new-source-button').on('click', function(e) {
         e.preventDefault();
         $.ajax({
-        url : "/require_source_form",
-        type : "GET",
-        success : function(response) {
-            $('<div>', {
-                'html': response,
-                'class': 'popup-container',
-                }).appendTo($(document.body))
+            url : "/require_source_form",
+            type : "GET",
+            success : function(response) {
+                $('<div>', {
+                    'html': response,
+                    'class': 'popup-container',
+                    }).appendTo($(document.body))
 
-        },
-        error : function(xhr,errmsg,err) {
-        },
-        complete: function() {
-        }
+            },
+            error : function(xhr,errmsg,err) {
+            },
+            complete: function() {
+            }
+        });
     });
-    })
+    $(document).ready(function() {
+      $('select').niceSelect();
+    });
 </script>
 {% endblock %}

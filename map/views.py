@@ -12,7 +12,7 @@ from django.utils import timezone
 from .models import Photo
 from .models import Source
 from .forms import PhotoForm
-from .forms import EditForm
+from .forms import PhotoDataForm
 from .forms import SourceForm
 
 
@@ -45,7 +45,7 @@ def get_photo(request):
         "url_full": p.img.url,
         "author": p.author,
         "uploader": p.uploader,
-        "uploaded": p.uploaded,
+        "uploaded": p.uploaded.strftime("%d.%m.%Y"),
         "source": source_name,
         "year": p.year,
         "id": p.id,
@@ -63,9 +63,9 @@ def edit_photo(request, pk):
 
     context = {
         "url": p.img.url,
-        "name": p.img.name,
-        "author": p.author,
+        "author": p.author or '',
         'sources': sources,
+        'filename': p.filename,
         'source': p.source_obj.id,
         'source_old': p.source,
         "year": p.year or '',
@@ -80,7 +80,7 @@ def save_changes(request, pk):
     if request.method != 'POST':
         return
 
-    form = EditForm(request.POST.copy())
+    form = PhotoDataForm(request.POST.copy())
 
     if len(request.FILES.getlist("files")) != 0:
         img = request.FILES.getlist("files")[0]
@@ -116,11 +116,14 @@ def save_changes(request, pk):
 
 
 def get_photos_data(request):
-    data = []
+    data = {}
     years = []
 
     for item in Photo.objects.values():
-        data.append({
+        if item["decade"] not in data:
+            data[item["decade"]] = []
+
+        data[item["decade"]].append({
             "latitude": item["latitude"],
             "longitude": item["longitude"],
             "direction": item["direction"],
@@ -128,6 +131,7 @@ def get_photos_data(request):
             "year": item["year"],
             "id": item["id"]
         })
+
         if item["year"] not in years:
             years.append(item["year"])
 
@@ -154,31 +158,36 @@ def upload_with_exif(request):
     if request.method != 'POST':
         return
 
-    failed = []
-    data = {
-        "uploader": User.objects.get(id=request.user.id),
-        "uploaded": timezone.now(),
-        "source": request.POST.get("source"),
-        "year": request.POST.get("year"),
-        "decade": request.POST.get("decade")
-    }
-
-    for file in request.FILES.getlist("files"):
-        if Photo.save_with_exif(file, data) is False:
-            failed.append(file.name)
-
-    if len(failed) == 0:
-        response = {
-            "state": "success",
-            "message": "фотографии загружены"
+    form = PhotoDataForm(request.POST.copy())
+    if form.is_valid():
+        failed = []
+        data = {
+            "uploader": User.objects.get(id=request.user.id),
+            "uploaded": timezone.now(),
+            "source": request.POST.get("source"),
+            "author": request.POST.get("author"),
+            "year": request.POST.get("year"),
+            "decade": request.POST.get("decade")
         }
+
+        for file in request.FILES.getlist("files"):
+            if Photo.save_with_exif(file, data) is False:
+                failed.append(file.name)
+
+        if len(failed) == 0:
+            response = {
+                "state": "success",
+                "message": "фотографии загружены"
+            }
+        else:
+            message = "в следующих файлах отсутсвуют геоданные: \n\r"
+            message += "\n\r".join(failed)
+            response = {
+                "state": "error",
+                "message": message
+            }
     else:
-        message = "в следующих файлах отсутсвуют геоданные: \n\r"
-        message += "\n\r".join(failed)
-        response = {
-            "state": "error",
-            "message": message
-        }
+        response = create_error_response(form)
 
     return JsonResponse(response)
 
@@ -217,3 +226,15 @@ def save_new_source(request):
         }
 
     return JsonResponse(response)
+
+
+def create_error_response(form):
+    errors = ''
+    for field in form:
+        for error in field.errors:
+            errors += field.name + ":\n\r"
+            errors += error + "\n\r"
+    return {
+        "state": "error",
+        "message": errors
+    }

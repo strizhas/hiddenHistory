@@ -106,6 +106,7 @@ class Source(models.Model):
 
 class Photo(models.Model):
     img = models.ImageField(upload_to=path_and_rename)
+    filename = models.CharField(max_length=200, null=True)
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     uploaded = models.DateTimeField(default=timezone.now)
     author = models.CharField(max_length=200, null=True)
@@ -153,6 +154,7 @@ class Photo(models.Model):
         p.orientation = gps['orientation']
         p.uploader = data['uploader']
         p.uploaded = data['uploaded']
+        p.filename = img.name
 
         if data['decade']:
             p.decade = data['decade']
@@ -160,6 +162,8 @@ class Photo(models.Model):
             p.year = data['year']
         if data['source']:
             p.source_obj = Source.objects.get(pk=data['source'])
+        if data['author']:
+            p.author = data['author']
 
         if gps['direction'] is not None:
             p.direction = gps['direction']
@@ -183,6 +187,7 @@ class Photo(models.Model):
             p.longitude = gps['longitude']
             p.latitude = gps['latitude']
             p.orientation = gps['orientation']
+            p.filename = img.name
 
             if gps['direction'] is not None:
                 p.direction = gps['direction']
@@ -196,8 +201,8 @@ class Photo(models.Model):
         if data['decade']:
             p.decade = data['decade']
 
+        p.author = data['author']
         p.save()
-        print(p.source_obj)
         return True
 
 

@@ -2,6 +2,7 @@
   <dictionary name="STR">
     <words>
       <w>basemap</w>
+      <w>basemaps</w>
       <w>imagekit</w>
       <w>openstreetmap</w>
       <w>tileset</w>

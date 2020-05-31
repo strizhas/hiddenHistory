@@ -62,14 +62,21 @@ function request_photos() {
         url : "/get_photos_data",
         type : "GET",
         success : function(response) {
-            $.each(response.data, function() {
-                var opts = markerOptions(20, this.direction, {"id": this.id, "year": this.year})
-                var m = L.marker([this.latitude, this.longitude], opts).addTo(map)
-                m.bindPopup("загрузка...")
-                m.on("click", function(e) {
-                    request_single_photo(e)
+            var marker_layers = {}
+            for (var decade in response.data) {
+                var group = []
+                $.each(response.data[decade], function() {
+                    var opts = markerOptions(20, this.direction, {"id": this.id, "year": this.year})
+                    var m = L.marker([this.latitude, this.longitude], opts)
+                        m.bindPopup("загрузка...")
+                        m.on("click", function(e) {
+                            request_single_photo(e)
+                        })
+                    group.push(m)
                 })
-            })
+                marker_layers[decade] = L.layerGroup(group).addTo(map);
+            }
+            L.control.layers(basemaps, marker_layers).addTo(map);
         },
         error : function(xhr,errmsg,err) {
         },
@@ -78,45 +85,33 @@ function request_photos() {
     });
 }
 
-function load_layer(url) {
-
-    url += '{z}/{x}/{y}.png';
-
-    if (layer != undefined) {
-        map.removeLayer(layer);
-    }
-
-    layer = L.tileLayer(url,{
-        maxZoom: 19,
-    }).addTo(map);
-}
-
 var corner1 = L.latLng(55.76,37.675)
 var corner2 = L.latLng(55.742,37.716)
 var bounds = L.latLngBounds(corner1, corner2);
 var layer = undefined;
-var tile_servers = {
-    'custom': 'https://hh-files.s3.eu-central-1.amazonaws.com/tileset/',
-    'osm': 'http://{s}.tile.osm.org/'
+
+var tile_urls = {
+    'custom': 'https://hh-files.s3.eu-central-1.amazonaws.com/tileset/{z}/{x}/{y}.png',
+    'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+}
+
+var basemap_custom = L.tileLayer(tile_urls['custom'], {id: 'MapID', maxZoom: 19});
+var basemap_osm = L.tileLayer(tile_urls['osm'], {id: 'MapID', maxZoom: 19});
+
+var basemaps = {
+    'схема завода': basemap_custom,
+    'карта osm': basemap_osm
 }
 
 var map = L.map('map', {
     center: [55.7507898, 37.6946124],
     zoom: 15,
     minZoom: 15,
-    maxZoom: 19
+    maxZoom: 19,
+    layers: [basemap_custom]
 });
 
-map.fitBounds(bounds)
-console.log(map.getBounds())
+map.fitBounds(bounds);
 map.setMaxBounds(bounds);
 
-load_layer(tile_servers['custom'])
-request_photos()
-
-document
-    .querySelector('#basemaps')
-    .addEventListener('change', function (e) {
-      var map_type = e.target.value;
-      load_layer(tile_servers[map_type]);
-    });
+request_photos();

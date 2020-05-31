@@ -8,7 +8,9 @@ class PhotoAdmin(admin.ModelAdmin):
     list_filter = ('source',)
 
 
-admin.site.register(Photo, PhotoAdmin)
-admin.site.register(Source)
+class SourceAdmin(admin.ModelAdmin):
+    list_display = ('name', 'url')
 
-# Register your models here.
+
+admin.site.register(Photo, PhotoAdmin)
+admin.site.register(Source, SourceAdmin)

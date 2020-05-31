@@ -22,3 +22,12 @@ def set_default_source():
             continue
         p.source_obj = source
         p.save()
+
+
+def set_filename():
+    ps = Photo.objects.all()
+    for p in ps:
+        if p.filename is not None:
+            continue
+        p.filename = p.img.name
+        p.save()
