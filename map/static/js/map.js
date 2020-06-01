@@ -74,7 +74,12 @@ function request_photos() {
                         })
                     group.push(m)
                 })
-                marker_layers[decade] = L.layerGroup(group).addTo(map);
+                if (decade != 'null') {
+                    var layer_name = decade + '-ые'
+                } else {
+                    var layer_name = 'неизвестно'
+                }
+                marker_layers[layer_name] = L.layerGroup(group).addTo(map);
             }
             L.control.layers(basemaps, marker_layers).addTo(map);
         },
@@ -92,15 +97,16 @@ var layer = undefined;
 
 var tile_urls = {
     'custom': 'https://hh-files.s3.eu-central-1.amazonaws.com/tileset/{z}/{x}/{y}.png',
+    'ge-2010': 'https://hh-files.s3.eu-central-1.amazonaws.com/tileset_ge_2010/{z}/{x}/{y}.png',
     'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
 }
 
 var basemap_custom = L.tileLayer(tile_urls['custom'], {id: 'MapID', maxZoom: 19});
-var basemap_osm = L.tileLayer(tile_urls['osm'], {id: 'MapID', maxZoom: 19});
+var basemap_ge_2010 = L.tileLayer(tile_urls['ge-2010'], {id: 'MapID', maxZoom: 19});
 
 var basemaps = {
     'схема завода': basemap_custom,
-    'карта osm': basemap_osm
+    'спутниковый снимок 2010 года': basemap_ge_2010
 }
 
 var map = L.map('map', {
