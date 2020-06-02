@@ -4,7 +4,7 @@ from map.models import Source
 
 
 class PhotoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'img', 'uploaded')
+    list_display = ('id', 'filename', 'uploaded')
     list_filter = ('source',)
 
 

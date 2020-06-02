@@ -96,8 +96,8 @@ var bounds = L.latLngBounds(corner1, corner2);
 var layer = undefined;
 
 var tile_urls = {
-    'custom': 'https://hh-files.s3.eu-central-1.amazonaws.com/tileset/{z}/{x}/{y}.png',
-    'ge-2010': 'https://hh-files.s3.eu-central-1.amazonaws.com/tileset_ge_2010/{z}/{x}/{y}.png',
+    'custom': 'https://storage.yandexcloud.net/hh-files/tileset-custom/{z}/{x}/{y}.png',
+    'ge-2010': 'https://storage.yandexcloud.net/hh-files/tileset-ge-2010/{z}/{x}/{y}.png',
     'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
 }
 
