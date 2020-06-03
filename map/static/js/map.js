@@ -24,11 +24,13 @@
     })()
 
 var loaded = {}
+var loaded_preview = {}
 
 function markerOptions(size, rotation, data) {
   const iconOptions = {
     iconSize  : [size, size],
     iconAnchor: [size/2, size/2],
+    tooltipAnchor: [ -5, -10 ],
     className : 'mymarker',
     id        : data['id'],
     year      : data['year'],
@@ -57,6 +59,25 @@ function request_single_photo(e) {
     });
 }
 
+function request_preview(e) {
+    var t = e.target.getTooltip();
+    var marker_id = e.target.options.icon.options.id;
+
+    if (marker_id in loaded_preview) {
+        return;
+    }
+    var url="/get_preview?id=" + marker_id;
+
+    $.get(url).done(function(data) {
+        var img = $('<img>', {
+            'src': data.url
+        })
+        t.setContent(img[0]);
+        t.update();
+        loaded_preview[marker_id] = true;
+    });
+}
+
 function request_photos() {
     $.ajax({
         url : "/get_photos_data",
@@ -69,8 +90,15 @@ function request_photos() {
                     var opts = markerOptions(20, this.direction, {"id": this.id, "year": this.year})
                     var m = L.marker([this.latitude, this.longitude], opts)
                         m.bindPopup("загрузка...")
+                        m.bindTooltip("<div class='img-blank'>g</div>", {
+                            'direction': 'top',
+                            'opacity': 1
+                            });
                         m.on("click", function(e) {
                             request_single_photo(e)
+                        })
+                        m.on("mouseover", function(e) {
+                            request_preview(e)
                         })
                     group.push(m)
                 })

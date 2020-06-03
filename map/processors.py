@@ -25,7 +25,7 @@ class SmallOrientedImage(ImageSpec):
         model, field_name = get_field_info(self.source)
         return [
             RotateEXIF(model.orientation),
-            ResizeToFill(52, 32)
+            ResizeToFill(150, 100)
         ]
 
 

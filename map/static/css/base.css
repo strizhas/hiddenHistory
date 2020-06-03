@@ -257,6 +257,20 @@ input, select {
 
 
 }
+
+/*----------------------- Тултип ----------------------------- */
+
+.img-blank {
+    width: 150px;
+    height: 100px;
+    background: #ccc;
+}
+
+.leaflet-tooltip {
+    min-width: 150px;
+    min-height: 100px;
+}
+
 /*----------------------- Попап с формой ----------------------------- */
 
 .popup-container {

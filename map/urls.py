@@ -13,6 +13,7 @@ urlpatterns = [
     path('upload', views.load_photo, name='load_photo'),
     path('upload_img', views.upload_img),
     path('get_photo', views.get_photo),
+    path('get_preview', views.get_preview),
     url(r'^edit_photo/(?P<pk>\d+)$', views.edit_photo, name='edit'),
     url(r'^save_changes/(?P<pk>\d+)$', views.save_changes),
     path('get_photos_data', views.get_photos_data),

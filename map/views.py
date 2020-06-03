@@ -56,6 +56,13 @@ def get_photo(request):
     return JsonResponse(data, safe=False)
 
 
+def get_preview(request):
+    photo_id = request.GET.get("id")
+    p = Photo.objects.get(pk=photo_id)
+
+    return JsonResponse({"url": p.img_small.url})
+
+
 @login_required(login_url='/accounts/login/')
 def edit_photo(request, pk):
     p = Photo.objects.get(pk=pk)
