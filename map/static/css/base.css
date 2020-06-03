@@ -263,7 +263,7 @@ input, select {
 .img-blank {
     width: 150px;
     height: 100px;
-    background: #ccc;
+    background: #fff;
 }
 
 .leaflet-tooltip {

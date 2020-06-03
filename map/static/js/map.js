@@ -90,7 +90,7 @@ function request_photos() {
                     var opts = markerOptions(20, this.direction, {"id": this.id, "year": this.year})
                     var m = L.marker([this.latitude, this.longitude], opts)
                         m.bindPopup("загрузка...")
-                        m.bindTooltip("<div class='img-blank'>g</div>", {
+                        m.bindTooltip("<div class='img-blank'></div>", {
                             'direction': 'top',
                             'opacity': 1
                             });
