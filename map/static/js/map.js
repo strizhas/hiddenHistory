@@ -59,15 +59,21 @@ function request_single_photo(e) {
     });
 }
 
-function request_preview(e) {
-    var t = e.target.getTooltip();
+function request_preview(e, m) {
     var marker_id = e.target.options.icon.options.id;
 
     if (marker_id in loaded_preview) {
         return;
     }
+
+    m.bindTooltip("<div class='img-blank'></div>", {
+                            'direction': 'top',
+                            'opacity': 1
+                            });
+    var t = m.getTooltip();
     var url="/get_preview?id=" + marker_id;
 
+    m.openTooltip();
     $.get(url).done(function(data) {
         var img = $('<img>', {
             'src': data.url
@@ -77,6 +83,9 @@ function request_preview(e) {
         loaded_preview[marker_id] = true;
     });
 }
+
+var cursor_on = undefined;
+var cursor_timer = undefined;
 
 function request_photos() {
     $.ajax({
@@ -90,16 +99,23 @@ function request_photos() {
                     var opts = markerOptions(20, this.direction, {"id": this.id, "year": this.year})
                     var m = L.marker([this.latitude, this.longitude], opts)
                         m.bindPopup("загрузка...")
-                        m.bindTooltip("<div class='img-blank'></div>", {
-                            'direction': 'top',
-                            'opacity': 1
-                            });
+
                         m.on("click", function(e) {
-                            request_single_photo(e)
+                            request_single_photo(e);
                         })
                         m.on("mouseover", function(e) {
-                            request_preview(e)
-                        })
+                            var m_id =  e.target.options.icon.options.id;
+                            var m = this;
+                            cursor_on = m_id;
+                            cursor_timer = setTimeout(function() {
+                                if (cursor_on == m_id) {
+                                    request_preview(e, m);
+                                }
+                            }, 200)
+                        });
+                        m.on("mouseout", function(e) {
+                            cursor_on = undefined;
+                        });
                     group.push(m)
                 })
                 if (decade != 'null') {
