@@ -139,7 +139,7 @@ def get_photos_data(request):
             "id": item["id"]
         })
 
-        if item["year"] not in years:
+        if item["year"] not in years and item["year"] is not None:
             years.append(item["year"])
 
     years.sort()
