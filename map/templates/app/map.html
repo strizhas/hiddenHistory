@@ -8,6 +8,9 @@
 
     <!-- Include the Leaflet JS Library -->
     <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet.js" integrity="sha512-mNqn2Wg7tSToJhvHcqfzLMU6J4mkOImSPTxVZAdo+lcPlk+GhZmYgACEe0x35K7YzW1zJ7XyJV/TT1MrdXvMcA==" crossorigin=""></script>
+    <script type="text/javascript" src="{% static 'js/mm-jsr.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/mm-jsr.css' %}">
+
 {% endblock %}
 {% block content %}
     <div id="legend-container" class="sidebar-container">
@@ -93,6 +96,10 @@
         </div>
     </div>
     <div class="map-wrapper">
+        <div class="time-range-slider">
+            <input id="jsr-1-1" name="min" type="range" min="1970" max="2020" step="1" value="1970">
+            <input id="jsr-1-2" name="max" type="range" min="1970" max="2020" step="1" value="2010">
+        </div>
         <div id="map"></div>
     </div>
     <script type="text/javascript" src="{% static 'js/map.js' %}"></script>

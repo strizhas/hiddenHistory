@@ -142,6 +142,8 @@ def get_photos_data(request):
         if item["year"] not in years:
             years.append(item["year"])
 
+    years.sort()
+
     return JsonResponse({"data": data, "years": years}, safe=False)
 
 

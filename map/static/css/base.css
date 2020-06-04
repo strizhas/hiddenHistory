@@ -159,6 +159,14 @@ input, select {
 
 }
 
+.time-range-slider {
+    position: absolute;
+    width: calc(100% - 30px);
+    margin-left: 15px;
+    z-index: 11000;
+    bottom: 0px;
+}
+
 /*----------------------- Сайдбар ------------------------------ */
 .sidebar-container {
     position: absolute;

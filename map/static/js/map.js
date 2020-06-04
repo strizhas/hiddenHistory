@@ -25,6 +25,12 @@
 
 var loaded = {}
 var loaded_preview = {}
+var cursor_on = undefined;
+var cursor_timer = undefined;
+var marker_layers = {};
+var year_min = undefined;
+var year_max = undefined;
+
 
 function markerOptions(size, rotation, data) {
   const iconOptions = {
@@ -84,58 +90,125 @@ function request_preview(e, m) {
     });
 }
 
-var cursor_on = undefined;
-var cursor_timer = undefined;
+function draw_markers(response) {
+
+    for (var decade in response.data) {
+        var group = [];
+        $.each(response.data[decade], function() {
+            var opts = markerOptions(20, this.direction, {"id": this.id, "year": this.year})
+            var m = L.marker([this.latitude, this.longitude], opts)
+
+                m.bindPopup("загрузка...");
+                m.on("click", function(e) {
+                    request_single_photo(e);
+                });
+                m.on("mouseover", function(e) {
+                    var m_id =  e.target.options.icon.options.id;
+                    var m = this;
+                    cursor_on = m_id;
+                    cursor_timer = setTimeout(function() {
+                        if (cursor_on == m_id) {
+                            request_preview(e, m);
+                        }
+                    }, 200)
+                });
+                m.on("mouseout", function(e) {
+                    cursor_on = undefined;
+                });
+            group.push(m);
+        })
+        if (decade != 'null') {
+            var layer_name = decade ;
+        } else {
+            var layer_name = 'неизвестно';
+        }
+        marker_layers[layer_name] = L.layerGroup(group).addTo(map);
+    }
+    L.control.layers(basemaps, marker_layers).addTo(map);
+};
+
+
+function build_slider(years) {
+    year_min = years[0];
+    year_max = years[years.length - 1];
+
+    const range = new JSR(['#jsr-1-1', '#jsr-1-2'], {
+        min: year_min,
+        max: year_max,
+        sliders: 2,
+        values: [year_min, year_max]
+    });
+    range.addEventListener('update', (input, value) => {
+        var name = $(input).attr('name');
+
+        if (name == "min") {
+            year_min = value;
+        } else {
+            year_max = value;
+        }
+
+        var d0 = Math.floor(year_min/10)*10;
+        var d1 = Math.floor(year_max/10)*10;
+
+        for (var layer in marker_layers) {
+            l_int = parseInt(layer)
+            if (l_int < d0 || l_int > d1) {
+                if(map.hasLayer(marker_layers[layer])) {
+                    map.removeLayer(marker_layers[layer]);
+                }
+                continue
+            }
+            if (!(map.hasLayer(marker_layers[layer]))) {
+                map.addLayer(marker_layers[layer]);
+            }
+        }
+
+        var markers_d1 = marker_layers[d1.toString()].getLayers();
+
+        for (var i=0; i<markers_d1.length; i++) {
+            var m = markers_d1[i];
+            if (m.options.icon.options.year >= year_min &&
+                m.options.icon.options.year <= year_max) {
+                m._icon.style.display = 'block'
+            } else {
+                m._icon.style.display = 'none'
+            }
+        }
+
+        if (d0 == d1) return;
+
+        var markers_d0 = marker_layers[d0.toString()].getLayers();
+
+        for (var i=0; i<markers_d0.length; i++) {
+            var m = markers_d1[i];
+            if (m.options.icon.options.year >= year_min &&
+                m.options.icon.options.year <= year_max) {
+                m._icon.style.display = 'block'
+            } else {
+                m._icon.style.display = 'none'
+            }
+        }
+
+    });
+};
 
 function request_photos() {
     $.ajax({
         url : "/get_photos_data",
         type : "GET",
         success : function(response) {
-            var marker_layers = {}
-            for (var decade in response.data) {
-                var group = []
-                $.each(response.data[decade], function() {
-                    var opts = markerOptions(20, this.direction, {"id": this.id, "year": this.year})
-                    var m = L.marker([this.latitude, this.longitude], opts)
-                        m.bindPopup("загрузка...")
-
-                        m.on("click", function(e) {
-                            request_single_photo(e);
-                        })
-                        m.on("mouseover", function(e) {
-                            var m_id =  e.target.options.icon.options.id;
-                            var m = this;
-                            cursor_on = m_id;
-                            cursor_timer = setTimeout(function() {
-                                if (cursor_on == m_id) {
-                                    request_preview(e, m);
-                                }
-                            }, 200)
-                        });
-                        m.on("mouseout", function(e) {
-                            cursor_on = undefined;
-                        });
-                    group.push(m)
-                })
-                if (decade != 'null') {
-                    var layer_name = decade + '-ые'
-                } else {
-                    var layer_name = 'неизвестно'
-                }
-                marker_layers[layer_name] = L.layerGroup(group).addTo(map);
-            }
-            L.control.layers(basemaps, marker_layers).addTo(map);
+            draw_markers(response);
+            build_slider(response.years);
         },
         error : function(xhr,errmsg,err) {
         },
         complete: function() {
         }
     });
-}
+};
 
-var corner1 = L.latLng(55.76,37.675)
-var corner2 = L.latLng(55.742,37.716)
+var corner1 = L.latLng(55.76,37.675);
+var corner2 = L.latLng(55.742,37.716);
 var bounds = L.latLngBounds(corner1, corner2);
 var layer = undefined;
 
@@ -143,7 +216,7 @@ var tile_urls = {
     'custom': 'https://storage.yandexcloud.net/hh-files/tileset-custom/{z}/{x}/{y}.png',
     'ge-2010': 'https://storage.yandexcloud.net/hh-files/tileset-ge-2010/{z}/{x}/{y}.png',
     'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
-}
+};
 
 var basemap_custom = L.tileLayer(tile_urls['custom'], {id: 'MapID', maxZoom: 19});
 var basemap_ge_2010 = L.tileLayer(tile_urls['ge-2010'], {id: 'MapID', maxZoom: 19});
@@ -151,7 +224,7 @@ var basemap_ge_2010 = L.tileLayer(tile_urls['ge-2010'], {id: 'MapID', maxZoom: 1
 var basemaps = {
     'схема завода': basemap_custom,
     'спутниковый снимок 2010 года': basemap_ge_2010
-}
+};
 
 var map = L.map('map', {
     center: [55.7507898, 37.6946124],
@@ -165,3 +238,4 @@ map.fitBounds(bounds);
 map.setMaxBounds(bounds);
 
 request_photos();
+
