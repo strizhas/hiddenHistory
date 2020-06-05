@@ -79,6 +79,10 @@ def edit_photo(request, pk):
         "decade": p.decade or '',
         "pk": pk
     }
+
+    if p.published:
+        context['published'] = True
+
     return render(request, 'app/edit_photo.html', context)
 
 
@@ -95,6 +99,7 @@ def save_changes(request, pk):
         img = None
 
     if form.is_valid():
+        print(form.cleaned_data)
         if Photo.edit_with_exif(img, form.cleaned_data, pk):
             p = Photo.objects.get(pk=pk)
             response = {
@@ -126,7 +131,7 @@ def get_photos_data(request):
     data = {}
     years = []
 
-    for item in Photo.objects.values():
+    for item in Photo.objects.filter(published=True).values():
         if item["decade"] not in data:
             data[item["decade"]] = []
 

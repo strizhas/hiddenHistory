@@ -30,7 +30,7 @@ var cursor_timer = undefined;
 var marker_layers = {};
 var year_min = undefined;
 var year_max = undefined;
-
+var tooltip = undefined;
 
 function markerOptions(size, rotation, data) {
   const iconOptions = {
@@ -110,10 +110,14 @@ function draw_markers(response) {
                         if (cursor_on == m_id) {
                             request_preview(e, m);
                         }
-                    }, 200)
+                    }, 300)
                 });
                 m.on("mouseout", function(e) {
                     cursor_on = undefined;
+                    var t = this.getTooltip();
+                    if (t != undefined) {
+                        t.closeTooltip()
+                    }
                 });
             group.push(m);
         })
@@ -138,6 +142,7 @@ function build_slider(years) {
         sliders: 2,
         values: [year_min, year_max]
     });
+
     range.addEventListener('update', (input, value) => {
         var name = $(input).attr('name');
 

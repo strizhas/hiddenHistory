@@ -52,6 +52,15 @@
                 <option value="" selected>неизвестно</option>
             </select>
         </div>
+        <div class="input-element">
+
+            <span class="input-header">Опубликована</span>
+            {% if published %}
+                <input type="checkbox" checked="checked" name="published"/>
+            {% else %}
+                <input type="checkbox" name="published"/>
+            {% endif %}
+        </div>
         <span class="help-text">в фотографии должны содержаться GPS данные в формате EXIF</span>
         <div class="input-element">
             <input type="file" name="files"/>

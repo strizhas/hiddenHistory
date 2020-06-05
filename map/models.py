@@ -107,6 +107,7 @@ class Source(models.Model):
 class Photo(models.Model):
     img = models.ImageField(upload_to=path_and_rename)
     filename = models.CharField(max_length=200, null=True)
+    published = models.BooleanField(default=True)
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     uploaded = models.DateTimeField(default=timezone.now)
     author = models.CharField(max_length=200, null=True)
@@ -200,6 +201,8 @@ class Photo(models.Model):
             p.source_obj = Source.objects.get(pk=data['source'])
         if data['decade']:
             p.decade = data['decade']
+        if 'published' in data:
+            p.published = data['published']
 
         p.author = data['author']
         p.save()

@@ -125,6 +125,10 @@ input, select {
 	border: solid 1px #e8e8e8;
 }
 
+.ajax-update-form .input-element input[type="checkbox"] {
+    width: auto;
+}
+
 .ajax-update-form .input-element input:focus {
     outline: 1px solid #000;
 }
