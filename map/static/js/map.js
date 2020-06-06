@@ -1,28 +1,5 @@
 
 
-(function() {
-  // Save original method before overwriting it below.
-      const _setPosOriginal = L.Marker.prototype._setPos
-
-      L.Marker.addInitHook(function() {
-        const anchor = this.options.icon.options.iconAnchor
-        this.options.rotationOrigin = anchor ? `${anchor[0]}px ${anchor[1]}px` : 'center center'
-        // Ensure marker remains rotated during dragging.
-        this.on('drag', data => { this._rotate() })
-      })
-
-      L.Marker.include({
-        _setPos: function(pos) {
-          _setPosOriginal.call(this, pos)
-          if (this.options.rotation) this._rotate()
-        },
-        _rotate: function() {
-          this._icon.style[`${L.DomUtil.TRANSFORM}Origin`] = this.options.rotationOrigin
-          this._icon.style[L.DomUtil.TRANSFORM] += ` rotate(${this.options.rotation}deg)`
-        }
-      })
-    })()
-
 var loaded = {}
 var loaded_preview = {}
 var cursor_on = undefined;
@@ -31,6 +8,29 @@ var marker_layers = {};
 var year_min = undefined;
 var year_max = undefined;
 var tooltip = undefined;
+var map = undefined;
+var basemaps = undefined;
+var base_url = location.href.split('?')[0]
+
+const _setPosOriginal = L.Marker.prototype._setPos;
+
+L.Marker.addInitHook(function() {
+    const anchor = this.options.icon.options.iconAnchor
+    this.options.rotationOrigin = anchor ? `${anchor[0]}px ${anchor[1]}px` : 'center center'
+    // Ensure marker remains rotated during dragging.
+    this.on('drag', data => { this._rotate() })
+    })
+
+    L.Marker.include({
+    _setPos: function(pos) {
+      _setPosOriginal.call(this, pos)
+      if (this.options.rotation) this._rotate()
+    },
+    _rotate: function() {
+      this._icon.style[`${L.DomUtil.TRANSFORM}Origin`] = this.options.rotationOrigin
+      this._icon.style[L.DomUtil.TRANSFORM] += ` rotate(${this.options.rotation}deg)`
+    }
+});
 
 function markerOptions(size, rotation, data) {
   const iconOptions = {
@@ -47,7 +47,7 @@ function markerOptions(size, rotation, data) {
     icon: L.divIcon(iconOptions),
     rotation: 360 - rotation
   }
-}
+};
 
 function request_single_photo(e) {
     var popup = e.target.getPopup();
@@ -63,7 +63,7 @@ function request_single_photo(e) {
         popup.update();
         loaded[marker_id] = true;
     });
-}
+};
 
 function request_preview(e, m) {
     var marker_id = e.target.options.icon.options.id;
@@ -135,6 +135,26 @@ function draw_markers(response) {
 function build_slider(years) {
     year_min = years[0];
     year_max = years[years.length - 1];
+
+    $('<input>', {
+        'name': 'min',
+        'type': 'range',
+        'min': year_min,
+        'max': year_max,
+        'step': 1,
+        'value': year_min,
+        'id': 'jsr-1-1'
+    }).appendTo('#time-range-slider')
+
+    $('<input>', {
+        'name': 'max',
+        'type': 'range',
+        'min': year_min,
+        'max': year_max,
+        'step': 1,
+        'value': year_max,
+        'id': 'jsr-1-2'
+    }).appendTo('#time-range-slider')
 
     const range = new JSR(['#jsr-1-1', '#jsr-1-2'], {
         min: year_min,
@@ -212,35 +232,87 @@ function request_photos() {
     });
 };
 
-var corner1 = L.latLng(55.76,37.675);
-var corner2 = L.latLng(55.742,37.716);
-var bounds = L.latLngBounds(corner1, corner2);
-var layer = undefined;
+function get_map_params() {
 
-var tile_urls = {
-    'custom': 'https://storage.yandexcloud.net/hh-files/tileset-custom/{z}/{x}/{y}.png',
-    'ge-2010': 'https://storage.yandexcloud.net/hh-files/tileset-ge-2010/{z}/{x}/{y}.png',
-    'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+    var center = [55.7507898, 37.6946124];
+    var zoom = 15;
+    var params = {};
+
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+      params[key] = value;
+    });
+
+    if ('center' in params) {
+        center = params.center.split(",").map(parseFloat);
+    }
+
+    if ('zoom' in params) {
+        zoom = parseInt(params.zoom)
+    }
+
+    return {
+        'center': center,
+        'zoom': zoom
+    }
 };
 
-var basemap_custom = L.tileLayer(tile_urls['custom'], {id: 'MapID', maxZoom: 19});
-var basemap_ge_2010 = L.tileLayer(tile_urls['ge-2010'], {id: 'MapID', maxZoom: 19});
+function change_url(center, zoom) {
+    var url = base_url + `?center=${center.lat},${center.lng}`;
+        url += `&zoom=${zoom}`;
 
-var basemaps = {
-    'схема завода': basemap_custom,
-    'спутниковый снимок 2010 года': basemap_ge_2010
+    window.history.replaceState( {} , '', url );
 };
 
-var map = L.map('map', {
-    center: [55.7507898, 37.6946124],
-    zoom: 15,
-    minZoom: 15,
-    maxZoom: 19,
-    layers: [basemap_custom]
-});
+function init_map() {
+    var corner1 = L.latLng(55.765,37.671);
+    var corner2 = L.latLng(55.74,37.72);
+    var bounds = L.latLngBounds(corner1, corner2);
 
-map.fitBounds(bounds);
-map.setMaxBounds(bounds);
+    var tile_urls = {
+        'custom': 'https://storage.yandexcloud.net/hh-files/tileset-custom/{z}/{x}/{y}.png',
+        'ge-2010': 'https://storage.yandexcloud.net/hh-files/tileset-ge-2010/{z}/{x}/{y}.png',
+        'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
+    };
 
-request_photos();
+    var basemap_custom = L.tileLayer(tile_urls['custom'], {
+        id: 'MapID',
+        maxZoom: 19
+        });
+    var basemap_ge_2010 = L.tileLayer(tile_urls['ge-2010'], {
+        id: 'MapID',
+        maxZoom: 19
+        });
 
+    basemaps = {
+        'схема завода': basemap_custom,
+        'спутниковый снимок 2010 года': basemap_ge_2010
+    };
+    var params = get_map_params()
+
+    map = L.map('map', {
+        center: params.center,
+        zoom: params.zoom,
+        zooms: [15,16,17,18,19,20],
+        minZoom: 15,
+        maxZoom: 20,
+        layers: [basemap_custom]
+    });
+
+    //map.fitBounds(bounds);
+    map.setMaxBounds(bounds);
+
+    request_photos();
+
+    map.on('moveend', function() {
+        center = map.getCenter()
+        zoom = map.getZoom()
+        change_url(center, zoom)
+    })
+    map.on('zoomend', function() {
+        center = map.getCenter()
+        zoom = map.getZoom()
+        change_url(center, zoom)
+    })
+};
+
+init_map()
