@@ -128,7 +128,8 @@ function draw_markers(response) {
         }
         marker_layers[layer_name] = L.layerGroup(group).addTo(map);
     }
-    L.control.layers(basemaps, marker_layers).addTo(map);
+    //L.control.layers(basemaps, marker_layers).addTo(map);
+    L.control.layers(basemaps).addTo(map);
 };
 
 
@@ -271,21 +272,28 @@ function init_map() {
     var tile_urls = {
         'custom': 'https://storage.yandexcloud.net/hh-files/tileset-custom/{z}/{x}/{y}.png',
         'ge-2010': 'https://storage.yandexcloud.net/hh-files/tileset-ge-2010/{z}/{x}/{y}.png',
+        '1906': 'https://storage.yandexcloud.net/hh-files/tileset-1906/{z}/{x}/{y}.png',
         'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
     };
 
     var basemap_custom = L.tileLayer(tile_urls['custom'], {
-        id: 'MapID',
+        id: 'basemap-custom',
         maxZoom: 19
         });
     var basemap_ge_2010 = L.tileLayer(tile_urls['ge-2010'], {
-        id: 'MapID',
-        maxZoom: 19
+        id: 'basemap-ge-2010',
+        maxZoom: 20
+        });
+    var basemap_1906 = L.tileLayer(tile_urls['1906'], {
+        id: 'basemap-1906',
+        maxNativeZoom: 17,
+        maxZoom: 18
         });
 
     basemaps = {
         'схема завода': basemap_custom,
-        'спутниковый снимок 2010 года': basemap_ge_2010
+        'спутниковый снимок 2010 года': basemap_ge_2010,
+        'план 1906 года': basemap_1906
     };
     var params = get_map_params()
 
@@ -294,7 +302,6 @@ function init_map() {
         zoom: params.zoom,
         zooms: [15,16,17,18,19,20],
         minZoom: 15,
-        maxZoom: 20,
         layers: [basemap_custom]
     });
 
