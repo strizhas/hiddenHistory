@@ -133,8 +133,23 @@ function draw_markers(response) {
 };
 
 
-function build_slider(years) {
-    year_min = years[0];
+function build_slider(years, data) {
+
+    var decades = Object.keys(data)
+    var i = decades.indexOf('null')
+
+    if (i != -1) {
+        decades.splice(i, 1)
+    }
+
+    decades = decades.map(parseFloat).sort()
+
+    if (years[0] < decades[0]) {
+        year_min = years[0];
+    } else {
+        year_min = decades[0]
+    }
+
     year_max = years[years.length - 1];
 
     $('<input>', {
@@ -189,32 +204,39 @@ function build_slider(years) {
             }
         }
 
-        var markers_d1 = marker_layers[d1.toString()].getLayers();
+        if (d1.toString() in marker_layers) {
+            var markers_d1 = marker_layers[d1.toString()].getLayers();
 
-        for (var i=0; i<markers_d1.length; i++) {
-            var m = markers_d1[i];
-            if (m.options.icon.options.year >= year_min &&
-                m.options.icon.options.year <= year_max) {
-                m._icon.style.display = 'block'
-            } else {
-                m._icon.style.display = 'none'
+            for (var i=0; i<markers_d1.length; i++) {
+                var m = markers_d1[i];
+                if (m.options.icon.options.year >= year_min &&
+                    m.options.icon.options.year <= year_max) {
+                    m._icon.style.display = 'block'
+                } else {
+                    m._icon.style.display = 'none'
+                }
             }
+
+            if (d0 == d1) return;
         }
 
-        if (d0 == d1) return;
+        if (d0.toString() in marker_layers) {
+            var markers_d0 = marker_layers[d0.toString()].getLayers();
 
-        var markers_d0 = marker_layers[d0.toString()].getLayers();
+            for (var i=0; i<markers_d0.length; i++) {
+                var m = markers_d0[i];
 
-        for (var i=0; i<markers_d0.length; i++) {
-            var m = markers_d1[i];
-            if (m.options.icon.options.year >= year_min &&
-                m.options.icon.options.year <= year_max) {
-                m._icon.style.display = 'block'
-            } else {
-                m._icon.style.display = 'none'
+                if (m.options.icon.options.year == null) {
+                    continue;
+                }
+                if (m.options.icon.options.year >= year_min &&
+                    m.options.icon.options.year <= year_max) {
+                    m._icon.style.display = 'block'
+                } else {
+                    m._icon.style.display = 'none'
+                }
             }
         }
-
     });
 };
 
@@ -224,7 +246,7 @@ function request_photos() {
         type : "GET",
         success : function(response) {
             draw_markers(response);
-            build_slider(response.years);
+            build_slider(response.years, response.data);
         },
         error : function(xhr,errmsg,err) {
         },

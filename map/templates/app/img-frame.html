@@ -6,6 +6,10 @@
     <div class="main-section">
         {% if year %}
             <div class="photo-year-caption">{{ year }},</div>
+        {% else %}
+            {% if decade %}
+                <div class="photo-year-caption">{{ decade }}-ые,</div>
+            {% endif %}
         {% endif %}
         {% if source %}
             <div>источник: {{ source }}</div>

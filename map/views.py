@@ -48,6 +48,7 @@ def get_photo(request):
         "uploaded": p.uploaded.strftime("%d.%m.%Y"),
         "source": source_name,
         "year": p.year,
+        "decade": p.decade,
         "id": p.id,
         "owner": p.uploader.id == request.user.id
     }
@@ -130,6 +131,7 @@ def save_changes(request, pk):
 def get_photos_data(request):
     data = {}
     years = []
+    decades = []
 
     for item in Photo.objects.filter(published=True).values():
         if item["decade"] not in data:
