@@ -22,35 +22,28 @@
     </div>
 {% endblock %}
 {% block content %}
-	<div class="no-map-content">
-	<a href="{{ url_full }}" target="_blank" class="img-download-link">скачать в полном размере</a>
-	<div class="popup-img-frame">
-		{{ description }}
-		<img src="{{ url }}" alt="{{ alt }}"/>
-	</div>
-	<div class="photo-captions">
-		<div class="main-section">
-			{% if year %}
-				<div class="photo-year-caption">{{ year }},</div>
-			{% else %}
-				{% if decade %}
-					<div class="photo-year-caption">{{ decade }}-ые,</div>
-				{% endif %}
-			{% endif %}
-			{% if source %}
-				<div>источник: {{ source }}</div>
-			{% else %}
-				 <div>источник не указан</div>
-			{% endif %}
-			{% if author %}
-				<div>| автор: {{ author }}</div>
-			{% endif %}
+    <div class="no-map-content">
+        {% for p in page_obj %}
+            <a href="show/{{ p.id }}" >
+                <img src="{{ p.img_small.url }}"/>
+            </a>
+        {% endfor %}
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page=1">&laquo; первая</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+                {% endif %}
 
-		</div>
-		<div class="help-text">загузил: {{ uploader }}, {{ uploaded }}</div>
-		{% if owner == True %}
-			<a href="/edit_photo/{{ id }}" target="_blank">редактировать</a>
-		{% endif %}
-	</div>
-	</div>
+                <span class="current">
+                    Страница {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">следующая</a>
+                    <a href="?page={{ page_obj.paginator.num_pages }}">последняя</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
 {% endblock %}

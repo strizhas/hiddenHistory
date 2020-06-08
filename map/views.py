@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 from django.utils import timezone
 
 from .models import Photo
@@ -31,28 +32,23 @@ def load_photo(request):
     return render(request, 'app/load_photo.html', context)
 
 
+def show_albums(request):
+    p = Photo.objects.all().order_by('-id')
+    paginator = Paginator(p, 50)  # Show 25 contacts per page.
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'app/albums.html', {'page_obj': page_obj})
+
+
+def show_photo(request, pk):
+    context = Photo.objects.get(pk=pk).get_view_context(request)
+    return render(request, 'app/show.html', context=context)
+
+
 def get_photo(request):
     photo_id = request.GET.get("id")
-    p = Photo.objects.get(pk=photo_id)
-
-    if p.source_obj is not None:
-        source_name = p.source_obj.name
-    else:
-        source_name = None
-
-    context = {
-        "url": p.img_medium.url,
-        "url_full": p.img.url,
-        "author": p.author,
-        "uploader": p.uploader,
-        "uploaded": p.uploaded.strftime("%d.%m.%Y"),
-        "source": source_name,
-        "year": p.year,
-        "decade": p.decade,
-        "id": p.id,
-        "owner": p.uploader.id == request.user.id
-    }
-
+    context = Photo.objects.get(pk=photo_id).get_view_context(request)
     data = render_to_string('app/img-frame.html', context=context)
     return JsonResponse(data, safe=False)
 
@@ -74,6 +70,7 @@ def edit_photo(request, pk):
         "author": p.author or '',
         'sources': sources,
         'filename': p.filename,
+        'description': p.description or '',
         'source': p.source_obj.id,
         'source_old': p.source,
         "year": p.year or '',
@@ -100,7 +97,6 @@ def save_changes(request, pk):
         img = None
 
     if form.is_valid():
-        print(form.cleaned_data)
         if Photo.edit_with_exif(img, form.cleaned_data, pk):
             p = Photo.objects.get(pk=pk)
             response = {

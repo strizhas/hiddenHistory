@@ -9,11 +9,15 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.show),
+    path('', views.show, name='map'),
+    path('albums', views.show_albums, name='albums'),
     path('upload', views.load_photo, name='load_photo'),
+
     path('upload_img', views.upload_img),
     path('get_photo', views.get_photo),
     path('get_preview', views.get_preview),
+    url(r'^show/(?P<pk>\d+)$', views.show_photo, name='show'),
+    url(r'^photo/(?P<pk>\d+)$', views.edit_photo, name='view'),
     url(r'^edit_photo/(?P<pk>\d+)$', views.edit_photo, name='edit'),
     url(r'^save_changes/(?P<pk>\d+)$', views.save_changes),
     path('get_photos_data', views.get_photos_data),

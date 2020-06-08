@@ -11,7 +11,19 @@
 
 <body>
   <div class="main-wrapper">
-  {% block content %}<!-- default content text (typically empty) -->{% endblock %}
+    <div id="legend-container" class="sidebar-container">
+        <div class="sidebar-wrapper">
+          <h2>Металлургический завод "Серп и молот"</h2>
+          <nav class="sidebar-nav">
+              <a href="{% url 'map' %}">интерактивная карта</a> |
+              <a href="{% url 'albums' %}">фотоальбом</a>
+          </nav>
+          {% block sidebar %}{% endblock %}
+        </div>
+    </div>
+    <div class="map-wrapper">
+      {% block content %}<!-- default content text (typically empty) -->{% endblock %}
+    </div>
   </div>
 </body>
 </html>

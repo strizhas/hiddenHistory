@@ -2,6 +2,7 @@ html, body {
         padding: 0;
         margin: 0;
         bottom: 0;
+        background: #fff;
     }
 
 html {
@@ -66,6 +67,10 @@ body {
     height: 100vh;
 }
 
+.no-map-content {
+    padding: 20px;
+    width: calc(100% - 40px);
+}
 
 button {
 	margin-right: 20px;
@@ -86,10 +91,6 @@ input, select {
     margin:0 auto;
     padding: 40px 0;
 }
-
-
-
-
 
 
 /*----------------------- Формы общие ------------------------------ */
@@ -173,7 +174,7 @@ input, select {
 
 /*----------------------- Сайдбар ------------------------------ */
 .sidebar-container {
-    position: absolute;
+    position: fixed;
     top: 0px;
     right: 0px;
     width: 400px;
@@ -188,6 +189,13 @@ input, select {
 
 .sidebar-wrapper {
     padding: 20px;
+}
+.sidebar-nav {
+    margin: 10px 0 10px 0;
+}
+.sidebar-nav a {
+    color: #B1B1B1;
+
 }
 
 .legend-table {
@@ -219,6 +227,29 @@ input, select {
     height: 15px;
 }
 
+/*----------------------- Попаз фотографии ----------------------------- */
+
+
+.photo-captions .main-section {
+    padding-bottom: 5px;
+}
+
+.photo-captions .main-section * {
+    font-size: 18px;
+    display: inline-block;
+}
+
+.img-download-link {
+    font-size: 14px;
+    display: block;
+    margin: 0 0 10px 0;
+}
+
+.popup-img-frame {
+    background: #e3e3e3;
+    text-align: center;
+    font-size: 0;
+}
 
 /*----------------------- Попап----------------------------- */
 
@@ -232,26 +263,7 @@ input, select {
     position: relative;
 }
 
-.leaflet-popup-content .photo-captions .main-section {
-    padding-bottom: 5px;
-}
 
-.leaflet-popup-content .photo-captions .main-section * {
-    font-size: 18px;
-    display: inline-block;
-}
-
-.leaflet-popup-content .img-download-link {
-    font-size: 14px;
-    display: block;
-    margin: 0 0 10px 0;
-}
-
-.popup-img-frame {
-    background: #e3e3e3;
-    text-align: center;
-    font-size: 0;
-}
 
 @media only screen and (max-width: 1440px) {
     .popup-img-frame img {

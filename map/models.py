@@ -111,6 +111,7 @@ class Photo(models.Model):
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     uploaded = models.DateTimeField(default=timezone.now)
     author = models.CharField(max_length=200, null=True, blank=True)
+    description = models.CharField(max_length=400, null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
     decade = models.IntegerField(null=True)
     source = models.CharField(max_length=200, null=True, blank=True)
@@ -204,9 +205,44 @@ class Photo(models.Model):
         if 'published' in data:
             p.published = data['published']
 
+        if data['description']:
+            p.description = data['description']
+
         p.author = data['author']
         p.save()
         return True
+
+    def get_view_context(self, request):
+
+        if self.source_obj is not None:
+            source_name = self.source_obj.name
+        else:
+            source_name = None
+
+        alt = 'Завод "Серп и молот" '
+        if self.year:
+            alt += str(self.year)
+        else:
+            alt += str(self.decade) + '-ые'
+        if self.description:
+            alt += ' - {}'.format(self.description)
+
+        context = {
+            "url": self.img_medium.url,
+            "url_full": self.img.url,
+            "author": self.author,
+            "uploader": self.uploader,
+            "uploaded": self.uploaded.strftime("%d.%m.%Y"),
+            "source": source_name,
+            "year": self.year,
+            "decade": self.decade,
+            "description": self.description,
+            "alt": alt,
+            "id": self.id,
+            "owner": self.uploader.id == request.user.id
+        }
+
+        return context
 
 
 @receiver(models.signals.post_delete, sender=Photo)
