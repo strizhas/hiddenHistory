@@ -23,7 +23,10 @@
 {% endblock %}
 {% block content %}
 	<div class="no-map-content">
-	<a href="{{ url_full }}" target="_blank" class="img-download-link">скачать в полном размере</a>
+		<div class="top-image-section">
+			<a href="{% url 'albums' %}" class="help-links">вернуться к альбомам</a> |
+			<a href="{{ url_full }}" target="_blank" class="help-links">скачать в полном размере</a>
+		</div>
 	<div class="popup-img-frame">
 		{{ description }}
 		<img src="{{ url }}" alt="{{ alt }}"/>

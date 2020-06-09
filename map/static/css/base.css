@@ -239,10 +239,16 @@ input, select {
     display: inline-block;
 }
 
-.img-download-link {
+.top-image-section a {
+    color: #000;
+}
+
+.help-links {
     font-size: 14px;
     display: block;
     margin: 0 0 10px 0;
+    display: inline-block;
+    color: #000;
 }
 
 .popup-img-frame {
