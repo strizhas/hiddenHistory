@@ -33,7 +33,7 @@ def load_photo(request):
 
 
 def show_albums(request):
-    p = Photo.objects.all().order_by('-id')
+    p = Photo.objects.filter(published=True).order_by('-id')
     paginator = Paginator(p, 50)  # Show 25 contacts per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

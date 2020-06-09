@@ -68,7 +68,7 @@ body {
 }
 
 .no-map-content {
-    padding: 20px;
+    padding: 20px 20px 60px 20px;
     width: calc(100% - 40px);
 }
 
@@ -249,6 +249,32 @@ input, select {
     background: #e3e3e3;
     text-align: center;
     font-size: 0;
+}
+
+.album-photo-preview img {
+    width: 150px;
+    height: 100px;
+}
+
+.pagination .step-links a {
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+}
+
+.pagination .step-links .page-nums {
+    width: 30px;
+    height: 30px;
+}
+
+.inactive-page-button {
+    color: #ccc;
+}
+
+.pagination .step-links .page-active {
+    background: #CD471C;
+    color: #fff;
 }
 
 /*----------------------- Попап----------------------------- */

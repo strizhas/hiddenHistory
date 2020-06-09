@@ -24,24 +24,30 @@
 {% block content %}
     <div class="no-map-content">
         {% for p in page_obj %}
-            <a href="show/{{ p.id }}" >
+            <a class="album-photo-preview" href="show/{{ p.id }}" >
                 <img src="{{ p.img_small.url }}"/>
             </a>
         {% endfor %}
         <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
-                    <a href="?page=1">&laquo; первая</a>
-                    <a href="?page={{ page_obj.previous_page_number }}">предыдущая</a>
+                    <a href="?page={{ page_obj.previous_page_number }}">&larr;</a>
+                {% else %}
+                    <span class="inactive-page-button">&larr;</span>
                 {% endif %}
 
-                <span class="current">
-                    Страница {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                </span>
+                {% for p in  page_obj.paginator.page_range %}
+                    {% if p == page_obj.number %}
+                        <a class="page-nums page-active" href="?page={{ p }}">{{ p }}</a>
+                    {% else %}
+                        <a class="page-nums" href="?page={{ p }}">{{ p }}</a>
+                    {% endif %}
+                {% endfor %}
 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">следующая</a>
-                    <a href="?page={{ page_obj.paginator.num_pages }}">последняя</a>
+                    <a href="?page={{ page_obj.next_page_number }}">&rarr;</a>
+                {% else %}
+                    <span class="inactive-page-button">&rarr;</span>
                 {% endif %}
             </span>
         </div>
