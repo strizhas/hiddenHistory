@@ -3,8 +3,26 @@
 <html lang="en">
 <head>
   {% block title %}<title>hidden history</title>{% endblock %}
-  <script src="{% static 'js/jquery.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script src="{% static 'js/jquery.js' %}"></script>
   {% block head %}{% endblock %}
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+
+            /* Hamburger menu animation */
+            $('.open-button').click(function(){
+              $(this).toggleClass('open');
+            });
+
+             /* Menu fade/in out on mobile */
+            $(".open-button").click(function(e){
+                e.preventDefault();
+                $("#sidebar-content").toggleClass('mobile-menu-open');
+            });
+
+        });
+    </script>
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -13,15 +31,23 @@
   <div class="main-wrapper">
     <div id="legend-container" class="sidebar-container">
         <div class="sidebar-wrapper">
+            <a href="#" class="open-button">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
           <h2>Металлургический завод "Серп и молот"</h2>
-          <nav class="sidebar-nav">
-              <a href="{% url 'map' %}">интерактивная карта</a> |
-              <a href="{% url 'albums' %}">фотоальбом</a>
-          </nav>
-          {% block sidebar %}{% endblock %}
+            <div id="sidebar-content" class="sidebar-content">
+              <nav class="sidebar-nav">
+                  <a href="{% url 'map' %}">интерактивная карта</a> |
+                  <a href="{% url 'albums' %}">фотоальбом</a>
+              </nav>
+
+              {% block sidebar %}{% endblock %}
+            </div>
         </div>
     </div>
-    <div class="map-wrapper">
+    <div id="content-wrapper" class="map-wrapper">
       {% block content %}<!-- default content text (typically empty) -->{% endblock %}
     </div>
   </div>

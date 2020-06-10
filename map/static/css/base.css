@@ -227,6 +227,68 @@ input, select {
     height: 15px;
 }
 
+.open-button {
+	width: 30px;
+	height: 30px;
+	transform: rotate(0deg);
+	transition: .5s ease-in-out;
+	position: absolute;
+	cursor: pointer;
+	border-bottom: 0;
+	top: 30px;
+	right: 40px;
+	z-index: 9999;
+	border-bottom: 0;
+}
+
+.open-button span {
+	display: block;
+	position: absolute;
+	height: 2px;
+	width: 100%;
+	background: black;
+	border-radius: 2px;
+	opacity: 1;
+	left: 0;
+	transform: rotate(0deg);
+	transition: .25s ease-in-out;
+
+}
+
+.open-button span:nth-child(1) {
+	top: 0px;
+	transform-origin: left center;
+}
+
+.open-button span:nth-child(2) {
+	top: 10px;
+	transform-origin: left center;
+}
+
+.open-button span:nth-child(3) {
+	top: 20px;
+	transform-origin: left center;
+}
+
+.open-button.open span:nth-child(1) {
+	transform: rotate(45deg);
+	top: -3px;
+	left: 8px;
+}
+
+.open-button.open span:nth-child(2) {
+	width: 0%;
+	opacity: 0;
+}
+
+.open-button.open span:nth-child(3) {
+	transform: rotate(-45deg);
+	top: 19px;
+	left: 8px;
+}
+
+
+
 /*----------------------- Попаз фотографии ----------------------------- */
 
 
@@ -281,6 +343,17 @@ input, select {
 .pagination .step-links .page-active {
     background: #CD471C;
     color: #fff;
+}
+
+/*----------------------- AJAX окна----------------------------- */
+
+.ajax-content-window {
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
 }
 
 /*----------------------- Попап----------------------------- */
@@ -343,17 +416,44 @@ input, select {
 }
 
 @media only screen and (max-width: 1024px) {
+    .main-wrapper {
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100vw;
+    }
     .map-wrapper {
         width: 100vw;
+        margin-top: 70px;
     }
 
     .sidebar-container {
+        height: auto;
+        min-height: 70px;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0:
+    }
+
+    .sidebar-content {
         display: none;
+        height: 0px;
+        transition: .25s ease-in-out;
+    }
+
+    .mobile-menu-open {
+        display: block;
+        height: auto;
+        min-height: 100vh;
     }
 }
 
 @media only screen and (max-width: 640px) {
 
+    h2 {
+        font-size: 12px;
+    }
     .popup-img-frame img {
         max-width: calc(80vw - 20px);
     }
