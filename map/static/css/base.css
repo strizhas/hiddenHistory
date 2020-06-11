@@ -2,7 +2,7 @@ html, body {
         padding: 0;
         margin: 0;
         bottom: 0;
-        background: #fff;
+        background: #f6f6f2;
     }
 
 html {
@@ -62,7 +62,7 @@ body {
 
 .map-wrapper {
     position: relative;
-    background: #fff;
+    background: #f6f6f2;
     width: calc(100vw - 400px);
     height: 100vh;
 }
@@ -172,6 +172,19 @@ input, select {
     bottom: 0px;
 }
 
+.leaflet-control-layers {
+    background: #f6f6f2;
+}
+
+.leaflet-bar a,
+.leaflet-bar a:hover {
+    background-color: #f6f6f2;
+}
+
+.jsr_slider:focus::before {
+    background: #CD471C;
+}
+
 /*----------------------- Сайдбар ------------------------------ */
 .sidebar-container {
     position: fixed;
@@ -179,7 +192,7 @@ input, select {
     right: 0px;
     width: 400px;
     height: 100vh;
-    background: #fff;
+    background: #f6f6f2;
     z-index: 500;
     overflow: scroll;
     -webkit-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
@@ -227,16 +240,20 @@ input, select {
     height: 15px;
 }
 
+#main-menu-button {
+    display: none;
+}
+
 .open-button {
-	width: 30px;
-	height: 30px;
+	width: 18px;
+	height: 14px;
 	transform: rotate(0deg);
 	transition: .5s ease-in-out;
 	position: absolute;
 	cursor: pointer;
 	border-bottom: 0;
-	top: 30px;
-	right: 40px;
+	top: 20px;
+	right: 25px;
 	z-index: 9999;
 	border-bottom: 0;
 }
@@ -261,12 +278,12 @@ input, select {
 }
 
 .open-button span:nth-child(2) {
-	top: 10px;
+	top: 7px;
 	transform-origin: left center;
 }
 
 .open-button span:nth-child(3) {
-	top: 20px;
+	top: 14px;
 	transform-origin: left center;
 }
 
@@ -283,7 +300,7 @@ input, select {
 
 .open-button.open span:nth-child(3) {
 	transform: rotate(-45deg);
-	top: 19px;
+	top: 10px;
 	left: 8px;
 }
 
@@ -319,9 +336,14 @@ input, select {
     font-size: 0;
 }
 
+.album-photo-preview {
+    font-size: 0;
+}
+
 .album-photo-preview img {
     width: 150px;
     height: 100px;
+    padding: 0 2px;
 }
 
 .pagination .step-links a {
@@ -342,18 +364,24 @@ input, select {
 
 .pagination .step-links .page-active {
     background: #CD471C;
-    color: #fff;
+    color: #f6f6f2;
 }
 
 /*----------------------- AJAX окна----------------------------- */
 
 .ajax-content-window {
-    background: #fff;
-    position: absolute;
+    background: #f6f6f2;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100vh;
+    z-index: 15000;
+}
+
+.frame-header-section {
+    height: 10px;
+    padding: 20px;
 }
 
 /*----------------------- Попап----------------------------- */
@@ -392,7 +420,7 @@ input, select {
 .img-blank {
     width: 150px;
     height: 100px;
-    background: #fff;
+    background: #f6f6f2;
 }
 
 .leaflet-tooltip {
@@ -408,7 +436,7 @@ input, select {
     left: calc(50% - 200px);
     width: 300px;
     height: 400px;
-    background: #fff;
+    background: #f6f6f2;
     padding: 20px;
     -webkit-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
     -moz-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
@@ -416,6 +444,10 @@ input, select {
 }
 
 @media only screen and (max-width: 1024px) {
+    #main-menu-button {
+        display: block;
+    }
+
     .main-wrapper {
         top: 0;
         left: 0;
@@ -424,16 +456,22 @@ input, select {
     }
     .map-wrapper {
         width: 100vw;
-        margin-top: 70px;
+        height: calc(100vh - 50px);
+        margin-top: 50px;
     }
 
     .sidebar-container {
         height: auto;
-        min-height: 70px;
+        min-height: 50px;
         width: 100%;
         position: absolute;
         top: 0;
-        left: 0:
+        left: 0;
+        z-index: 14000;
+    }
+
+    .sidebar-wrapper {
+        padding: 10px 20px;
     }
 
     .sidebar-content {
@@ -467,5 +505,13 @@ input, select {
 
     .leaflet-popup-content-wrapper {
         marin-left: -40vw;
+    }
+}
+
+@media only screen and (max-width: 360px) {
+
+    .album-photo-preview img {
+        width: 100px;
+        height: auto;
     }
 }

@@ -11,12 +11,12 @@
         $(document).ready(function(){
 
             /* Hamburger menu animation */
-            $('.open-button').click(function(){
+            $('#main-menu-button').click(function(){
               $(this).toggleClass('open');
             });
 
              /* Menu fade/in out on mobile */
-            $(".open-button").click(function(e){
+            $("#main-menu-button").click(function(e){
                 e.preventDefault();
                 $("#sidebar-content").toggleClass('mobile-menu-open');
             });
@@ -31,7 +31,7 @@
   <div class="main-wrapper">
     <div id="legend-container" class="sidebar-container">
         <div class="sidebar-wrapper">
-            <a href="#" class="open-button">
+            <a id="main-menu-button" href="#" class="open-button">
                     <span></span>
                     <span></span>
                     <span></span>

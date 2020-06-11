@@ -23,6 +23,14 @@
 {% endblock %}
 {% block content %}
 	<div class="no-map-content">
+		<div class="frame-header-section">
+
+			<a href="#" id="close-window-button" class="open-button open">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+		</div>
 		<div class="top-image-section">
 			<a href="{% url 'albums' %}" id="go-back-link" class="help-links">вернуться к альбомам</a> |
 			<a href="{{ url_full }}" target="_blank" class="help-links">скачать в полном размере</a>
