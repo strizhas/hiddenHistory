@@ -1,6 +1,7 @@
 {% extends "base_generic.html" %}
 {% load static %}
 {% block head %}
+    <script type="text/javascript" src="{% static 'js/jquery.touchSwipe.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/albums.js' %}"></script>
 {% endblock %}
 {% block sidebar %}
@@ -24,7 +25,7 @@
 {% block content %}
     <div class="no-map-content">
         {% for p in page_obj %}
-            <a class="album-photo-preview" href="show/{{ p.id }}" >
+            <a class="album-photo-preview" href="show/{{ p.id }}" data-id="{{ p.id }}" >
                 <img src="{{ p.img_small.url }}"/>
             </a>
         {% endfor %}

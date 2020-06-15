@@ -333,6 +333,7 @@ input, select {
 .popup-img-frame {
     background: #e3e3e3;
     text-align: center;
+    position: relative;
     font-size: 0;
 }
 
@@ -366,6 +367,33 @@ input, select {
     background: #CD471C;
     color: #f6f6f2;
 }
+
+.popup-img-frame .disabled-button {
+    display: none;
+}
+
+.popup-img-frame .toggle-photo-button {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    cursor: pointer;
+}
+
+.popup-img-frame .toggle-previous {
+    left: 3%;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.popup-img-frame .toggle-next {
+    right: 3%;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
 
 /*----------------------- AJAX окна----------------------------- */
 
@@ -506,6 +534,7 @@ input, select {
     .leaflet-popup-content-wrapper {
         marin-left: -40vw;
     }
+
 }
 
 @media only screen and (max-width: 360px) {
