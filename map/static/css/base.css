@@ -193,7 +193,7 @@ input, select {
     width: 400px;
     height: 100vh;
     background: #f6f6f2;
-    z-index: 500;
+    z-index: 17000;
     overflow: scroll;
     -webkit-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
     -moz-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
@@ -402,7 +402,7 @@ input, select {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100vw - 400px);
     height: 100vh;
     z-index: 15000;
 }
@@ -476,6 +476,11 @@ input, select {
         display: block;
     }
 
+    #time-range-slider {
+        position: fixed;
+        bottom: 0;
+    }
+
     .main-wrapper {
         top: 0;
         left: 0;
@@ -512,6 +517,10 @@ input, select {
         display: block;
         height: auto;
         min-height: 100vh;
+    }
+
+    .ajax-content-window {
+        width: 100%;
     }
 }
 
