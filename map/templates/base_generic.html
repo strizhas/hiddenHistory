@@ -18,7 +18,7 @@
              /* Menu fade/in out on mobile */
             $("#main-menu-button").click(function(e){
                 e.preventDefault();
-                $("#sidebar-content").toggleClass('mobile-menu-open');
+                $("#main-menu-nav").toggleClass('mobile-menu-open');
             });
 
         });
@@ -30,20 +30,19 @@
 <body>
   <div class="main-wrapper">
     <div id="legend-container" class="sidebar-container">
-        <div class="sidebar-wrapper">
+        <div class="main-menu-wrapper">
             <a id="main-menu-button" href="#" class="open-button">
                     <span></span>
                     <span></span>
                     <span></span>
                 </a>
-          <h2>Металлургический завод "Серп и молот"</h2>
-            <div id="sidebar-content" class="sidebar-content">
-              <nav class="sidebar-nav">
-                  <a href="{% url 'map' %}">интерактивная карта</a> |
+            <div id="main-menu" class="main-menu">
+              <nav id="main-menu-nav" class="main-menu-nav">
+                  <a href="{% url 'history' %}">история</a>
+                  <a href="{% url 'map' %}">интерактивная карта</a>
                   <a href="{% url 'albums' %}">фотоальбом</a>
+                  <a href="{% url 'about' %}">о проекте</a>
               </nav>
-
-              {% block sidebar %}{% endblock %}
             </div>
         </div>
     </div>

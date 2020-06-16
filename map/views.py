@@ -17,7 +17,7 @@ from .forms import PhotoDataForm
 from .forms import SourceForm
 
 
-def show(request):
+def show_map(request):
     return render(request, 'app/map.html')
 
 
@@ -30,6 +30,15 @@ def load_photo(request):
         'sources': sources
     }
     return render(request, 'app/load_photo.html', context)
+
+
+def show_about(request):
+    sources = Source.objects.values()
+    return render(request, 'app/about.html', {'sources': sources})
+
+
+def show_history(request):
+    return render(request, 'app/history.html')
 
 
 def show_albums(request):

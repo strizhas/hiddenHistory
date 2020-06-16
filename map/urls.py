@@ -9,10 +9,11 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.show, name='map'),
+    path('', views.show_history, name='history'),
     path('albums', views.show_albums, name='albums'),
+    path('about', views.show_about, name='about'),
+    path('map', views.show_map, name='map'),
     path('upload', views.load_photo, name='load_photo'),
-
     path('upload_img', views.upload_img),
     path('get_photo', views.get_photo),
     path('get_preview', views.get_preview),

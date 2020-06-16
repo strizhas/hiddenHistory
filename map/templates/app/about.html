@@ -1,0 +1,32 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block title %}
+    <title>История территории московского завода 'Серп и молот' - о проекте</title>
+{% endblock %}
+{% block content %}
+    <div class="no-map-content">
+        <p>Проект создан на чистом энтузиазме и не преследует коммерческой цели. Главная цель проекта – проследить развитие отедльно взятой территории и сохранить отпечаток тех эпох, на стыке которых сформировался этот район.
+        </p>
+        <p>Если у вас есть фотографии или&nbsp;другие материалы, которыми вы могли бы поделиться, то буду очень
+            признателен.
+        </p>
+        <span class="help-text">Контакты:</span><br>
+        <div class="contacts-list">
+            <div class="contact-item">
+                 <img src="{% static 'img/telegram-icon.png' %}"/> <a href="https://tlgg.ru/strizhas" target="_blank">strizhas</a><br>
+            </div>
+            <div class="contact-item">
+                <img src="{% static 'img/instagram-icon.png' %}"/> <a href="https://www.instagram.com/_lingua_franka/" target="_blank">_lingua_franka</a>
+            </div>
+        </div>
+        <br><br>
+        В проекте использованы изображения из следующих источников:
+        <ul class="source-list">
+        {% for s in sources %}
+            <li>
+                <a href="{{ s.url }}">{{ s.name }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
