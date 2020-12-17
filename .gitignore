@@ -12,12 +12,16 @@ log/**
 !log/placeholder
 
 hiddenhistory/settings/production.py
+
 # виртуальное окружение
 /bin/
 /bin/*
 
 /lib/
 /lib/*
+
+/Scripts/
+/Scripts/*
 
 pyvenv.cfg
 

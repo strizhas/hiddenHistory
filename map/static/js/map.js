@@ -292,16 +292,11 @@ function init_map() {
     var bounds = L.latLngBounds(corner1, corner2);
 
     var tile_urls = {
-        'custom': 'https://storage.yandexcloud.net/hh-files/tileset-custom/{z}/{x}/{y}.png',
-        'ge-2010': 'https://storage.yandexcloud.net/hh-files/tileset-ge-2010/{z}/{x}/{y}.png',
+        'ge-2010': 'https://storage.yandexcloud.net/hh-files/tilesets/ge-2010/{z}/{x}/{y}.png',
         '1906': 'https://storage.yandexcloud.net/hh-files/tileset-1906/{z}/{x}/{y}.png',
         'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
     };
 
-    var basemap_custom = L.tileLayer(tile_urls['custom'], {
-        id: 'basemap-custom',
-        maxZoom: 19
-        });
     var basemap_ge_2010 = L.tileLayer(tile_urls['ge-2010'], {
         id: 'basemap-ge-2010',
         maxZoom: 20
@@ -313,7 +308,6 @@ function init_map() {
         });
 
     basemaps = {
-        'схема завода': basemap_custom,
         'спутниковый снимок 2010 года': basemap_ge_2010,
         'план 1906 года': basemap_1906
     };
@@ -324,7 +318,7 @@ function init_map() {
         zoom: params.zoom,
         zooms: [15,16,17,18,19,20],
         minZoom: 15,
-        layers: [basemap_custom]
+        layers: [basemap_ge_2010]
     });
 
     //map.fitBounds(bounds);
