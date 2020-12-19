@@ -1,5 +1,8 @@
 $background: #F6F6F2;
 $font_main: #000000;
+$ascent_blue: #9FC7D3;
+
+$ascent_red: #CD471C;
 
 $size_10_column: 880px;
 $size_8_column: 700px;
@@ -10,16 +13,90 @@ $size_4_column: 340px;
 
 body {
     background: $background;
+    font-family: 'Open Sans', sans-serif;
 }
+
 
 .content-8-column {
     max-width: $size_8_column;
     margin: 0 auto;
-    padding: 50px 20px;
+    padding: 0;
 }
 
 .content-5-column {
+    margin: 0;
     max-width: $size_5_column;
-    margin: 0 auto;
-    padding: 50px 20px;
+    padding: 50px 0;
+}
+
+/*----------------------- Типографика ------------------------------ */
+
+.text-intro {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+.number {
+    .prefix, .measure {
+        color: $ascent_red;
+        font-size: 48px;
+        font-weight: 800;
+    }
+
+    .value {
+        color: $ascent_red;
+        font-size: 64px;
+        font-weight: 800;
+    }
+
+    .caption {
+        font-size: 24px;
+        font-weight: 600;
+    }
+}
+/*----------------------- Заголовок главы ------------------------------ */
+
+.chapter-header {
+    width: 100vw;
+}
+
+.chapter-header {
+    .chapter-header-top {
+        max-width: $size_8_column;
+        margin: 0 auto;
+    }
+
+    .chapter-header-top {
+        span {
+            color: $ascent_blue;
+        }
+        .chapter-num {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 60px;
+        }
+        .year {
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 0;
+        }
+        .year b {
+            font-size: 96px;
+
+        }
+    }
+
+    .chapter-header-bottom {
+        width: 100%;
+        background: $ascent_blue;
+        padding: 40px 0;
+    }
+
+    .chapter-header-bottom h2 {
+        max-width: $size_8_column;
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0 auto;
+    }
 }

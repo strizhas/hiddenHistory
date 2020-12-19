@@ -1,0 +1,28 @@
+{{ $data := getJSON "Data/СиМ-история.json" }}
+
+<section class="chapter" id="chapter-0">
+    <header class="site-header" id="header-container">
+    </header>
+    <div id="header-out-trigger"></div>
+    <div class="content-8-column">
+        <p class="text-intro">{{ (index $data.chapter_0 0).Intro | safeHTML }}</p>
+        <div class="text-section content-5-column">
+            <p class="text-regular">{{ (index $data.chapter_0 0).Text | safeHTML }}</p>
+            <p class="text-regular">{{ (index $data.chapter_0 1).Text | safeHTML }}</p>
+        </div>
+    </div>
+</section>
+<section class="chapter" id="chapter-1">
+    {{ partial "components/chapter_header.html" (dict "num" 1 "year" 1883 "text" (index $data.chapter_1 0).Title) }}
+    <div class="content-8-column">
+        <div class="text-section content-5-column">
+            <p class="text-regular">{{ (index $data.chapter_1 0).Text | safeHTML }}</p>
+            <p class="text-regular">{{ (index $data.chapter_1 1).Text | safeHTML }}</p>
+            <p class="text-regular">{{ (index $data.chapter_1 2).Text | safeHTML }}</p>
+            {{ partial "components/number.html" (dict "index" 0) }}
+            <p class="text-regular">{{ (index $data.chapter_1 3).Text | safeHTML }}</p>
+            <p class="text-regular">{{ (index $data.chapter_1 4).Text | safeHTML }}</p>
+            <p class="text-regular">{{ (index $data.chapter_1 5).Text | safeHTML }}</p>
+        </div>
+    </div>
+</section>

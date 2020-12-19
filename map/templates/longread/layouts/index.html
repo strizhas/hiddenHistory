@@ -3,16 +3,6 @@
 {{ partial "components/head.html" . }}
 <body id="project_content">
     {{ $data := getJSON "Data/СиМ-история.json" }}
-    <section class="chapter" id="chapter-0">
-
-        <header class="site-header" id="header-container">
-        </header>
-        <div id="header-out-trigger"></div>
-        <p class="text-intro content-8-column">{{ (index $data.chapter_1 0).Intro | safeHTML }}}</p>
-        <div class="text-section content-5-column">
-            <p class="text-regular">{{ (index $data.chapter_1 1).Text | safeHTML }}</p>
-        </div>
-
-    </section>
+    {{ partial "chapter_1.html" . }}
 </body>
 </html>

@@ -8,4 +8,6 @@
     {{- $sass := resources.Get "history-page.scss" -}}
     {{- $style := $sass | resources.ToCSS -}}
     <link rel="stylesheet" href="{{ $style.RelPermalink | absURL }}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>

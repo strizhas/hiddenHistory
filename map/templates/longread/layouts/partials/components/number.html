@@ -1,0 +1,11 @@
+{{ $data := getJSON "Data/СиМ-история.json" }}
+<div class="number number-big">
+    <p>
+        {{- if ne (index $data.numbers .index).prefix "" -}}
+            <span class="prefix">{{ (index $data.numbers .index).Prefix }} </span>
+        {{- end -}}
+        <span class="value">{{ (index $data.numbers .index).Number }} </span>
+        <span class="measure">{{ (index $data.numbers .index).Measure }}</span><br>
+        <span class="caption">{{ (index $data.numbers .index).Text | safeHTML }}</span>
+    </p>
+</div>
