@@ -73,7 +73,7 @@ body {
 
 .no-map-content {
     padding: 60px 10px;
-    max-width: 620px;
+    max-width: 880px;
     margin: 0 auto;
 }
 
@@ -203,8 +203,8 @@ input, select {
 
     margin: 0 auto;
     padding: 0 10px;
-    width: 620px;
     background: #F6F6F2;
+    max-width: 880px;
 }
 
 .main-menu a {

@@ -3,10 +3,20 @@ body {
   background: #F6F6F2;
   font-family: 'Open Sans', sans-serif; }
 
+.content-10-column {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0; }
+
 .content-8-column {
   max-width: 700px;
   margin: 0 auto;
   padding: 0; }
+
+.content-6-column {
+  margin: 0;
+  max-width: 520px;
+  padding: 50px 0; }
 
 .content-5-column {
   margin: 0;
@@ -14,10 +24,17 @@ body {
   padding: 50px 0; }
 
 /*----------------------- Типографика ------------------------------ */
+p {
+  font-size: 16px;
+  line-height: 24px; }
+
 .text-intro {
   font-weight: 600;
   font-size: 24px;
   line-height: 30px; }
+
+.number {
+  margin: 60px 0 40px 0; }
 
 .number .prefix, .number .measure {
   color: #CD471C;
@@ -30,15 +47,34 @@ body {
   font-weight: 800; }
 
 .number .caption {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600; }
+
+.quote-section {
+  margin: 30px 0 50px 90px;
+  max-width: 610px;
+  font-style: italic; }
+
+.quote-section .quote-text {
+  font-size: 20px;
+  line-height: 30px; }
+
+.quote-section .quote-author {
+  display: block;
+  color: #CD471C;
+  font-size: 20px; }
+
+.quote-section .author-titul {
+  display: block;
+  color: #CD471C;
+  font-size: 14px; }
 
 /*----------------------- Заголовок главы ------------------------------ */
 .chapter-header {
   width: 100vw; }
 
 .chapter-header .chapter-header-top {
-  max-width: 700px;
+  max-width: 880px;
   margin: 0 auto; }
 
 .chapter-header .chapter-header-top span {
@@ -63,7 +99,23 @@ body {
   padding: 40px 0; }
 
 .chapter-header .chapter-header-bottom h2 {
-  max-width: 700px;
+  max-width: 880px;
   font-size: 24px;
   font-weight: 600;
   margin: 0 auto; }
+
+/*----------------------- Изображения ------------------------------ */
+.img-section {
+  position: relative;
+  margin: 30px 0 50px 0;
+  padding: 0; }
+
+.img-section .img-caption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 160px;
+  color: #999999; }
+
+.img-section img {
+  margin-left: 180px; }

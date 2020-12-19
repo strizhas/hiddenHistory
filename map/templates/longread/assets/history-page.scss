@@ -1,8 +1,9 @@
 $background: #F6F6F2;
 $font_main: #000000;
-$ascent_blue: #9FC7D3;
 
+$ascent_blue: #9FC7D3;
 $ascent_red: #CD471C;
+$ascent_gray: #999999;
 
 $size_10_column: 880px;
 $size_8_column: 700px;
@@ -16,11 +17,23 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 
+.content-10-column {
+    max-width: $size_10_column;
+    margin: 0 auto;
+    padding: 0;
+}
+
 
 .content-8-column {
     max-width: $size_8_column;
     margin: 0 auto;
     padding: 0;
+}
+
+.content-6-column {
+    margin: 0;
+    max-width: $size_6_column;
+    padding: 50px 0;
 }
 
 .content-5-column {
@@ -31,12 +44,19 @@ body {
 
 /*----------------------- Типографика ------------------------------ */
 
+p {
+    font-size: 16px;
+    line-height: 24px;
+}
 .text-intro {
     font-weight: 600;
     font-size: 24px;
     line-height: 30px;
 }
 
+.number {
+    margin: 60px 0 40px 0;
+}
 .number {
     .prefix, .measure {
         color: $ascent_red;
@@ -51,8 +71,30 @@ body {
     }
 
     .caption {
-        font-size: 24px;
+        font-size: 18px;
         font-weight: 600;
+    }
+}
+.quote-section {
+    margin: 30px 0 50px 90px;
+    max-width: 610px;
+    font-style: italic;
+}
+
+.quote-section {
+    .quote-text {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .quote-author {
+        display: block;
+        color: $ascent_red;
+        font-size: 20px;
+    }
+    .author-titul {
+        display: block;
+        color: $ascent_red;
+        font-size: 14px;
     }
 }
 /*----------------------- Заголовок главы ------------------------------ */
@@ -63,7 +105,7 @@ body {
 
 .chapter-header {
     .chapter-header-top {
-        max-width: $size_8_column;
+        max-width: $size_10_column;
         margin: 0 auto;
     }
 
@@ -94,9 +136,32 @@ body {
     }
 
     .chapter-header-bottom h2 {
-        max-width: $size_8_column;
+        max-width: $size_10_column;
         font-size: 24px;
         font-weight: 600;
         margin: 0 auto;
+    }
+}
+
+/*----------------------- Изображения ------------------------------ */
+
+
+.img-section {
+    position: relative;
+    margin: 30px 0 50px 0;
+    padding: 0;
+}
+
+.img-section {
+    .img-caption {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 160px;
+        color: $ascent_gray;
+    }
+
+    img {
+        margin-left: 180px;
     }
 }
