@@ -25,6 +25,9 @@ hiddenhistory/settings/production.py
 
 pyvenv.cfg
 
+/map/templates/longread/resources/
+/map/templates/longread/resources/*
+
 # Приватные файлы
 /private/*
 token.pickle

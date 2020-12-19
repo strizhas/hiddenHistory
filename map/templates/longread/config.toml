@@ -1,0 +1,6 @@
+baseURL = ""
+languageCode = "ru"
+title = "My New Hugo Site"
+assetDir = "assets"
+disableKinds = ["taxonomy", "taxonomyTerm", "category", "sitemap", "RSS", "404", "robotsTXT", "section"]
+

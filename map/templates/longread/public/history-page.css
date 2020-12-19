@@ -1,0 +1,12 @@
+body {
+  background: #F6F6F2; }
+
+.content-8-column {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 50px 20px; }
+
+.content-5-column {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: 50px 20px; }

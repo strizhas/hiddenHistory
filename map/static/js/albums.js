@@ -102,7 +102,7 @@ function AjaxWindow() {
 
         $('<div>', {
             'id': 'ajax-content',
-            'class': 'ajax-content-window',
+            'class': 'ajax-content-window img-slider',
             'html': data
         }).appendTo('#content-wrapper');
 

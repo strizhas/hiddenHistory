@@ -409,9 +409,24 @@ input, select {
     z-index: 15000;
 }
 
+.ajax-content-window.img-slider {
+    width: 100vw;
+    height: 100vh;
+    margin-top: 100px;
+    background: none;
+}
+
+.img-slider .no-map-content {
+    padding: 20px;
+    max-width: 800px;
+    background: #f6f6f2;
+    border-radius: 10px;
+}
+
 .frame-header-section {
     height: 10px;
     padding: 20px;
+    position: relative;
 }
 
 /*----------------------- Попап----------------------------- */
@@ -425,7 +440,6 @@ input, select {
     width: 640px !important;
     position: relative;
 }
-
 
 
 @media only screen and (max-width: 1440px) {
@@ -468,11 +482,15 @@ input, select {
     height: 400px;
     background: #f6f6f2;
     padding: 20px;
+
+}
+
+.img-slider .no-map-content,
+.popup-container {
     -webkit-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
     -moz-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
     box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
 }
-
 @media only screen and (max-width: 1024px) {
 
     #time-range-slider {

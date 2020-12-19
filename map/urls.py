@@ -4,12 +4,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include
 from django.urls import path
+from django.views.generic import TemplateView
 
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.show_history, name='history'),
+    # path('', views.show_history, name='history'),
+    path('', TemplateView.as_view(template_name='longread/public/django-template/index.html'), name='history'),
     path('albums', views.show_albums, name='albums'),
     path('about', views.show_about, name='about'),
     path('map', views.show_map, name='map'),

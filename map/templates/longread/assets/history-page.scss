@@ -1,0 +1,25 @@
+$background: #F6F6F2;
+$font_main: #000000;
+
+$size_10_column: 880px;
+$size_8_column: 700px;
+$size_6_column: 520px;
+$size_5_column: 430px;
+$size_4_column: 340px;
+
+
+body {
+    background: $background;
+}
+
+.content-8-column {
+    max-width: $size_8_column;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
+
+.content-5-column {
+    max-width: $size_5_column;
+    margin: 0 auto;
+    padding: 50px 20px;
+}
