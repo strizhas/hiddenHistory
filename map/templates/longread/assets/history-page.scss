@@ -15,12 +15,17 @@ $size_4_column: 340px;
 body {
     background: $background;
     font-family: 'Open Sans', sans-serif;
+    padding: 10px;
+}
+
+.content-wrapper {
+    padding: 50px 0;
 }
 
 .content-10-column {
     max-width: $size_10_column;
     margin: 0 auto;
-    padding: 0;
+    padding: 0 0 50px 0;
 }
 
 
@@ -33,7 +38,7 @@ body {
 .content-6-column {
     margin: 0;
     max-width: $size_6_column;
-    padding: 50px 0;
+    padding: 20px 0;
 }
 
 .content-5-column {
@@ -44,6 +49,9 @@ body {
 
 /*----------------------- Типографика ------------------------------ */
 
+h3 {
+    margin: 60px 0 20px 0;
+}
 p {
     font-size: 16px;
     line-height: 24px;
@@ -52,6 +60,9 @@ p {
     font-weight: 600;
     font-size: 24px;
     line-height: 30px;
+}
+.text-regular {
+    padding: 10px 0;
 }
 
 .number {
@@ -97,11 +108,30 @@ p {
         font-size: 14px;
     }
 }
+
+.in-text-ul {
+    list-style: none;
+    margin: 40px 0;
+    padding-left: 60px;
+    text-indent: -30px;
+}
+
+.in-text-ul {
+
+    li {
+        margin: 15px 0;
+    }
+    li:before {
+        content: "—";
+        font-size: 20px;
+        margin-right: 10px;
+        color: $ascent_red;
+
+    }
+}
+
 /*----------------------- Заголовок главы ------------------------------ */
 
-.chapter-header {
-    width: 100vw;
-}
 
 .chapter-header {
     .chapter-header-top {
@@ -121,7 +151,7 @@ p {
         .year {
             font-size: 72px;
             font-weight: 800;
-            line-height: 0;
+            line-height: 80px;
         }
         .year b {
             font-size: 96px;
@@ -130,16 +160,20 @@ p {
     }
 
     .chapter-header-bottom {
-        width: 100%;
-        background: $ascent_blue;
-        padding: 40px 0;
+        max-width: $size_10_column;
+        margin: 0 auto;
+        padding: 40px 0 20px 0;
     }
 
     .chapter-header-bottom h2 {
-        max-width: $size_10_column;
+        max-width: $size_6_column;
+        display: inline-block;
         font-size: 24px;
         font-weight: 600;
         margin: 0 auto;
+        padding: 10px 0;
+        border-top: 1px solid $ascent_gray;
+        border-bottom: 1px solid $ascent_gray;
     }
 }
 
@@ -164,4 +198,79 @@ p {
     img {
         margin-left: 180px;
     }
+}
+
+
+/*----------------------- Навигация ------------------------------ */
+
+
+.article-pagination {
+    a {
+        color: $font_main;
+        font-size: 22px;
+        font-weight: bold;
+        text-decoration: none;
+
+    }
+    .previous-page {
+        padding-right: 20px;
+    }
+
+    .previous-page:before {
+        content: "←";
+        font-size: 20px;
+        width: 20px;
+        padding-right: 10px;
+    }
+
+    .next-page:after {
+        content: "→";
+        font-size: 20px;
+        width: 20px;
+        padding-left: 10px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+
+    .img-section {
+        overflow: hidden;
+    }
+    .img-section {
+        .img-caption {
+            position: relative;
+            width: 100%;
+            color: $ascent_gray;
+        }
+
+        img {
+            max-width: 100%;
+            margin-left: 0;
+            height: auto;
+        }
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .quote-section {
+        margin: 30px 0 50px 30px;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .quote-section {
+        margin: 30px 0;
+    }
+}
+
+
+@media screen and (max-width: 440px) {
+    .in-text-ul {
+        list-style: none;
+        margin: 40px 0;
+        padding-left: 30px;
+        text-indent: -30px;
+    }
+
+
 }

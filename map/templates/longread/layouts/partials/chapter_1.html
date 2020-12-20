@@ -1,5 +1,5 @@
 {{ $data := getJSON "Data/СиМ-история.json" }}
-
+<div class="content-wrapper">
 <section class="chapter" id="chapter-0">
     <header class="site-header" id="header-container">
     </header>
@@ -21,8 +21,10 @@
             <p class="text-regular">{{ (index $data.chapter_1 1).Text | safeHTML }}</p>
             <p class="text-regular">{{ (index $data.chapter_1 2).Text | safeHTML }}</p>
             {{ partial "components/number.html" (dict "index" 0) }}
-            <p class="text-regular">{{ (index $data.chapter_1 3).Text | safeHTML }}</p>
-            <p class="text-regular">{{ (index $data.chapter_1 4).Text | safeHTML }}</p>
+            <p class="text-regular">
+                {{ (index $data.chapter_1 3).Text | safeHTML }}
+                {{ (index $data.chapter_1 4).Text | safeHTML }}
+            </p>
             <p class="text-regular">{{ (index $data.chapter_1 5).Text | safeHTML }}</p>
         </div>
             {{ partial "components/quote.html" (dict "index" 0) }}
@@ -31,4 +33,16 @@
             <p class="text-regular">{{ (index $data.chapter_1 7).Text | safeHTML }}</p>
         </div>
     </div>
+    {{- if eq .Page.Params.type "static" -}}
+    <div class="content-10-column article-pagination">
+        <a href='{{ ref . "chapter_2.md" }}' class="next-page">Глава 2. Завод в годы первой революции</a>
+    </div>
+    {{- end -}}
+    {{- if eq .Page.Params.type "django_html" -}}
+    <div class="content-10-column article-pagination">
+        <a href="{% url 'zavod_v_nachale_veka' %}" class="next-page">Глава 2. Завод в годы первой революции</a>
+    </div>
+    {{- end -}}
+
 </section>
+</div>

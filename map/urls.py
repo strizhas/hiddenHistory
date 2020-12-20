@@ -11,7 +11,12 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', views.show_history, name='history'),
-    path('', TemplateView.as_view(template_name='longread/public/django-template/index.html'), name='history'),
+    path('', TemplateView.as_view(
+        template_name='longread/public/django-templates/chapter_1/index.html'),
+         name='history'),
+    path('zavod_v_nachale_veka', TemplateView.as_view(
+        template_name='longread/public/django-templates/chapter_2/index.html'),
+        name='zavod_v_nachale_veka'),
     path('albums', views.show_albums, name='albums'),
     path('about', views.show_about, name='about'),
     path('map', views.show_map, name='map'),

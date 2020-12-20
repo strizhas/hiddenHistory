@@ -306,6 +306,9 @@ input, select {
 
 /*----------------------- Попаз фотографии ----------------------------- */
 
+.photo-captions {
+    margin-top: 20px;
+}
 
 .photo-captions .main-section {
     padding-bottom: 5px;
@@ -412,8 +415,8 @@ input, select {
 .ajax-content-window.img-slider {
     width: 100vw;
     height: 100vh;
-    margin-top: 100px;
-    background: none;
+    background: rgba(0,0,0,0.8);
+
 }
 
 .img-slider .no-map-content {
@@ -421,6 +424,7 @@ input, select {
     max-width: 800px;
     background: #f6f6f2;
     border-radius: 10px;
+    margin-top: 100px;
 }
 
 .frame-header-section {

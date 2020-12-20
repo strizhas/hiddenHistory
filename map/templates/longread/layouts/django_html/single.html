@@ -7,5 +7,7 @@
     <title>История территории московского завода 'Серп и молот' - о проекте</title>
 {% endblock %}
 {% block content %}
-    {{ partial "chapter_1.html" . }}
+    {{ if isset .Params "partial" }}
+        {{ partial $.Params.partial . }}
+    {{ end }}
 {% endblock %}>
