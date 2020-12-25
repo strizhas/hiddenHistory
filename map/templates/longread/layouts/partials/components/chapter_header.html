@@ -4,6 +4,6 @@
         <span class="year"><b class="year">{{ .year }}</b></span>
     </div>
     <div class="chapter-header-bottom">
-        <h2>{{ .text }}</h2>
+        <h2>{{ .text | safeHTML }}</h2>
     </div>
 </header>

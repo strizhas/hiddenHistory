@@ -1,0 +1,38 @@
+{{ $data := getJSON "Data/СиМ-история.json" }}
+<article class="content-wrapper">
+    <section class="chapter" id="chapter-1">
+        {{ partial "components/chapter_header.html" (dict "num" 3 "year" "1917 – 1940" "text" (index $data.chapter_3 0).Title) }}
+        <div class="content-10-column">
+            <div class="text-section content-6-column">
+                <p class="text-regular">{{ (index $data.chapter_3 0).Text | safeHTML }}</p>
+                <p class="text-regular">
+                    {{ (index $data.chapter_3 1).Text | safeHTML }}
+                    {{ (index $data.chapter_3 2).Text | safeHTML }}
+                </p>
+            </div>
+            {{ partial "components/quote.html" (dict "index" 2) }}
+            <div class="text-section content-6-column">
+                <p class="text-regular">{{ (index $data.chapter_3 3).Text | safeHTML }}</p>
+                <p class="text-regular">{{ (index $data.chapter_3 4).Text | safeHTML }}</p>
+                <ul class="in-text-ul">
+                {{ range $i, $r := (index $data.chapter_3 4).Table }}
+                <li>{{ $r | safeHTML }}</li>
+                {{ end }}
+                </ul>
+                <p class="text-regular">{{ (index $data.chapter_3 5).Text | safeHTML }}</p>
+            </div>
+            {{ partial "components/quote.html" (dict "index" 3) }}
+            <p>Продолжение следует...</p>
+        </div>
+        {{- if eq .Page.Params.type "static" -}}
+        <div class="content-10-column article-pagination">
+            <a href='{{ ref . "chapter_2.md" }}' class="previous-page">Глава 2. Завод в начале ХХ века</a>
+        </div>
+        {{- end -}}
+        {{- if eq .Page.Params.type "django_html" -}}
+        <div class="content-10-column article-pagination">
+            <a href="{% url 'zavod_v_nachale_veka' %}" class="previous-page">Глава 2.Завод в начале ХХ века</a>
+        </div>
+        {{- end -}}
+    </section>
+</article>

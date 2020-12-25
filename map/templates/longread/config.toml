@@ -1,6 +1,6 @@
 baseURL = ""
 languageCode = "ru"
-title = "My New Hugo Site"
+title = "Московский металлургический завод 'Серп и молот'. 130 лет истории - от пахотных земель до современного жилого квартала"
 assetDir = "assets"
 disableKinds = ["taxonomy", "taxonomyTerm", "category", "sitemap", "RSS", "404", "robotsTXT", "section"]
 

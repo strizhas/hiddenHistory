@@ -18,32 +18,41 @@
                 {{ end }}
                 </ul>
                 <p class="text-regular">{{ (index $data.chapter_2 3).Text | safeHTML }}</p>
-                <p class="text-regular">{{ (index $data.chapter_2 4).Text | safeHTML }}</p>
-                <p class="text-regular">{{ (index $data.chapter_2 5).Text | safeHTML }}</p>
+                <p class="text-regular">
+                    {{ (index $data.chapter_2 4).Text | safeHTML }}
+                    {{ (index $data.chapter_2 5).Text | safeHTML }}
+                </p>
             </div>
             {{ partial "components/img_section.html" (dict "index" 1) }}
             <div class="text-section content-6-column">
                 <p class="text-regular">{{ (index $data.chapter_2 6).Text | safeHTML }}</p>
                 {{ partial "components/number.html" (dict "index" 1) }}
-                <p class="text-regular">{{ (index $data.chapter_2 7).Text | safeHTML }}</p>
-                <p class="text-regular">{{ (index $data.chapter_2 8).Text | safeHTML }}</p>
+                <p class="text-regular">
+                    {{ (index $data.chapter_2 7).Text | safeHTML }}
+                    {{ (index $data.chapter_2 8).Text | safeHTML }}
+                </p>
                 <h3>{{ (index $data.chapter_2 9).Title | safeHTML }}</h3>
                 <p class="text-regular">{{ (index $data.chapter_2 9).Text | safeHTML }}</p>
             </div>
             {{ partial "components/quote.html" (dict "index" 1) }}
             <div class="text-section content-6-column">
                 <p class="text-regular">{{ (index $data.chapter_2 10).Text | safeHTML }}</p>
-                <p>Продолжение следует...</p>
             </div>
         </div>
         {{- if eq .Page.Params.type "static" -}}
         <div class="content-10-column article-pagination">
             <a href='{{ ref . "chapter_1.md" }}' class="previous-page">Глава 1. Основание завода</a>
         </div>
+        <div class="content-10-column article-pagination">
+            <a href='{{ ref . "chapter_3.md" }}' class="next-page">Глава 3. Завод после Октябрьской революции</a>
+        </div>
         {{- end -}}
         {{- if eq .Page.Params.type "django_html" -}}
         <div class="content-10-column article-pagination">
             <a href="{% url 'history' %}" class="previous-page">Глава 1. Основание завода</a>
+        </div>
+        <div class="content-10-column article-pagination">
+            <a href="{% url 'zavod_posle_revolucii' %}" class="next-page">Глава 3. Завод после Октябрьской революции</a>
         </div>
         {{- end -}}
     </section>

@@ -1,0 +1,16 @@
+<b>Содержание</b>
+
+{{- if eq .Page.Params.type "static" -}}
+    <nav class="timeline-navigation">
+        <a href='{{ ref . "static/chapter_1.md" }}'><b>1884–1900</b><span>Основание завода и его первые годы.</span></a>
+        <a href='{{ ref . "static/chapter_2.md" }}'><b>1900–1917</b><span>Завод в начале ХХ века. Революция 1905 г. и первая мировая война.</span></a>
+        <a href='{{ ref . "static/chapter_3.md" }}'><b>1917–1940</b><span>Завод после Октябрьской революции.</span></a>
+    </nav>
+{{- end -}}
+{{- if eq .Page.Params.type "django_html" -}}
+    <nav class="timeline-navigation">
+        <a href="{% url 'history' %}"><b>1884–1900</b><span>Основание завода и его первые годы.</span></a>
+        <a href="{% url 'zavod_v_nachale_veka' %}"><b>1900–1917</b><span>Завод в начале ХХ века. Революция 1905 г. и первая мировая война.</span></a>
+        <a href="{% url 'zavod_posle_revolucii' %}"><b>1917–1940</b><span>Завод после Октябрьской революции.</span></a>
+    </nav>
+{{- end -}}

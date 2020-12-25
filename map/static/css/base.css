@@ -7,7 +7,7 @@ html, body {
 
 html {
 	font-size: 3.2vw;
-	font-family: 'PT Sans', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 }
 
 p {
@@ -20,7 +20,7 @@ p {
 }
 
 h2, h3, h4 {
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-weight: bold;
     margin: 0;
 }
