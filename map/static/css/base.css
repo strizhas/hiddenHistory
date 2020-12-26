@@ -157,6 +157,21 @@ input, select {
     float: none;
 }
 
+.form-progress-bar-section {
+    width: 100%;
+}
+
+.form-progress-bar-section progress {
+    width: 100%;
+}
+.form-progress-bar-section .upload-status {
+    display: inline-block;
+    margin: 0;
+}
+.form-progress-bar-section .upload-bytes-counter {
+    float: right;
+}
+
 
 /*----------------------- Карта ------------------------------ */
 
