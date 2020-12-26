@@ -1,8 +1,10 @@
 {{ $data := getJSON "Data/СиМ-история.json" }}
 <div class="quote-section">
-    <p class="quote-text">{{ (index $data.quotes .index).Text | safeHTML }}</p>
-    <p>
-        <span class="quote-author">{{ (index $data.quotes .index).Author | safeHTML }}</span>
-        <span class="author-titul">{{ (index $data.quotes .index).Titul | safeHTML }}</span>
-    </p>
+    <div class="quote-content">
+        <p class="quote-text">{{ (index $data.quotes .index).Text | safeHTML }}</p>
+        <p>
+            <span class="quote-author">{{ (index $data.quotes .index).Author | safeHTML }}</span>
+            <span class="author-titul">{{ (index $data.quotes .index).Titul | safeHTML }}</span>
+        </p>
+    </div>
 </div>

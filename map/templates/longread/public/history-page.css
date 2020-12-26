@@ -21,6 +21,7 @@ body {
 .content-6-column {
   margin: 0;
   max-width: 520px;
+  margin-left: calc(100% - 520px);
   padding: 20px 0; }
 
 .content-5-column {
@@ -43,7 +44,9 @@ p {
   padding: 0; }
 
 .text-regular {
-  padding: 10px 0; }
+  padding: 10px 0;
+  font-size: 16px;
+  line-height: 24px; }
 
 .number {
   margin: 60px 0 40px 0; }
@@ -65,9 +68,16 @@ p {
   padding: 10px 0; }
 
 .quote-section {
-  margin: 30px 0 50px 90px;
-  max-width: 610px;
-  font-style: italic; }
+  margin: 30px 0 30px 160px;
+  padding: 20px 0;
+  max-width: 880px;
+  font-style: italic;
+  border-top: 1px solid #999999;
+  border-bottom: 1px solid #999999; }
+
+.quote-section .quote-content {
+  max-width: 520px;
+  margin: 0 auto; }
 
 .quote-section .quote-text {
   font-size: 20px;
@@ -86,7 +96,7 @@ p {
 .in-text-ul {
   list-style: none;
   margin: 40px 0;
-  padding-left: 60px;
+  padding-left: 30px;
   text-indent: -30px; }
 
 .in-text-ul li {
@@ -127,10 +137,15 @@ p {
   max-width: 450px; }
 
 /*----------------------- Заголовок главы ------------------------------ */
+.chapter-header {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 20px; }
+
 .chapter-header .chapter-header-top {
   margin: 0 auto;
-  padding: 0 20px;
-  max-width: 880px; }
+  max-width: 520px;
+  margin-left: calc(100% - 520px); }
 
 .chapter-header .chapter-header-top span {
   color: #CD471C; }
@@ -150,8 +165,9 @@ p {
 
 .chapter-header .chapter-header-bottom {
   margin: 0 auto;
-  padding: 20px;
-  max-width: 880px; }
+  padding: 20px 0;
+  max-width: 520px;
+  margin-left: calc(100% - 520px); }
 
 .chapter-header .chapter-header-bottom h2 {
   max-width: 520px;
@@ -203,12 +219,14 @@ p {
 
 .article-pagination a {
   color: #000000;
-  font-size: 22px;
+  font-size: 18px;
   font-weight: bold;
-  text-decoration: none; }
-
-.article-pagination .previous-page {
-  padding-right: 20px; }
+  text-decoration: none;
+  padding: 10px 0;
+  display: block;
+  text-indent: -30px;
+  max-width: 520px;
+  margin-left: calc(100% - 520px); }
 
 .article-pagination .previous-page:before {
   content: "←";
@@ -216,11 +234,11 @@ p {
   width: 20px;
   padding-right: 10px; }
 
-.article-pagination .next-page:after {
+.article-pagination .next-page:before {
   content: "→";
   font-size: 20px;
   width: 20px;
-  padding-left: 10px; }
+  padding-right: 10px; }
 
 @media screen and (max-width: 1440px) {
   .site-header {
@@ -236,7 +254,8 @@ p {
   .img-section .img-caption {
     position: relative;
     width: 100%;
-    color: #999999; }
+    color: #999999;
+    padding: 0 0 20px 0; }
   .img-section img {
     max-width: 100%;
     margin-left: 0;
@@ -245,6 +264,14 @@ p {
 @media screen and (max-width: 800px) {
   .quote-section {
     margin: 30px 0 50px 30px; } }
+
+@media screen and (max-width: 580px) {
+  .content-6-column,
+  .chapter-header .chapter-header-top,
+  .chapter-header .chapter-header-bottom {
+    margin-left: auto; }
+  .article-pagination a {
+    margin-left: 30px; } }
 
 @media screen and (max-width: 520px) {
   .quote-section {

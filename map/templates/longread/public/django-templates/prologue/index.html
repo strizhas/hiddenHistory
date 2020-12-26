@@ -1,0 +1,46 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block head %}
+    <meta name="description" content="До 17-ого века на территории современного Лефортово были исключительно пахотные и выгонные земли. В 17-ом веке здесь начинают появляться резиденции знати. Однако самое сильное влияние на развитие этого района оказало строительство железхных дорог"/>
+    <link rel="stylesheet" href="{% static 'css/history-page.css' %}">
+{% endblock %}
+{% block title %}
+    <title>Завод &#39;Серп и молот&#39;, Предисловие. Территория с начала 17-ого века и предпосылки создания фабрики</title>
+{% endblock %}
+{% block content %}
+    
+        
+<header class="site-header" id="header-container">
+        <div class="header-container">
+            <h1>Московский металлургический завод<br><b>"Серп и молот"</b><br>
+                <small>120 лет истории — от пахотных земель до современного жилого квартала</small>
+            </h1>
+        </div>
+    </header>
+<article class="content-wrapper">
+    <section class="chapter" id="chapter-0">
+
+        <div id="header-out-trigger"></div>
+        <div class="content-10-column">
+            <p class="text-intro">Московский завод “Серп и молот” уходит в&nbsp;прошлое и&nbsp;на&nbsp;его&nbsp;месте строится жилой квартал. Мало кто знает, какой длинный и&nbsp;извилистый путь прошло это&nbsp;предприятие от&nbsp;небольшой мануфактуры до&nbsp;огромного завода.</p>
+            <div class="text-section content-6-column">
+                <b>Содержание</b><nav class="timeline-navigation">
+        <a href="{% url 'history' %}"><b>1884–1900</b><span>Основание завода и его первые годы.</span></a>
+        <a href="{% url 'zavod_v_nachale_veka' %}"><b>1900–1917</b><span>Завод в начале ХХ века. Революция 1905 г. и первая мировая война.</span></a>
+        <a href="{% url 'zavod_posle_revolucii' %}"><b>1917–1940</b><span>Завод после Октябрьской революции.</span></a>
+    </nav>
+                <p class="text-regular">до ХVII века эти земли входили в&nbsp;состав владений монастырского села Карачарова, которое принадлежало Спасо-Андроникову монастырю. Тут&nbsp;были исключительно пахотные и&nbsp;выгонные земли, и&nbsp;никаких построек (во всяком случае капитальных) здесь не&nbsp;было. Однако в&nbsp;XVII часть земель переходит во владение города и&nbsp;тут&nbsp;начинают появлятся резиденции знати. в 1730-х годах в&nbsp;ходе устройства дворцово-паркового комплекса, известного как Летний Анненгоф, к&nbsp;востоку от&nbsp;него была посажена Анненгофская роща.</p>
+                <p class="text-regular">Однако самое непосредственное влияние на&nbsp;судьбу этих земель оказало железнодорожное строительство, начавшееся в&nbsp;1860-ые годы. В&nbsp;период с&nbsp;1862 по&nbsp;1867 годы здесь было открыто движение по&nbsp;трём направлениям&nbsp;- нижегородскому, казанскому и&nbsp;курскому. Наличие такой системы коммуникаций сделало этот район привлекательным для&nbsp;крупной промышленности.</p>
+            </div>
+            
+<figure class="img-section">
+    <figcaption class="img-caption">фрагмент карты Москвы 1873 года. Хорошо видно уже сформировавшиеся очертания будущего завода и района в целом</figcaption>
+    <img src="https://storage.yandexcloud.net/hh-files/history/maps/1873-crop.jpg" width="700" height="540"/>
+</figure>
+        </div>
+    </section><nav class="content-10-column article-pagination">
+            <a href="{% url 'osnovanie_zavoda' %}" class="next-page">Глава 1. Основание завода</a>
+        </nav></article>
+
+    
+{% endblock %}>

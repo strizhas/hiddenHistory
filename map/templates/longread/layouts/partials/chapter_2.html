@@ -39,21 +39,17 @@
                 <p class="text-regular">{{ (index $data.chapter_2 10).Text | safeHTML }}</p>
             </div>
         </div>
-        {{- if eq .Page.Params.type "static" -}}
-        <div class="content-10-column article-pagination">
-            <a href='{{ ref . "chapter_1.md" }}' class="previous-page">Глава 1. Основание завода</a>
-        </div>
-        <div class="content-10-column article-pagination">
-            <a href='{{ ref . "chapter_3.md" }}' class="next-page">Глава 3. Завод после Октябрьской революции</a>
-        </div>
-        {{- end -}}
-        {{- if eq .Page.Params.type "django_html" -}}
-        <div class="content-10-column article-pagination">
-            <a href="{% url 'history' %}" class="previous-page">Глава 1. Основание завода</a>
-        </div>
-        <div class="content-10-column article-pagination">
-            <a href="{% url 'zavod_posle_revolucii' %}" class="next-page">Глава 3. Завод после Октябрьской революции</a>
-        </div>
-        {{- end -}}
     </section>
+    {{- if eq .Page.Params.type "static" -}}
+    <nav class="content-10-column article-pagination">
+        <a href='{{ ref . "chapter_1.md" }}' class="previous-page">Глава 1. Основание завода</a>
+        <a href='{{ ref . "chapter_3.md" }}' class="next-page">Глава 3. Завод после Октябрьской революции</a>
+    </nav>
+    {{- end -}}
+    {{- if eq .Page.Params.type "django_html" -}}
+    <nav class="content-10-column article-pagination">
+        <a href="{% url 'osnovanie_zavoda' %}" class="previous-page">Глава 1. Основание завода</a>
+        <a href="{% url 'zavod_posle_revolucii' %}" class="next-page">Глава 3. Завод после Октябрьской революции</a>
+    </nav>
+    {{- end -}}
 </article>

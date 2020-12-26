@@ -10,6 +10,7 @@ $size_8_column: 700px;
 $size_6_column: 520px;
 $size_5_column: 430px;
 $size_4_column: 340px;
+$size_2_column: 160px;
 
 
 
@@ -40,6 +41,7 @@ body {
 .content-6-column {
     margin: 0;
     max-width: $size_6_column;
+    margin-left: calc(100% - #{$size_6_column});
     padding: 20px 0;
 }
 
@@ -54,18 +56,23 @@ body {
 h3 {
     margin: 60px 0 20px 0;
 }
+
 p {
     font-size: 16px;
     line-height: 24px;
 }
+
 .text-intro {
     font-weight: 600;
     font-size: 24px;
     line-height: 30px;
     padding: 0;
 }
+
 .text-regular {
     padding: 10px 0;
+    font-size: 16px;
+    line-height: 24px;
 }
 
 .number {
@@ -92,12 +99,20 @@ p {
     }
 }
 .quote-section {
-    margin: 30px 0 50px 90px;
-    max-width: 610px;
+    margin: 30px 0 30px $size_2_column;
+    padding: 20px 0;
+    max-width: $size_10_column;
     font-style: italic;
+    border-top: 1px solid $ascent_gray;
+    border-bottom: 1px solid $ascent_gray;
 }
 
 .quote-section {
+
+    .quote-content {
+        max-width: $size_6_column;
+        margin: 0 auto;
+    }
     .quote-text {
         font-size: 20px;
         line-height: 30px;
@@ -117,7 +132,7 @@ p {
 .in-text-ul {
     list-style: none;
     margin: 40px 0;
-    padding-left: 60px;
+    padding-left: 30px;
     text-indent: -30px;
 }
 
@@ -171,12 +186,18 @@ p {
 
 /*----------------------- Заголовок главы ------------------------------ */
 
+.chapter-header {
+    max-width: $size_10_column;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
 .chapter-header {
     .chapter-header-top {
         margin: 0 auto;
-        padding: 0 20px;
-        max-width: $size_10_column;
+
+        max-width: $size_6_column;
+        margin-left: calc(100% - #{$size_6_column});
     }
 
     .chapter-header-top {
@@ -201,8 +222,9 @@ p {
 
     .chapter-header-bottom {
         margin: 0 auto;
-        padding: 20px;
-        max-width: $size_10_column;
+        padding: 20px 0;
+        max-width: $size_6_column;
+        margin-left: calc(100% - #{$size_6_column});
     }
 
     .chapter-header-bottom h2 {
@@ -269,14 +291,17 @@ p {
 .article-pagination {
     a {
         color: $font_main;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: bold;
         text-decoration: none;
+        padding: 10px 0;
+        display: block;
+        text-indent: -30px;
+        max-width: $size_6_column;
+        margin-left: calc(100% - #{$size_6_column});
 
     }
-    .previous-page {
-        padding-right: 20px;
-    }
+
 
     .previous-page:before {
         content: "←";
@@ -285,11 +310,11 @@ p {
         padding-right: 10px;
     }
 
-    .next-page:after {
+    .next-page:before {
         content: "→";
         font-size: 20px;
         width: 20px;
-        padding-left: 10px;
+        padding-right: 10px;
     }
 }
 
@@ -316,6 +341,7 @@ p {
             position: relative;
             width: 100%;
             color: $ascent_gray;
+            padding: 0 0 20px 0;
         }
 
         img {
@@ -329,6 +355,19 @@ p {
 @media screen and (max-width: 800px) {
     .quote-section {
         margin: 30px 0 50px 30px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+
+    .content-6-column,
+    .chapter-header .chapter-header-top,
+    .chapter-header .chapter-header-bottom {
+        margin-left: auto;
+    }
+
+    .article-pagination a {
+        margin-left: 30px;
     }
 }
 

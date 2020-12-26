@@ -1,0 +1,33 @@
+{{ $data := getJSON "Data/СиМ-история.json" }}
+<header class="site-header" id="header-container">
+        <div class="header-container">
+            <h1>Московский металлургический завод<br><b>"Серп и молот"</b><br>
+                <small>120 лет истории — от пахотных земель до современного жилого квартала</small>
+            </h1>
+        </div>
+    </header>
+<article class="content-wrapper">
+    <section class="chapter" id="chapter-0">
+
+        <div id="header-out-trigger"></div>
+        <div class="content-10-column">
+            <p class="text-intro">{{ (index $data.chapter_0 0).Intro | safeHTML }}</p>
+            <div class="text-section content-6-column">
+                {{ partial "components/timeline_navigation.html" . }}
+                <p class="text-regular">{{ (index $data.chapter_0 0).Text | safeHTML }}</p>
+                <p class="text-regular">{{ (index $data.chapter_0 1).Text | safeHTML }}</p>
+            </div>
+            {{ partial "components/img_section.html" (dict "index" 0) }}
+        </div>
+    </section>
+    {{- if eq .Page.Params.type "static" -}}
+        <nav class="content-10-column article-pagination">
+            <a href='{{ ref . "chapter_1.md" }}' class="next-page">Глава 1. Основание завода</a>
+        </nav>
+        {{- end -}}
+        {{- if eq .Page.Params.type "django_html" -}}
+        <nav class="content-10-column article-pagination">
+            <a href="{% url 'osnovanie_zavoda' %}" class="next-page">Глава 1. Основание завода</a>
+        </nav>
+    {{- end -}}
+</article>

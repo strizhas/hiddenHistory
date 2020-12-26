@@ -12,8 +12,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('', views.show_history, name='history'),
     path('', TemplateView.as_view(
-        template_name='longread/public/django-templates/chapter_1/index.html'),
+        template_name='longread/public/django-templates/chapter_1/prologue.html'),
          name='history'),
+    path('osnovanie_zavoda', TemplateView.as_view(
+            template_name='longread/public/django-templates/chapter_1/index.html'),
+             name='osnovanie_zavoda'),
     path('zavod_v_nachale_veka', TemplateView.as_view(
         template_name='longread/public/django-templates/chapter_2/index.html'),
         name='zavod_v_nachale_veka'),

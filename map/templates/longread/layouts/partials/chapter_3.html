@@ -22,17 +22,19 @@
                 <p class="text-regular">{{ (index $data.chapter_3 5).Text | safeHTML }}</p>
             </div>
             {{ partial "components/quote.html" (dict "index" 3) }}
-            <p>Продолжение следует...</p>
+            <div class="text-section content-6-column">
+                <p>Продолжение следует...</p>
+            </div>
         </div>
-        {{- if eq .Page.Params.type "static" -}}
-        <div class="content-10-column article-pagination">
-            <a href='{{ ref . "chapter_2.md" }}' class="previous-page">Глава 2. Завод в начале ХХ века</a>
-        </div>
-        {{- end -}}
-        {{- if eq .Page.Params.type "django_html" -}}
-        <div class="content-10-column article-pagination">
-            <a href="{% url 'zavod_v_nachale_veka' %}" class="previous-page">Глава 2.Завод в начале ХХ века</a>
-        </div>
-        {{- end -}}
     </section>
+    {{- if eq .Page.Params.type "static" -}}
+    <nav class="content-10-column article-pagination">
+        <a href='{{ ref . "chapter_2.md" }}' class="previous-page">Глава 2. Завод в начале ХХ века</a>
+    </nav>
+    {{- end -}}
+    {{- if eq .Page.Params.type "django_html" -}}
+    <nav class="content-10-column article-pagination">
+        <a href="{% url 'zavod_v_nachale_veka' %}" class="previous-page">Глава 2.Завод в начале ХХ века</a>
+    </nav>
+    {{- end -}}
 </article>

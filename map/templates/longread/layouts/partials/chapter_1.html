@@ -1,55 +1,36 @@
 {{ $data := getJSON "Data/СиМ-история.json" }}
-<header class="site-header" id="header-container">
-        <div class="header-container">
-            <h1>Московский металлургический завод<br><b>"Серп и молот"</b><br>
-                <small>120 лет истории — от пахотных земель до современного жилого квартала</small>
-            </h1>
+<article class="content-wrapper">
+    <section class="chapter" id="chapter-1">
+        {{ partial "components/chapter_header.html" (dict "num" 1 "year" 1883 "text" (index $data.chapter_1 0).Title) }}
+        <div class="content-10-column">
+            <div class="text-section content-6-column">
+                <p class="text-regular">{{ (index $data.chapter_1 0).Text | safeHTML }}</p>
+                <p class="text-regular">{{ (index $data.chapter_1 1).Text | safeHTML }}</p>
+                <p class="text-regular">{{ (index $data.chapter_1 2).Text | safeHTML }}</p>
+                {{ partial "components/number.html" (dict "index" 0) }}
+                <p class="text-regular">
+                    {{ (index $data.chapter_1 3).Text | safeHTML }}
+                    {{ (index $data.chapter_1 4).Text | safeHTML }}
+                </p>
+                <p class="text-regular">{{ (index $data.chapter_1 5).Text | safeHTML }}</p>
+            </div>
+                {{ partial "components/quote.html" (dict "index" 0) }}
+            <div class="text-section content-6-column">
+                <p class="text-regular">{{ (index $data.chapter_1 6).Text | safeHTML }}</p>
+                <p class="text-regular">{{ (index $data.chapter_1 7).Text | safeHTML }}</p>
+            </div>
         </div>
-    </header>
-<div class="content-wrapper">
-<section class="chapter" id="chapter-0">
-
-    <div id="header-out-trigger"></div>
-    <div class="content-10-column">
-        <p class="text-intro">{{ (index $data.chapter_0 0).Intro | safeHTML }}</p>
-        <div class="text-section content-6-column">
-            {{ partial "components/timeline_navigation.html" . }}
-            <p class="text-regular">{{ (index $data.chapter_0 0).Text | safeHTML }}</p>
-            <p class="text-regular">{{ (index $data.chapter_0 1).Text | safeHTML }}</p>
-        </div>
-        {{ partial "components/img_section.html" (dict "index" 0) }}
-    </div>
-</section>
-<section class="chapter" id="chapter-1">
-    {{ partial "components/chapter_header.html" (dict "num" 1 "year" 1883 "text" (index $data.chapter_1 0).Title) }}
-    <div class="content-10-column">
-        <div class="text-section content-6-column">
-            <p class="text-regular">{{ (index $data.chapter_1 0).Text | safeHTML }}</p>
-            <p class="text-regular">{{ (index $data.chapter_1 1).Text | safeHTML }}</p>
-            <p class="text-regular">{{ (index $data.chapter_1 2).Text | safeHTML }}</p>
-            {{ partial "components/number.html" (dict "index" 0) }}
-            <p class="text-regular">
-                {{ (index $data.chapter_1 3).Text | safeHTML }}
-                {{ (index $data.chapter_1 4).Text | safeHTML }}
-            </p>
-            <p class="text-regular">{{ (index $data.chapter_1 5).Text | safeHTML }}</p>
-        </div>
-            {{ partial "components/quote.html" (dict "index" 0) }}
-        <div class="text-section content-6-column">
-            <p class="text-regular">{{ (index $data.chapter_1 6).Text | safeHTML }}</p>
-            <p class="text-regular">{{ (index $data.chapter_1 7).Text | safeHTML }}</p>
-        </div>
-    </div>
+    </section>
     {{- if eq .Page.Params.type "static" -}}
-    <div class="content-10-column article-pagination">
+    <nav class="content-10-column article-pagination">
+        <a href='{{ ref . "prologue.md" }}' class="previous-page">Пролог. Лефортово до последней четверти XIX ека</a>
         <a href='{{ ref . "chapter_2.md" }}' class="next-page">Глава 2. Завод в годы первой революции</a>
-    </div>
+    </nav>
     {{- end -}}
     {{- if eq .Page.Params.type "django_html" -}}
-    <div class="content-10-column article-pagination">
+    <nav class="content-10-column article-pagination">
+        <a href="{% url 'history' %}" class="previous-page">Пролог. Лефортово до последней четверти XIX ека</a>
         <a href="{% url 'zavod_v_nachale_veka' %}" class="next-page">Глава 2. Завод в начале ХХ века</a>
-    </div>
+    </nav>
     {{- end -}}
-
-</section>
-</div>
+</article>
