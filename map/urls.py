@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.conf.urls.static import static
+
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include
@@ -7,6 +7,8 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from . import views
+
+app_name = 'mmz'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,5 +45,3 @@ urlpatterns = [
     path('require_source_form', views.require_source_form),
     path('save_new_source', views.save_new_source)
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

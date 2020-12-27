@@ -56,7 +56,7 @@ function request_single_photo(e) {
     if (marker_id in loaded) {
         return;
     }
-    var url="/get_photo?id=" + marker_id;
+    var url="/mmz/get_photo?id=" + marker_id;
 
     $.get(url).done(function(data) {
         popup.setContent(data);
@@ -77,7 +77,7 @@ function request_preview(e, m) {
                             'opacity': 1
                             });
     var t = m.getTooltip();
-    var url="/get_preview?id=" + marker_id;
+    var url="/mmz/get_preview?id=" + marker_id;
 
     m.openTooltip();
     $.get(url).done(function(data) {
@@ -242,7 +242,7 @@ function build_slider(years, data) {
 
 function request_photos() {
     $.ajax({
-        url : "/get_photos_data",
+        url : "/mmz/get_photos_data",
         type : "GET",
         success : function(response) {
             draw_markers(response);

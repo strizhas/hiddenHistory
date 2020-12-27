@@ -128,6 +128,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+print("MEDIA_ROOT")
+print(MEDIA_ROOT)
+
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('project', 'colormap')

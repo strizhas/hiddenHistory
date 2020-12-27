@@ -29,8 +29,8 @@
     {{- end -}}
     {{- if eq .Page.Params.type "django_html" -}}
     <nav class="content-10-column article-pagination">
-        <a href="{% url 'zavod_v_nachale_veka' %}" class="next-page">Глава 2. Завод в начале ХХ века</a>
-        <a href="{% url 'history' %}" class="previous-page">Пролог. Лефортово до последней четверти XIX ека</a>
+        <a href="{% url 'mmz:zavod_v_nachale_veka' %}" class="next-page">Глава 2. Завод в начале ХХ века</a>
+        <a href="{% url 'mmz:history' %}" class="previous-page">Пролог. Лефортово до последней четверти XIX ека</a>
     </nav>
     {{- end -}}
 </article>

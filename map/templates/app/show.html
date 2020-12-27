@@ -15,7 +15,7 @@
                 </a>
 		</div>
 		<div class="top-image-section">
-			<a href="{% url 'albums' %}" id="go-back-link" class="help-links">вернуться к альбомам</a> |
+			<a href="{% url 'mmz:albums' %}" id="go-back-link" class="help-links">вернуться к альбомам</a> |
 			<a href="{{ url_full }}" target="_blank" class="help-links">скачать в полном размере</a>
 		</div>
 	<div id="popup-img-frame" class="popup-img-frame">
@@ -44,7 +44,7 @@
 		</div>
 		<div class="help-text">загузил: {{ uploader }}, {{ uploaded }}</div>
 		{% if owner == True %}
-			<a href="/edit_photo/{{ id }}" target="_blank">редактировать</a>
+			<a href="/mmz/edit_photo/{{ id }}" target="_blank">редактировать</a>
 		{% endif %}
 	</div>
 	</div>

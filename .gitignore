@@ -37,9 +37,9 @@ credentials.json
 # медиа файлы
 hiddenhistory/media
 hiddenhistory/media/*
-media/*
-media/**
-!media/**/init.txt
+hiddenhistory/media/*
+hiddenhistory/media/**
+!hiddenhistory/media/**/init.txt
 project/media/
 
 **/__pycache__/**

@@ -32,8 +32,8 @@
     {{- end -}}
     {{- if eq .Page.Params.type "django_html" -}}
     <nav class="content-10-column article-pagination">
-        <a href="{% url 'rekonstrukciya_zavoda' %}" class="next-page">Глава 4. Грандиозная реконструкция и&nbsp;всесоюзная слава</a>
-        <a href="{% url 'zavod_v_nachale_veka' %}" class="previous-page">Глава 2. Завод в начале ХХ века</a>
+        <a href="{% url 'mmz:rekonstrukciya_zavoda' %}" class="next-page">Глава 4. Грандиозная реконструкция и&nbsp;всесоюзная слава</a>
+        <a href="{% url 'mmz:zavod_v_nachale_veka' %}" class="previous-page">Глава 2. Завод в начале ХХ века</a>
     </nav>
     {{- end -}}
 </article>
