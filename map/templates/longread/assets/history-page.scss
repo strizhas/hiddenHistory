@@ -80,13 +80,13 @@ p {
 }
 .number {
     .prefix, .measure {
-        color: $ascent_blue;
+        color: $ascent_red;
         font-size: 48px;
         font-weight: 800;
     }
 
     .value {
-        color: $ascent_blue;
+        color: $ascent_red;
         font-size: 64px;
         font-weight: 800;
     }
@@ -264,6 +264,23 @@ p {
     }
 }
 
+.svg-object {
+    margin: 0 0 40px 0;
+    padding: 0;
+}
+
+.svg-object {
+    .svg-fig-caption {
+        display: block;
+        max-width: $size_6_column;
+        margin-left: calc(100% - #{$size_6_column});
+        margin-bottom: 20px;
+    }
+    object {
+        width: 100%;
+    }
+}
+
 
 /*----------------------- Навигация ------------------------------ */
 
@@ -271,7 +288,7 @@ p {
     padding: 10px 0 20px 0;
 }
 .timeline-navigation {
-    a {
+    .timeline-item {
         display: block;
         color: $font_main;
         position: relative;
@@ -368,6 +385,12 @@ p {
 
     .article-pagination a {
         margin-left: 30px;
+    }
+
+    .svg-object {
+        .svg-fig-caption {
+            margin-left: auto;
+        }
     }
 }
 

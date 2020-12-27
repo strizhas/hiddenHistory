@@ -52,12 +52,12 @@ p {
   margin: 60px 0 40px 0; }
 
 .number .prefix, .number .measure {
-  color: #9FC7D3;
+  color: #CD471C;
   font-size: 48px;
   font-weight: 800; }
 
 .number .value {
-  color: #9FC7D3;
+  color: #CD471C;
   font-size: 64px;
   font-weight: 800; }
 
@@ -197,11 +197,24 @@ p {
 .img-section img {
   margin-left: 180px; }
 
+.svg-object {
+  margin: 0 0 40px 0;
+  padding: 0; }
+
+.svg-object .svg-fig-caption {
+  display: block;
+  max-width: 520px;
+  margin-left: calc(100% - 520px);
+  margin-bottom: 20px; }
+
+.svg-object object {
+  width: 100%; }
+
 /*----------------------- Навигация ------------------------------ */
 .timeline-navigation {
   padding: 10px 0 20px 0; }
 
-.timeline-navigation a {
+.timeline-navigation .timeline-item {
   display: block;
   color: #000000;
   position: relative;
@@ -271,7 +284,9 @@ p {
   .chapter-header .chapter-header-bottom {
     margin-left: auto; }
   .article-pagination a {
-    margin-left: 30px; } }
+    margin-left: 30px; }
+  .svg-object .svg-fig-caption {
+    margin-left: auto; } }
 
 @media screen and (max-width: 520px) {
   .quote-section {

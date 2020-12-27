@@ -1,7 +1,7 @@
 {{ $data := getJSON "Data/СиМ-история.json" }}
 <article class="content-wrapper">
     <section class="chapter" id="chapter-1">
-        {{ partial "components/chapter_header.html" (dict "num" 3 "year" "1917 – 1940" "text" (index $data.chapter_3 0).Title) }}
+        {{ partial "components/chapter_header.html" (dict "num" 3 "year" "1917 – 1930" "text" (index $data.chapter_3 0).Title) }}
         <div class="content-10-column">
             <div class="text-section content-6-column">
                 <p class="text-regular">{{ (index $data.chapter_3 0).Text | safeHTML }}</p>
@@ -22,19 +22,18 @@
                 <p class="text-regular">{{ (index $data.chapter_3 5).Text | safeHTML }}</p>
             </div>
             {{ partial "components/quote.html" (dict "index" 3) }}
-            <div class="text-section content-6-column">
-                <p>Продолжение следует...</p>
-            </div>
         </div>
     </section>
     {{- if eq .Page.Params.type "static" -}}
     <nav class="content-10-column article-pagination">
+        <a href='{{ ref . "chapter_4.md" }}' class="next-page">Глава 4. Грандиозная реконструкция и&nbsp;всесоюзная слава</a>
         <a href='{{ ref . "chapter_2.md" }}' class="previous-page">Глава 2. Завод в начале ХХ века</a>
     </nav>
     {{- end -}}
     {{- if eq .Page.Params.type "django_html" -}}
     <nav class="content-10-column article-pagination">
-        <a href="{% url 'zavod_v_nachale_veka' %}" class="previous-page">Глава 2.Завод в начале ХХ века</a>
+        <a href="{% url 'rekonstrukciya_zavoda' %}" class="next-page">Глава 4. Грандиозная реконструкция и&nbsp;всесоюзная слава</a>
+        <a href="{% url 'zavod_v_nachale_veka' %}" class="previous-page">Глава 2. Завод в начале ХХ века</a>
     </nav>
     {{- end -}}
 </article>
