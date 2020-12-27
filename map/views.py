@@ -17,6 +17,10 @@ from .forms import PhotoDataForm
 from .forms import SourceForm
 
 
+def redirect_to_mmz(request):
+    return redirect('/mmz')
+
+
 def show_map(request):
     return render(request, 'app/map.html')
 
