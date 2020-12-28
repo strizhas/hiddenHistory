@@ -4,6 +4,7 @@ $font_main: #000000;
 $ascent_blue: #9FC7D3;
 $ascent_red: #CD471C;
 $ascent_gray: #999999;
+$light_gray: #E9E6E1;
 
 $size_10_column: 880px;
 $size_8_column: 700px;
@@ -73,6 +74,14 @@ p {
     padding: 10px 0;
     font-size: 16px;
     line-height: 24px;
+}
+
+.text-annotation-wide {
+    width: 100%;
+    border-top: 6px solid $light_gray;
+    border-bottom: 6px solid $light_gray;
+    padding: 30px 0;
+    margin: 60px 0 30px 0;
 }
 
 .number {

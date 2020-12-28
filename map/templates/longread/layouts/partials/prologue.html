@@ -8,10 +8,13 @@
     </header>
 <article class="content-wrapper">
     <section class="chapter" id="chapter-0">
-
         <div id="header-out-trigger"></div>
         <div class="content-10-column">
             <p class="text-intro">{{ (index $data.chapter_0 0).Intro | safeHTML }}</p>
+            <p class="text-annotation-wide">
+                <i>От автора:</i><br><br>
+                {{ (index $data.chapter_0 1).Intro | safeHTML }}
+            </p>
             <div class="text-section content-6-column">
                 {{ partial "components/timeline_navigation.html" . }}
                 <p class="text-regular">{{ (index $data.chapter_0 0).Text | safeHTML }}</p>
