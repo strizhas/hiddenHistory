@@ -521,6 +521,7 @@ input, select {
     position: relative;
     color: #8A8A87;
     font-size: 16px;
+    min-height: 260px;
 }
 
 .site-footer a {
@@ -545,14 +546,11 @@ input, select {
 
 .site-footer .column-left {
     max-width: calc(100% - 520px);
-    position: absolute;
-    top: 0;
-    left: 0;
 }
 
 .site-footer .column-right {
     max-width: 520px;
-    margin-left: calc(100% - 520px);
+    float: right;
 }
 .site-footer .column-right ol {
     padding-left: 1em;
@@ -576,12 +574,12 @@ input, select {
 
     .site-footer .column-left {
         max-width: 100%;
-        position: relative;
+        margin-top: 40px;
     }
     .site-footer .column-right {
         max-width: 100%;
         margin-left: 0;
-        margin-top: 40px;
+        float: none;
     }
 }
 
