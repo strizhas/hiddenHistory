@@ -84,6 +84,10 @@ p {
     margin: 60px 0 30px 0;
 }
 
+.text-annotation-wide a {
+    color: $font_main;
+}
+
 .number {
     margin: 60px 0 40px 0;
 }
@@ -354,6 +358,13 @@ p {
     .site-header {
         height: 400px;
     }
+    .site-header {
+
+
+        h1 small {
+            max-width: 400px;
+        }
+    }
 }
 
 @media screen and (max-width: 800px) {
@@ -417,6 +428,37 @@ p {
         padding-left: 30px;
         text-indent: -30px;
     }
+    .site-header {
 
+        h1 {
+            max-width: 600px;
+            font-size: 16px;
+            padding-top: 10px;
+        }
+        h1 b {
+            text-transform: uppercase;
+            font-size: 40px;
+            color: $ascent_red;
+        }
+        h1 small {
 
+        }
+    }
+
+}
+@media screen and (max-width: 380px) {
+    .site-header {
+        h1 {
+            max-width: 600px;
+            font-size: 14px;
+        }
+        h1 b {
+            text-transform: uppercase;
+            font-size: 32px;
+            color: $ascent_red;
+        }
+        h1 small {
+
+        }
+    }
 }

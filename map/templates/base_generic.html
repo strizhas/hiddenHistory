@@ -21,6 +21,19 @@
                 $("#main-menu-nav").toggleClass('mobile-menu-open');
             });
 
+            $.get( "/mmz/require_sources", function( data ) {
+                if (Array.isArray(data) == true) {
+                    var ul = $('#footer-source-list')
+                    for (var i = 0; i < data.length; i++) {
+                        var li = $('<li>').appendTo(ul)
+                        $('<a>', {
+                            'href': data[i]['url'],
+                            'text': data[i]['name']
+                        }).appendTo(li)
+                    }
+                }
+            });
+
         });
     </script>
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -51,5 +64,29 @@
       {% block content %}<!-- default content text (typically empty) -->{% endblock %}
     </div>
   </div>
+    {% if not no_footer %}
+        <footer class="site-footer">
+            <div class="footer-content">
+                Андрей Стрижков, 2020<br><br>
+                <div class="footer-columns">
+                    <section class="column-left">
+                        Источники фотографий:
+                        <ul id="footer-source-list" class="source-list">
+
+                        </ul>
+                    </section>
+                    <section class="column-right">
+                        Рассказ построен на следующих источниках:
+                        <ol>
+                            <li>"Магнитка близ Садового кольца": Стимулы к&nbsp;работе на&nbsp;Московском заводе "Серп и&nbsp;молот", 1883-2001&nbsp;гг.&nbsp;— Андрей Маркевич, Андрей Соколов, 2005;</li>
+                            <li>Заводское жильё в&nbsp;1935–первой половине 1960-х&nbsp;гг. По&nbsp;материалам завода "Серп и&nbsp;молот"&nbsp;—  В.С.&nbsp;Тяжельникова;</li>
+                            <li><a href="http://xn----8sbeckcargt5bj2ado8m.xn--p1ai/chyornaya-metallurgiya/mmz-serp-i-molot.html" target="_blank">Советские-заводы.рф;</a></li>
+                            <li><a href="https://archi.ru/russia/50973/serp-i-molot-istoriya-mesta" target="_blank">"Серп и Молот": история места — archi.ru</a></li>
+                        </ol>
+                    </section>
+                </div>
+            </div>
+        </footer>
+    {% endif %}
 </body>
 </html>

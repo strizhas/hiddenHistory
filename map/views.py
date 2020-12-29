@@ -22,7 +22,7 @@ def redirect_to_mmz(request):
 
 
 def show_map(request):
-    return render(request, 'app/map.html')
+    return render(request, 'app/map.html', {'no_footer': 'true'})
 
 
 @login_required(login_url='/accounts/login/')
@@ -37,21 +37,18 @@ def load_photo(request):
 
 
 def show_about(request):
-    sources = Source.objects.values()
-    return render(request, 'app/about.html', {'sources': sources})
-
-
-def show_history(request):
-    return render(request, 'app/history.html')
+    return render(request, 'app/about.html')
 
 
 def show_albums(request):
     p = Photo.objects.filter(published=True).order_by('-id')
     paginator = Paginator(p, 50)  # Show 25 contacts per page.
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
 
-    return render(request, 'app/albums.html', {'page_obj': page_obj})
+    context = {
+        'page_obj': paginator.get_page(page_number)
+    }
+    return render(request, 'app/albums.html', context)
 
 
 def show_photo(request, pk):
@@ -215,6 +212,14 @@ def upload_with_exif(request):
         response = create_error_response(form)
 
     return JsonResponse(response)
+
+
+def require_sources(request):
+    if request.method != 'GET':
+        return
+
+    return JsonResponse(
+        list(Source.objects.values('name', 'url')), safe=False)
 
 
 def require_source_form(request):

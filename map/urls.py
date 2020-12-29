@@ -12,7 +12,6 @@ app_name = 'mmz'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', views.show_history, name='history'),
     path('', TemplateView.as_view(
         template_name='longread/public/django-templates/prologue/index.html'),
          name='history'),
@@ -42,6 +41,9 @@ urlpatterns = [
     path('get_photos_data', views.get_photos_data),
     path('upload_with_exif', views.upload_with_exif),
     path('accounts/', include('django.contrib.auth.urls')),
+
+    # AJAX запросы
+    path('require_sources', views.require_sources),
     path('require_source_form', views.require_source_form),
     path('save_new_source', views.save_new_source)
 ]

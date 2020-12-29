@@ -68,7 +68,7 @@ body {
     position: relative;
     background: #f6f6f2;
     width: 100%;
-    height: calc(100vh - 50px);
+    min-height: calc(100vh - 50px);
 }
 
 .no-map-content {
@@ -180,7 +180,7 @@ input, select {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: calc(100vh - 50px);
 
 }
 
@@ -510,6 +510,56 @@ input, select {
     -moz-box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
     box-shadow: -1px 1px 8px 0px rgba(0,0,0,0.47);
 }
+
+
+/*----------------------- Футер ------------------------------ */
+
+.site-footer {
+    background: #484846;
+    width: 100%;
+    padding: 30px 0;
+    position: relative;
+    color: #8A8A87;
+    font-size: 16px;
+}
+
+.site-footer a {
+    color: #8A8A87;
+}
+
+.site-footer .footer-content {
+    position: relative;
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.site-footer .footer-columns {
+    position: relative;
+}
+
+.site-footer .footer-columns ul,
+.site-footer .footer-columns ol {
+    margin-top: 10px;
+}
+
+
+.site-footer .column-left {
+    max-width: calc(100% - 520px);
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.site-footer .column-right {
+    max-width: 520px;
+    margin-left: calc(100% - 520px);
+}
+.site-footer .column-right ol {
+    padding-left: 1em;
+}
+
+/*----------------------- Стили для устройств ------------------------------ */
+
 @media only screen and (max-width: 1024px) {
 
     #time-range-slider {
@@ -519,6 +569,19 @@ input, select {
 
     .ajax-content-window {
         width: 100%;
+    }
+}
+
+@media only screen and (max-width: 840px) {
+
+    .site-footer .column-left {
+        max-width: 100%;
+        position: relative;
+    }
+    .site-footer .column-right {
+        max-width: 100%;
+        margin-left: 0;
+        margin-top: 40px;
     }
 }
 
