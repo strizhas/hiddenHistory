@@ -2,12 +2,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% block title %}<title>hidden history</title>{% endblock %}
+    {% block title %}<title>Завод "Серп и молот" — история территории</title>{% endblock %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta property="og:title" content="Завод 'Серп и молот' — история территории"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="http://hidden-history.ru/mmz/"/>
+    <meta property="og:image" content="https://storage.yandexcloud.net/hh-files/history/photo/sharing-img.jpg"/>
+    <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" type="image/png">
     <script src="{% static 'js/jquery.js' %}"></script>
-  {% block head %}{% endblock %}
+    {% block head %}{% endblock %}
     <script type="text/javascript">
-
         $(document).ready(function(){
 
             /* Hamburger menu animation */
@@ -36,7 +40,7 @@
 
         });
     </script>
-  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
 </head>
