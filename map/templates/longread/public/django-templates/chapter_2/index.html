@@ -3,6 +3,29 @@
 {% block head %}
     <meta name="description" content="Московский металлический завод, в последствие ставший заводом &#39;Серп и молот&#39;, в начале ХХ века. Годы первой ревообции 1905 г. и период первой мировой войны"/>
     <link rel="stylesheet" href="{% static 'css/history-page.css' %}">
+    <script>
+        function setScroll(s_id) {
+            let section = document.getElementById(s_id);
+
+            let scrolled = window.scrollY;
+            let etop = section.getBoundingClientRect().top;
+            window.scrollTo(0, scrolled + etop);
+        }
+
+        function load_content() {
+            fetch("{% static 'html/index.html' %}")
+            .then(r => r.text())
+                .then(function (rr) {
+
+                var body = document.getElementById("content-wrapper");
+                var section = document.getElementsByClassName("chapter")[0]
+                var s_id = section.getAttribute("id")
+
+                document.getElementById("content-wrapper").innerHTML = rr ;
+                setScroll(s_id);
+            })
+        }
+    </script>
 {% endblock %}
 {% block title %}
     <title>Завод &#39;Серп и молот&#39; в начале ХХ века и годы первой русской революции</title>
@@ -11,14 +34,14 @@
     
         
 <article class="content-wrapper">
-    <section class="chapter" id="chapter-1">
+    <section class="chapter" id="chapter-2">
         <header class="chapter-header">
     <div class="chapter-header-top">
         <span class="chapter-num">Глава 2</span>
         <span class="year"><b class="year">1900 – 1917</b></span>
     </div>
     <div class="chapter-header-bottom">
-        <h2>Завод в&nbsp;начале ХХ&nbsp;века&nbsp;— первая русская революция, модернизация завода, первая мировая война</h2>
+        <h1>Завод в&nbsp;начале ХХ&nbsp;века&nbsp;— первая русская революция, модернизация завода, первая мировая война</h1>
     </div>
 </header>
         <div class="content-10-column">
@@ -28,7 +51,7 @@
                     Гужон был вынужден закрыть часть производственных программ, сократив при&nbsp;этом штат рабочих. У&nbsp;оставшихся уменьшились заработки, что привело к&nbsp;нарастанию напряженности в&nbsp;среде рабочих.
                 </p>
 
-                <h3>Первая русская революция</h3>
+                <h2 class="longread-h2">Первая русская революция</h2>
                 <p class="text-regular">Волнения начались после событий 9&nbsp;января 1905 года в&nbsp;Петербурге. 12&nbsp;декабря на&nbsp;заводе началась забастовка. Вот&nbsp;некоторые из&nbsp;требований бастующих:</p>
 
                 <ul class="in-text-ul">
@@ -66,7 +89,7 @@
                     Были выстроены новые мартеновский печи, была механизирована их загрузка. На&nbsp;подъездных путях забегала “кукушка”, облегчившая вспомогательные работы. Появились дизели, паровые машины стали заменятся электромоторами. В&nbsp;цехах стали появляться новые станы, построена трансформаторная подстанция.
                     Модернизация принесла свои плоды, “производительная способность предприятия увеличилась на 50%”. ММЗ вместе с другими предприятиями черной металлургии стал одним из&nbsp;лидеров промышленного роста.
                 </p>
-                <h3>Первая мировая война</h3>
+                <h2 class="longread-h2">Первая мировая война</h2>
                 <p class="text-regular">С началом первой мировой войны завод стал работать на&nbsp;оборону. Среди заказчиков ММЗ значились военное и&nbsp;морское ведомства, Министерство путей сообщения, предприятия, выпускающие снаряды, гранаты и&nbsp;т.п. В&nbsp;связи с&nbsp;мобилизацией завод впервые столкнулся с&nbsp;нехваткой рабочих рук. Во&nbsp;время первой мобилизации 1914&nbsp;года в&nbsp;армию было&nbsp;призвано более 800 рабочих (около 25% от&nbsp;общего штата), среди которых было много квалифицированных сотрудников. Вопрос стоял настолько остро, что&nbsp;на&nbsp;одном и собраний Гужон прямо заявил:</p>
             </div>
             
@@ -88,4 +111,7 @@
         <a href="{% url 'mmz:osnovanie_zavoda' %}" class="previous-page">Глава 1. Основание завода</a>
     </nav></article>
     
+    <script>
+        load_content()
+    </script>
 {% endblock %}>

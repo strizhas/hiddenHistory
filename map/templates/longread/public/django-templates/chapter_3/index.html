@@ -3,6 +3,29 @@
 {% block head %}
     <meta name="description" content="Завод &#39;Серп и молот&#39; в годы Октябрьской революции и последовавших событий. Предприятие было на грани уничтожения, но со временем сумело восстановить свое производство"/>
     <link rel="stylesheet" href="{% static 'css/history-page.css' %}">
+    <script>
+        function setScroll(s_id) {
+            let section = document.getElementById(s_id);
+
+            let scrolled = window.scrollY;
+            let etop = section.getBoundingClientRect().top;
+            window.scrollTo(0, scrolled + etop);
+        }
+
+        function load_content() {
+            fetch("{% static 'html/index.html' %}")
+            .then(r => r.text())
+                .then(function (rr) {
+
+                var body = document.getElementById("content-wrapper");
+                var section = document.getElementsByClassName("chapter")[0]
+                var s_id = section.getAttribute("id")
+
+                document.getElementById("content-wrapper").innerHTML = rr ;
+                setScroll(s_id);
+            })
+        }
+    </script>
 {% endblock %}
 {% block title %}
     <title>Завод в годы Октябрьской революции и последовавших событий</title>
@@ -11,14 +34,14 @@
     
         
 <article class="content-wrapper">
-    <section class="chapter" id="chapter-1">
+    <section class="chapter" id="chapter-3">
         <header class="chapter-header">
     <div class="chapter-header-top">
         <span class="chapter-num">Глава 3</span>
         <span class="year"><b class="year">1917 – 1930</b></span>
     </div>
     <div class="chapter-header-bottom">
-        <h2>Завод в&nbsp;годы Октябрьской революции и&nbsp;последовавших за&nbsp;ней событий</h2>
+        <h1>Завод в&nbsp;годы Октябрьской революции и&nbsp;последовавших за&nbsp;ней событий</h1>
     </div>
 </header>
         <div class="content-10-column">
@@ -69,4 +92,7 @@
         <a href="{% url 'mmz:zavod_v_nachale_veka' %}" class="previous-page">Глава 2. Завод в начале ХХ века</a>
     </nav></article>
     
+    <script>
+        load_content()
+    </script>
 {% endblock %}>

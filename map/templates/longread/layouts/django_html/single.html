@@ -3,6 +3,29 @@
 {% block head %}
     <meta name="description" content="{{ .Params.description }}"/>
     <link rel="stylesheet" href="{% static 'css/history-page.css' %}">
+    <script>
+        function setScroll(s_id) {
+            let section = document.getElementById(s_id);
+
+            let scrolled = window.scrollY;
+            let etop = section.getBoundingClientRect().top;
+            window.scrollTo(0, scrolled + etop);
+        }
+
+        function load_content() {
+            fetch("{% static 'html/index.html' %}")
+            .then(r => r.text())
+                .then(function (rr) {
+
+                var body = document.getElementById("content-wrapper");
+                var section = document.getElementsByClassName("chapter")[0]
+                var s_id = section.getAttribute("id")
+
+                document.getElementById("content-wrapper").innerHTML = rr ;
+                setScroll(s_id);
+            })
+        }
+    </script>
 {% endblock %}
 {% block title %}
     <title>{{ .Params.title }}</title>
@@ -11,4 +34,7 @@
     {{ if isset .Params "partial" }}
         {{ partial $.Params.partial . }}
     {{ end }}
+    <script>
+        load_content()
+    </script>
 {% endblock %}>

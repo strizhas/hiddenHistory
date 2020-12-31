@@ -1,18 +1,20 @@
-<b>Содержание</b>
+{{- if or (eq .Page.Params.type "static") (eq .Page.Params.type "django_html") -}}
+    <b>Содержание</b>
 
-{{- if eq .Page.Params.type "static" -}}
-    <nav class="timeline-navigation">
-        <a class="timeline-item" href='{{ ref . "static/chapter_1.md" }}'><b>1884–1900</b><span>Основание завода и его первые годы.</span></a>
-        <a class="timeline-item" href='{{ ref . "static/chapter_2.md" }}'><b>1900–1917</b><span>Завод в начале ХХ века. Революция 1905 г. и первая мировая война.</span></a>
-        <a class="timeline-item" href='{{ ref . "static/chapter_3.md" }}'><b>1917–1930</b><span>Завод после Октябрьской революции.</span></a>
-        <a class="timeline-item" href='{{ ref . "static/chapter_4.md" }}'><b>1930–1940</b><span>Грандиозная реконструкция и&nbsp;всесоюзная слава.</span></a>
-    </nav>
-{{- end -}}
-{{- if eq .Page.Params.type "django_html" -}}
-    <nav class="timeline-navigation">
-        <a class="timeline-item" href="{% url 'mmz:history' %}"><b>1884–1900</b><span>Основание завода и его первые годы.</span></a>
-        <a class="timeline-item" href="{% url 'mmz:zavod_v_nachale_veka' %}"><b>1900–1917</b><span>Завод в начале ХХ века. Революция 1905 г. и первая мировая война.</span></a>
-        <a class="timeline-item" href="{% url 'mmz:zavod_posle_revolucii' %}"><b>1917–1930</b><span>Завод после Октябрьской революции.</span></a>
-        <a class="timeline-item" href="{% url 'mmz:rekonstrukciya_zavoda' %}"><b>1930–1940</b><span>Грандиозная реконструкция и&nbsp;всесоюзная слава.</span></a>
-    </nav>
+    {{- if eq .Page.Params.type "static" -}}
+        <nav class="timeline-navigation">
+            <a class="timeline-item" href='{{ ref . "static/chapter_1.md" }}'><b>1884–1900</b><span>Основание завода и его первые годы.</span></a>
+            <a class="timeline-item" href='{{ ref . "static/chapter_2.md" }}'><b>1900–1917</b><span>Завод в начале ХХ века. Революция 1905 г. и первая мировая война.</span></a>
+            <a class="timeline-item" href='{{ ref . "static/chapter_3.md" }}'><b>1917–1930</b><span>Завод после Октябрьской революции.</span></a>
+            <a class="timeline-item" href='{{ ref . "static/chapter_4.md" }}'><b>1930–1940</b><span>Грандиозная реконструкция и&nbsp;всесоюзная слава.</span></a>
+        </nav>
+    {{- end -}}
+    {{- if eq .Page.Params.type "django_html" -}}
+        <nav class="timeline-navigation">
+            <a class="timeline-item" href="{% url 'mmz:history' %}"><b>1884–1900</b><span>Основание завода и его первые годы.</span></a>
+            <a class="timeline-item" href="{% url 'mmz:zavod_v_nachale_veka' %}"><b>1900–1917</b><span>Завод в начале ХХ века. Революция 1905 г. и первая мировая война.</span></a>
+            <a class="timeline-item" href="{% url 'mmz:zavod_posle_revolucii' %}"><b>1917–1930</b><span>Завод после Октябрьской революции.</span></a>
+            <a class="timeline-item" href="{% url 'mmz:rekonstrukciya_zavoda' %}"><b>1930–1940</b><span>Грандиозная реконструкция и&nbsp;всесоюзная слава.</span></a>
+        </nav>
+    {{- end -}}
 {{- end -}}

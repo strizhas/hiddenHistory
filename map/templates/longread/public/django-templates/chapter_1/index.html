@@ -3,6 +3,29 @@
 {% block head %}
     <meta name="description" content="В 1884 году Юлий Гужон открывает московский металлический завод, который в последствие стал заводом &#39;Серп и молот&#39;"/>
     <link rel="stylesheet" href="{% static 'css/history-page.css' %}">
+    <script>
+        function setScroll(s_id) {
+            let section = document.getElementById(s_id);
+
+            let scrolled = window.scrollY;
+            let etop = section.getBoundingClientRect().top;
+            window.scrollTo(0, scrolled + etop);
+        }
+
+        function load_content() {
+            fetch("{% static 'html/index.html' %}")
+            .then(r => r.text())
+                .then(function (rr) {
+
+                var body = document.getElementById("content-wrapper");
+                var section = document.getElementsByClassName("chapter")[0]
+                var s_id = section.getAttribute("id")
+
+                document.getElementById("content-wrapper").innerHTML = rr ;
+                setScroll(s_id);
+            })
+        }
+    </script>
 {% endblock %}
 {% block title %}
     <title>Завод &#39;Серп и молот&#39;, Основание завода и его первые годы</title>
@@ -18,7 +41,7 @@
         <span class="year"><b class="year">1883</b></span>
     </div>
     <div class="chapter-header-bottom">
-        <h2>Основание завода и&nbsp;его&nbsp;первые годы</h2>
+        <h1>Основание завода и&nbsp;его&nbsp;первые годы</h1>
     </div>
 </header>
         <div class="content-10-column">
@@ -59,4 +82,7 @@
         <a href="{% url 'mmz:history' %}" class="previous-page">Пролог. Лефортово до последней четверти XIX ека</a>
     </nav></article>
     
+    <script>
+        load_content()
+    </script>
 {% endblock %}>

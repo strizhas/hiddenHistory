@@ -3,6 +3,29 @@
 {% block head %}
     <meta name="description" content="В начале 1930-х гг. началась реконструкция завода &#39;Серп и молот&#39;. Его территория была расширена более чем в два раза, были построены новые цеха. Из металла, произведённого на заводе, были изготовлены скульптура &#39;Рабочий и колхнозница&#39;, отделка станции &#39;маяковская&#39; и т.п."/>
     <link rel="stylesheet" href="{% static 'css/history-page.css' %}">
+    <script>
+        function setScroll(s_id) {
+            let section = document.getElementById(s_id);
+
+            let scrolled = window.scrollY;
+            let etop = section.getBoundingClientRect().top;
+            window.scrollTo(0, scrolled + etop);
+        }
+
+        function load_content() {
+            fetch("{% static 'html/index.html' %}")
+            .then(r => r.text())
+                .then(function (rr) {
+
+                var body = document.getElementById("content-wrapper");
+                var section = document.getElementsByClassName("chapter")[0]
+                var s_id = section.getAttribute("id")
+
+                document.getElementById("content-wrapper").innerHTML = rr ;
+                setScroll(s_id);
+            })
+        }
+    </script>
 {% endblock %}
 {% block title %}
     <title>Грандиозная реконструкция 1930-х гг. Расширешение территории и всесоюзная слава.</title>
@@ -11,14 +34,14 @@
     
         
 <article class="content-wrapper">
-    <section class="chapter" id="chapter-1">
+    <section class="chapter" id="chapter-4">
         <header class="chapter-header">
     <div class="chapter-header-top">
         <span class="chapter-num">Глава 4</span>
         <span class="year"><b class="year">1930 – 1940</b></span>
     </div>
     <div class="chapter-header-bottom">
-        <h2>Грандиозная реконструкция и&nbsp;всесоюзная слава</h2>
+        <h1>Грандиозная реконструкция и&nbsp;всесоюзная слава</h1>
     </div>
 </header>
         <div class="content-10-column">
@@ -76,4 +99,7 @@
         <a href="{% url 'mmz:zavod_posle_revolucii' %}" class="previous-page">Глава 3. Завод после Октябрьской революции</a>
     </nav></article>
     
+    <script>
+        load_content()
+    </script>
 {% endblock %}>

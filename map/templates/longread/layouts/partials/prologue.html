@@ -1,26 +1,29 @@
 {{ $data := getJSON "Data/СиМ-история.json" }}
-<header class="site-header" id="header-container">
-        <div class="header-container">
-            <h1>Московский металлургический завод<br><b>"Серп и молот"</b><br>
-                <small>История территории&nbsp;— от&nbsp;пахотных земель до&nbsp;многоэтажного жилого квартала</small>
-            </h1>
-        </div>
-    </header>
-<article class="content-wrapper">
+<article>
     <section class="chapter" id="chapter-0">
-        <div id="header-out-trigger"></div>
-        <div class="content-10-column">
-            <p class="text-intro">{{ (index $data.chapter_0 0).Intro | safeHTML }}</p>
-            <p class="text-annotation-wide">
-                <i>От автора:</i><br><br>
-                {{ (index $data.chapter_0 1).Intro | safeHTML }}
-            </p>
-            <div class="text-section content-6-column">
-                {{ partial "components/timeline_navigation.html" . }}
-                <p class="text-regular">{{ (index $data.chapter_0 0).Text | safeHTML }}</p>
-                <p class="text-regular">{{ (index $data.chapter_0 1).Text | safeHTML }}</p>
+        <header class="site-header" id="header-container">
+            <div class="header-container">
+                <h1>Московский металлургический завод<br><b>"Серп и молот"</b><br>
+                    <small>История территории&nbsp;— от&nbsp;пахотных земель до&nbsp;многоэтажного жилого квартала</small>
+                </h1>
             </div>
-            {{ partial "components/img_section.html" (dict "index" 0) }}
+        </header>
+        <div class="content-wrapper">
+            <div id="header-out-trigger"></div>
+            <div class="content-10-column">
+                <p class="text-intro">{{ (index $data.chapter_0 0).Intro | safeHTML }}</p>
+                <p class="text-annotation-wide">
+                    <i>От автора:</i><br><br>
+                    {{ (index $data.chapter_0 1).Intro | safeHTML }}
+                </p>
+                <div class="text-section content-6-column">
+                    {{ partial "components/timeline_navigation.html" . }}
+                    <h2 class="longread-h2">История территории до 1883 года</h2>
+                    <p class="text-regular">{{ (index $data.chapter_0 0).Text | safeHTML }}</p>
+                    <p class="text-regular">{{ (index $data.chapter_0 1).Text | safeHTML }}</p>
+                </div>
+                {{ partial "components/img_section.html" (dict "index" 0) }}
+            </div>
         </div>
     </section>
     {{- if eq .Page.Params.type "static" -}}
