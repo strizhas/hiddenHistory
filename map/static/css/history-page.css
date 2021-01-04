@@ -40,26 +40,26 @@ body {
 
 p {
   font-size: 1.6rem;
-  line-height: 2.4rem; }
+  line-height: 2.5rem; }
 
 b {
   font-size: 1.6rem; }
 
 .text-intro {
   font-weight: 600;
-  font-size: 2.4rem;
+  font-size: 2.2rem;
   line-height: 3rem;
   padding: 0; }
 
 .text-regular {
   padding: 1rem 0;
   font-size: 1.6rem;
-  line-height: 2.4rem; }
+  line-height: 2.5rem; }
 
 .text-annotation-wide {
   width: 100%;
   font-size: 1.6rem;
-  line-height: 2.4rem;
+  line-height: 2.5rem;
   border-top: 6px solid #E9E6E1;
   border-bottom: 6px solid #E9E6E1;
   padding: 30px 0;

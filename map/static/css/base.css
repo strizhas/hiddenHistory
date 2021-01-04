@@ -12,10 +12,10 @@ html {
 
 p {
 	margin: 0;
-	margin-bottom: 30px;
-	margin-top: 20px;
-	font-size: 18px;
-	line-height: 25px;
+	margin-bottom: 3rem;
+	margin-top: 2rem;
+	font-size: 1.6rem;
+	line-height: 2.5rem;
 
 }
 
@@ -25,12 +25,12 @@ h2, h3, h4 {
     margin: 0;
 }
 h2 {
-	font-size: 32px;
-	line-height: 35px;
+	font-size: 3.2rem;
+	line-height: 3.5rem;
 }
 
 h3 {
-    font-size: 22px;
+    font-size: 2.2rem;
 }
 
 h4 {
@@ -558,6 +558,13 @@ input, select {
 
 /*----------------------- Стили для устройств ------------------------------ */
 
+
+@media screen and (max-width: 1440px) {
+    html {
+        font-size: 0.7vw;
+    }
+}
+
 @media only screen and (max-width: 1024px) {
 
     #time-range-slider {
@@ -581,6 +588,14 @@ input, select {
         margin-left: 0;
         float: none;
     }
+}
+
+@media screen and (max-width: 800px) {
+
+    html {
+        font-size: 1.3vw;
+    }
+
 }
 
 @media only screen and (max-width: 640px) {
@@ -634,6 +649,19 @@ input, select {
         height: auto;
     }
 
+}
+
+@media screen and (max-width: 580px) {
+
+    html {
+        font-size: 2.2vw;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    html {
+        font-size: 2.6vw;
+    }
 }
 
 @media only screen and (max-width: 360px) {
