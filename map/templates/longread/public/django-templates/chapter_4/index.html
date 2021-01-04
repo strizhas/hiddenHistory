@@ -11,19 +11,24 @@
             let etop = section.getBoundingClientRect().top;
             window.scrollTo(0, scrolled + etop);
         }
-
         function load_content() {
-            fetch("{% static 'html/index.html' %}")
-            .then(r => r.text())
-                .then(function (rr) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "{% static 'html/index.html' %}", true);
+            xhr.send();
 
-                var body = document.getElementById("content-wrapper");
-                var section = document.getElementsByClassName("chapter")[0]
-                var s_id = section.getAttribute("id")
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) return;
 
-                document.getElementById("content-wrapper").innerHTML = rr ;
-                setScroll(s_id);
-            })
+                if (xhr.status == 200) {
+                    var body = document.getElementById("content-wrapper");
+                    var section = document.getElementsByClassName("chapter")[0]
+                    var s_id = section.getAttribute("id")
+
+                    document.getElementById("content-wrapper").innerHTML = xhr.responseText ;
+                    setScroll(s_id);
+                }
+
+            }
         }
     </script>
 {% endblock %}
@@ -50,11 +55,11 @@
 
                 <ul class="timeline-navigation">
                 
-                    <li class="timeline-item"><b>1930 г.</b><span style="margin-left: 70px">построен новый ремонтно-механический цех.</span></li>
+                    <li class="timeline-item year-single"><b>1930 г.</b><span>построен новый ремонтно-механический цех.</span></li>
                 
-                    <li class="timeline-item"><b>1932 г.</b><span style="margin-left: 70px">цех холодной прокатки стали, калибровочный цех и&nbsp;новая котельная.</span></li>
+                    <li class="timeline-item year-single"><b>1932 г.</b><span>цех холодной прокатки стали, калибровочный цех и&nbsp;новая котельная.</span></li>
                 
-                    <li class="timeline-item"><b>1933 г.</b><span style="margin-left: 70px">новый модельный цех.</span></li>
+                    <li class="timeline-item year-single"><b>1933 г.</b><span>новый модельный цех.</span></li>
                 
                 </ul>
                 <p class="text-regular">В&nbsp;старых цехах в&nbsp;значительной степени заменено оборудование. Были упразднены традиционные для&nbsp;завода производства (гвоздильное и&nbsp;болтовое), а&nbsp;вместо них налажено производство тонких и&nbsp;тончайших видов проволоки, высококачественных стальных слитков и&nbsp;листов нержавеющей стали.Было освоено биметаллическое литье, производство хромированных деталей.</p>

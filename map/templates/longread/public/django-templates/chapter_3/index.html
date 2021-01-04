@@ -11,19 +11,24 @@
             let etop = section.getBoundingClientRect().top;
             window.scrollTo(0, scrolled + etop);
         }
-
         function load_content() {
-            fetch("{% static 'html/index.html' %}")
-            .then(r => r.text())
-                .then(function (rr) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "{% static 'html/index.html' %}", true);
+            xhr.send();
 
-                var body = document.getElementById("content-wrapper");
-                var section = document.getElementsByClassName("chapter")[0]
-                var s_id = section.getAttribute("id")
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) return;
 
-                document.getElementById("content-wrapper").innerHTML = rr ;
-                setScroll(s_id);
-            })
+                if (xhr.status == 200) {
+                    var body = document.getElementById("content-wrapper");
+                    var section = document.getElementsByClassName("chapter")[0]
+                    var s_id = section.getAttribute("id")
+
+                    document.getElementById("content-wrapper").innerHTML = xhr.responseText ;
+                    setScroll(s_id);
+                }
+
+            }
         }
     </script>
 {% endblock %}

@@ -8,16 +8,24 @@
                 <p class="text-regular">{{ (index $data.chapter_1 1).Text | safeHTML }}</p>
                 <p class="text-regular">{{ (index $data.chapter_1 2).Text | safeHTML }}</p>
                 {{ partial "components/number.html" (dict "index" 0) }}
-                <p class="text-regular">
-                    {{ (index $data.chapter_1 3).Text | safeHTML }}
-                    {{ (index $data.chapter_1 4).Text | safeHTML }}
-                </p>
-                <p class="text-regular">{{ (index $data.chapter_1 5).Text | safeHTML }}</p>
+                <div class="paragraph-with-img">
+                    <p class="text-regular">
+                        {{ (index $data.chapter_1 3).Text | safeHTML }}
+                        {{ (index $data.chapter_1 4).Text | safeHTML }}
+                    </p>
+                    <p class="text-regular">{{ (index $data.chapter_1 5).Text | safeHTML }}</p>
+                    {{ partial "components/img_section.html" (dict "index" 2 "left" "true") }}
+                    <br><br><br>
+                </div>
             </div>
                 {{ partial "components/quote.html" (dict "index" 0) }}
             <div class="text-section content-6-column">
-                <p class="text-regular">{{ (index $data.chapter_1 6).Text | safeHTML }}</p>
-                <p class="text-regular">{{ (index $data.chapter_1 7).Text | safeHTML }}</p>
+                <div class="paragraph-with-img">
+                    <p class="text-regular">{{ (index $data.chapter_1 6).Text | safeHTML }}</p>
+                    <p class="text-regular">{{ (index $data.chapter_1 7).Text | safeHTML }}</p>
+                    {{ partial "components/img_section.html" (dict "index" 3 "left" "true") }}
+                    <br><br><br>
+                </div>
             </div>
         </div>
     </section>

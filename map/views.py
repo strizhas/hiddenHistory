@@ -137,9 +137,8 @@ def save_changes(request, pk):
 def get_photos_data(request):
     data = {}
     years = []
-    decades = []
 
-    for item in Photo.objects.filter(published=True).values():
+    for item in Photo.objects.filter(published=True, on_map=True).values():
         if item["decade"] not in data:
             data[item["decade"]] = []
 
@@ -186,15 +185,22 @@ def upload_with_exif(request):
         data = {
             "uploader": User.objects.get(id=request.user.id),
             "uploaded": timezone.now(),
-            "source": request.POST.get("source"),
-            "author": request.POST.get("author"),
-            "year": request.POST.get("year"),
-            "decade": request.POST.get("decade")
+            "source": form.cleaned_data["source"],
+            "author": form.cleaned_data["author"],
+            "year": form.cleaned_data["year"],
+            "decade": form.cleaned_data["decade"]
         }
 
-        for file in request.FILES.getlist("files"):
-            if Photo.save_with_exif(file, data) is False:
-                failed.append(file.name)
+        if request.POST.get("exif") is None:
+            # сохранение фотографий без gps данных
+            print("NO GPS")
+            for file in request.FILES.getlist("files"):
+                Photo.save_without_exif(file, data)
+        else:
+            # сохранение фотографий с gps
+            for file in request.FILES.getlist("files"):
+                if Photo.save_with_exif(file, data) is False:
+                    failed.append(file.name)
 
         if len(failed) == 0:
             response = {

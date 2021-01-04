@@ -1,5 +1,18 @@
 {{ $data := getJSON "Data/СиМ-история.json" }}
-<figure class="img-section">
-    <figcaption class="img-caption">{{ (index $data.img .index).Caption }}</figcaption>
-    <img src="{{ (index $data.img .index).Src }}" width="{{ (index $data.img .index).Width }}" height="{{ (index $data.img .index).Height }}"/>
+{{- if eq .left "true" -}}
+<figure class="img-section img-section-left" style="width: {{ (index $data.img .index).Width }}rem">
+    <img src="{{ (index $data.img .index).Src }}"/>
+    <figcaption class="img-caption">
+        {{ (index $data.img .index).Caption | safeHTML }}<br>
+        <a href="{{ (index $data.img .index).Source}}" target="_blank">Источник фотографии</a>
+    </figcaption>
 </figure>
+{{- else -}}
+<figure class="img-section img-section-inline" >
+    <figcaption class="img-caption">
+        {{ (index $data.img .index).Caption | safeHTML }}<br>
+        <a href="{{ (index $data.img .index).Source}}" target="_blank">Источник фотографии</a>
+    </figcaption>
+    <img src="{{ (index $data.img .index).Src }}"/>
+</figure>
+{{ end }}

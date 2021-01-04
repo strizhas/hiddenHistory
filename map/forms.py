@@ -13,7 +13,7 @@ class PhotoDataForm(forms.Form):
     year = forms.CharField(help_text='год, когда сделана фотография', required=False)
     decade = forms.CharField(help_text='десятилетие', required=False)
     source = forms.CharField(help_text='источник', required=False)
-    author = forms.CharField(help_text='источник', required=False)
+    author = forms.CharField(help_text='Автор фотографии', required=False)
     description = forms.CharField(help_text='описание', required=False)
     published = forms.BooleanField(required=False)
 

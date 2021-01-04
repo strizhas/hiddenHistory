@@ -45,6 +45,17 @@ def _convert_to_degress(value):
     return d + (m / 60.0) + (s / 3600.0)
 
 
+def get_orientation_only(img):
+    tags = ef.process_file(img)
+    orientation = tags.get("Image Orientation")
+    if orientation:
+        orientation_value = orientation.values[0]
+    else:
+        orientation_value = 1
+
+    return orientation_value
+
+
 def get_gps(img):
     """
     returns gps data if present other wise returns empty dictionary
@@ -108,16 +119,16 @@ class Photo(models.Model):
     img = models.ImageField(upload_to=path_and_rename)
     filename = models.CharField(max_length=200, null=True)
     published = models.BooleanField(default=True)
+    on_map = models.BooleanField(default=True)
     uploader = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     uploaded = models.DateTimeField(default=timezone.now)
     author = models.CharField(max_length=200, null=True, blank=True)
     description = models.CharField(max_length=400, null=True, blank=True)
     year = models.IntegerField(null=True, blank=True)
     decade = models.IntegerField(null=True)
-    source = models.CharField(max_length=200, null=True, blank=True)
     source_obj = models.ForeignKey(Source, on_delete=models.SET_NULL, null=True)
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
     altitude = models.IntegerField(null=True)
     orientation = models.IntegerField(default=1)
     direction = models.FloatField(null=True)
@@ -173,6 +184,29 @@ class Photo(models.Model):
             p.altitude = int(gps['altitude'])
 
         p.save()
+        return True
+
+    @staticmethod
+    def save_without_exif(img, data):
+        p = Photo()
+        p.img = img
+        p.uploader = data['uploader']
+        p.uploaded = data['uploaded']
+        p.orientation = get_orientation_only(img)
+        p.filename = img.name
+        p.on_map = False
+
+        if data['decade']:
+            p.decade = data['decade']
+        if data['year']:
+            p.year = data['year']
+        if data['source']:
+            p.source_obj = Source.objects.get(pk=data['source'])
+        if data['author']:
+            p.author = data['author']
+
+        p.save()
+        return True
 
     @staticmethod
     def edit_with_exif(img, data, pk):

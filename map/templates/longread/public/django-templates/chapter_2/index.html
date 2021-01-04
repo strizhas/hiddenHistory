@@ -11,19 +11,24 @@
             let etop = section.getBoundingClientRect().top;
             window.scrollTo(0, scrolled + etop);
         }
-
         function load_content() {
-            fetch("{% static 'html/index.html' %}")
-            .then(r => r.text())
-                .then(function (rr) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "{% static 'html/index.html' %}", true);
+            xhr.send();
 
-                var body = document.getElementById("content-wrapper");
-                var section = document.getElementsByClassName("chapter")[0]
-                var s_id = section.getAttribute("id")
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) return;
 
-                document.getElementById("content-wrapper").innerHTML = rr ;
-                setScroll(s_id);
-            })
+                if (xhr.status == 200) {
+                    var body = document.getElementById("content-wrapper");
+                    var section = document.getElementsByClassName("chapter")[0]
+                    var s_id = section.getAttribute("id")
+
+                    document.getElementById("content-wrapper").innerHTML = xhr.responseText ;
+                    setScroll(s_id);
+                }
+
+            }
         }
     </script>
 {% endblock %}
@@ -65,18 +70,21 @@
                 <li>улучшение санитарного состояния на заводе</li>
                 
                 </ul>
-                <p class="text-regular">В ответ Гужон уволил всех рабочих. 17 января стачка завершилась, правление завода выразило готовность пойти на&nbsp;некоторые уступки (сократить рабочий день, улучшить санитарное состояние и&nbsp;изменить тарифные ставки).</p>
-                <p class="text-regular">
-                    К концу 1905-года атмосфера в&nbsp;обществе вновь накалилась. В&nbsp;начале октября, чтобы предотвратить стачку, Гужон пообещал выплатить рабочим деньги за&nbsp;все обсчёты в&nbsp;последние годы, но&nbsp;после передумал, сославшись на&nbsp;бедственное положение завода.
-                    6 ноября начались волнения, не&nbsp;прекращавшиеся почти два месяца. Гужон в&nbsp;очередной раз уволил всех рабочих, но&nbsp;они не&nbsp;ушли с завода. В&nbsp;лефортовском районе начали расти баррикады, однако крупных стычек и&nbsp;инцидентов не&nbsp;было. В&nbsp;конце концов измученные забастовкой рабочие вернулись на&nbsp;свои места.
-                </p>
-            </div>
-            
-<figure class="img-section">
-    <figcaption class="img-caption">10 декабря, буквально за одну ночь, Москва оказалась покрыта баррикадами, однако восстание довольно быстро сошло на нет</figcaption>
-    <img src="https://storage.yandexcloud.net/hh-files/history/photo/94c74733299b.jpg" width="590" height="380"/>
+
+                <div class="paragraph-with-img">
+                    <p class="text-regular">В ответ Гужон уволил всех рабочих. 17 января стачка завершилась, правление завода выразило готовность пойти на&nbsp;некоторые уступки (сократить рабочий день, улучшить санитарное состояние и&nbsp;изменить тарифные ставки).</p>
+                    <p class="text-regular">
+                        К концу 1905-года атмосфера в&nbsp;обществе вновь накалилась. В&nbsp;начале октября, чтобы предотвратить стачку, Гужон пообещал выплатить рабочим деньги за&nbsp;все обсчёты в&nbsp;последние годы, но&nbsp;после передумал, сославшись на&nbsp;бедственное положение завода.
+                        6 ноября начались волнения, не&nbsp;прекращавшиеся почти два месяца. Гужон в&nbsp;очередной раз уволил всех рабочих, но&nbsp;они не&nbsp;ушли с завода. В&nbsp;лефортовском районе начали расти баррикады, однако крупных стычек и&nbsp;инцидентов не&nbsp;было. В&nbsp;конце концов измученные забастовкой рабочие вернулись на&nbsp;свои места.
+                    </p>
+                    <figure class="img-section img-section-left" style="width: 50rem">
+    <img src="https://storage.yandexcloud.net/hh-files/history/photo/94c74733299b.jpg"/>
+    <figcaption class="img-caption">
+        10&nbsp;декабря, буквально за&nbsp;одну ночь, Москва оказалась покрыта баррикадами, однако восстание довольно быстро сошло на&nbsp;нет.<br>
+        <a href="https://photochronograph.ru/2013/09/13/dekabrskoe-vosstanie-1905-goda-v-moskve/" target="_blank">Источник фотографии</a>
+    </figcaption>
 </figure>
-            <div class="text-section content-6-column">
+                </div>
                 <p class="text-regular">В экономике, тем временем, началась депрессия, сказавшаяся также и&nbsp;на&nbsp;предприятии. В&nbsp;течение ряда лет&nbsp;завод не&nbsp;приносил прибыль, поэтому правление решило начать модернизацию предприятия. На&nbsp;это была выделена колоссальная по&nbsp;тем&nbsp;временам сумма.</p>
                 
 <div class="number number-big">
@@ -85,10 +93,19 @@
         <span class="caption">стоимость дооборудованния завода</span>
     </p>
 </div>
-                <p class="text-regular">
-                    Были выстроены новые мартеновский печи, была механизирована их загрузка. На&nbsp;подъездных путях забегала “кукушка”, облегчившая вспомогательные работы. Появились дизели, паровые машины стали заменятся электромоторами. В&nbsp;цехах стали появляться новые станы, построена трансформаторная подстанция.
-                    Модернизация принесла свои плоды, “производительная способность предприятия увеличилась на 50%”. ММЗ вместе с другими предприятиями черной металлургии стал одним из&nbsp;лидеров промышленного роста.
-                </p>
+                <div class="paragraph-with-img">
+                    <p class="text-regular">
+                        Были выстроены новые мартеновский печи, была механизирована их загрузка. На&nbsp;подъездных путях забегала “кукушка”, облегчившая вспомогательные работы. Появились дизели, паровые машины стали заменятся электромоторами. В&nbsp;цехах стали появляться новые станы, построена трансформаторная подстанция.
+                        Модернизация принесла свои плоды, “производительная способность предприятия увеличилась на 50%”. ММЗ вместе с другими предприятиями черной металлургии стал одним из&nbsp;лидеров промышленного роста.
+                    </p><br><br><br>
+                    <figure class="img-section img-section-left" style="width: 40rem">
+    <img src="https://storage.yandexcloud.net/hh-files/history/photo/stroevoi-ceh-edit.jpg"/>
+    <figcaption class="img-caption">
+        Строевой цех и&nbsp;кузница при&nbsp;нём, 1925&nbsp;г.<br>
+        <a href="https://ok.ru/group/53148627435604/album/53160973303892/867073055316" target="_blank">Источник фотографии</a>
+    </figcaption>
+</figure>
+                </div>
                 <h2 class="longread-h2">Первая мировая война</h2>
                 <p class="text-regular">С началом первой мировой войны завод стал работать на&nbsp;оборону. Среди заказчиков ММЗ значились военное и&nbsp;морское ведомства, Министерство путей сообщения, предприятия, выпускающие снаряды, гранаты и&nbsp;т.п. В&nbsp;связи с&nbsp;мобилизацией завод впервые столкнулся с&nbsp;нехваткой рабочих рук. Во&nbsp;время первой мобилизации 1914&nbsp;года в&nbsp;армию было&nbsp;призвано более 800 рабочих (около 25% от&nbsp;общего штата), среди которых было много квалифицированных сотрудников. Вопрос стоял настолько остро, что&nbsp;на&nbsp;одном и собраний Гужон прямо заявил:</p>
             </div>

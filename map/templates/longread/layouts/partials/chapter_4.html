@@ -8,7 +8,7 @@
 
                 <ul class="timeline-navigation">
                 {{ range $i, $r := (index $data.chapter_4 0).Table }}
-                    <li class="timeline-item"><b>{{ $r | safeHTML }}</b><span style="margin-left: 70px">{{ index (index $data.chapter_4 1).Table $i | safeHTML }}</span></li>
+                    <li class="timeline-item year-single"><b>{{ $r | safeHTML }}</b><span>{{ index (index $data.chapter_4 1).Table $i | safeHTML }}</span></li>
                 {{ end }}
                 </ul>
                 <p class="text-regular">{{ (index $data.chapter_4 1).Text | safeHTML }}</p>

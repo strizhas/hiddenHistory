@@ -51,6 +51,12 @@
             </select>
         </div>
         <div class="input-element">
+            <input type="checkbox" name="exif" checked/> фото содержит метаданные с координатами<br>
+            <span class="help-text">если стоит галочка, то из фотографий будут извлечены EXIF данные с координатами и фотографии будут наненсены на карту.
+            При этом, если в фотографии не будет этих данных, то она не будет загружена. Если фотография не подразумевает привязки к месту, то галочку надо убрать.
+            </span>
+        </div>
+        <div class="input-element">
             <input type="file" name="files" multiple required/>
         </div>
         <div class="input-element">

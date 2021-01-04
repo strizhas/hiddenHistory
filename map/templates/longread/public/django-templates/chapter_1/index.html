@@ -11,19 +11,24 @@
             let etop = section.getBoundingClientRect().top;
             window.scrollTo(0, scrolled + etop);
         }
-
         function load_content() {
-            fetch("{% static 'html/index.html' %}")
-            .then(r => r.text())
-                .then(function (rr) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "{% static 'html/index.html' %}", true);
+            xhr.send();
 
-                var body = document.getElementById("content-wrapper");
-                var section = document.getElementsByClassName("chapter")[0]
-                var s_id = section.getAttribute("id")
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) return;
 
-                document.getElementById("content-wrapper").innerHTML = rr ;
-                setScroll(s_id);
-            })
+                if (xhr.status == 200) {
+                    var body = document.getElementById("content-wrapper");
+                    var section = document.getElementsByClassName("chapter")[0]
+                    var s_id = section.getAttribute("id")
+
+                    document.getElementById("content-wrapper").innerHTML = xhr.responseText ;
+                    setScroll(s_id);
+                }
+
+            }
         }
     </script>
 {% endblock %}
@@ -47,8 +52,8 @@
         <div class="content-10-column">
             <div class="text-section content-6-column">
                 <p class="text-regular">В 1883 г. француз Юлий (Жюль) Гужон, сын обосновавшегося в&nbsp;1845&nbsp;г. в&nbsp;Москве Пьера Гужона, хозяина гвоздильного производства за&nbsp;Бутырской заставой, подал прошение московскому начальству: "разрешить железопрокатное производство, с&nbsp;постановкой машин и&nbsp;станков, на&nbsp;вновь устраиваемом мною заводе".</p>
-                <p class="text-regular">Разрешение было получено, и&nbsp;в&nbsp;этом же году у&nbsp;Рогожской заставы появились мастерские Гужона, изготовляющие проволоку. В&nbsp;1885&nbsp;г. завод полностью выгорел, и&nbsp;по&nbsp;Москве ходили слухи, что&nbsp;сам хозяин и&nbsp;инициировал поджог&nbsp;- страховая премия была отнюдь не&nbsp;символическая. В&nbsp;1890&nbsp;г. Гужон поставил здесь первую мартеновскую печь, а&nbsp;с&nbsp;1908 г. на&nbsp;заводе начался листовой прокат стали.</p>
-                <p class="text-regular">Даже по&nbsp;сравнению с&nbsp;другими металлургическими предприятиями условия труда для&nbsp;низкоквалифицированного персонала были очень тяжелыми. Низкий уровень механизации труда требовал большой физических затрат. Ситуация осложнялась низким уровнем санитарии&nbsp;- уборка в цехах проводилась только раз&nbsp;в&nbsp;году, на&nbsp;пасху.</p>
+                <p class="text-regular">Разрешение было получено, и&nbsp;в&nbsp;этом же году у&nbsp;Рогожской заставы появились мастерские Гужона, занимавшиеся изготовлением проволоки. В&nbsp;1885&nbsp;г. завод полностью выгорел, и&nbsp;по&nbsp;Москве ходили слухи, что&nbsp;сам хозяин и&nbsp;инициировал поджог ради страховой премии. В&nbsp;1890&nbsp;г. Гужон поставил здесь первую мартеновскую печь, а&nbsp;с&nbsp;1908 г. на&nbsp;заводе начался листовой прокат стали.</p>
+                <p class="text-regular">Даже по&nbsp;сравнению с&nbsp;другими металлургическими предприятиями условия труда для&nbsp;низкоквалифицированного персонала были очень тяжелыми. Низкий уровень механизации труда требовал большой физических затрат. Ситуация осложнялась низким уровнем санитарии&nbsp;— уборка в&nbsp;цехах проводилась только раз&nbsp;в&nbsp;году, на&nbsp;пасху.</p>
                 
 <div class="number number-big">
     <p><span class="prefix">до </span><span class="value">15 </span>
@@ -56,11 +61,21 @@
         <span class="caption">составляла рабочая смена в&nbsp;начале 1880-х годов</span>
     </p>
 </div>
-                <p class="text-regular">
-                    К концу XIX века она уменьшилась до&nbsp;12&nbsp;часов (без&nbsp;учета сверхурочных). Имели место принудительные сверхурочные работы, за&nbsp;отказ от&nbsp;которых можно было лишиться места.
-                    Несмотря на&nbsp;это, из-за&nbsp;высокого уровня безработицы, желающих работать на&nbsp;этом заводе всегда был избыток.
-                </p>
-                <p class="text-regular">К концу ХIX века на&nbsp;предприятии намечаются улучшения в&nbsp;социальной сфере: появляются пенсии, пособия, потребительский кооператив, больничные пособия. На&nbsp;заводе также открылся приемный покой, в&nbsp;котором работали два фельдшера, а также врач (правда он приходил только на&nbsp;15&nbsp;минут). Из-за&nbsp;высокого травматизма и&nbsp;большого штата приемный покой не&nbsp;успевал оказывать помощь всем нуждающимся.</p>
+                <div class="paragraph-with-img">
+                    <p class="text-regular">
+                        К концу XIX века она уменьшилась до&nbsp;12&nbsp;часов (без&nbsp;учета сверхурочных). Имели место принудительные сверхурочные работы, за&nbsp;отказ от&nbsp;которых можно было лишиться места.
+                        Несмотря на&nbsp;это, из-за&nbsp;высокого уровня безработицы, желающих работать на&nbsp;этом заводе всегда был избыток.
+                    </p>
+                    <p class="text-regular">К концу ХIX века на&nbsp;предприятии намечаются улучшения в&nbsp;социальной сфере: появляются пенсии, пособия, потребительский кооператив, больничные пособия. На&nbsp;заводе также открылся приемный покой, в&nbsp;котором работали два фельдшера, а также врач (правда он приходил только на&nbsp;15&nbsp;минут). Из-за&nbsp;высокого травматизма и&nbsp;большого штата приемный покой не&nbsp;успевал оказывать помощь всем нуждающимся.</p>
+                    <figure class="img-section img-section-left" style="width: 20rem">
+    <img src="https://storage.yandexcloud.net/hh-files/history/photo/krestyanin.jpg"/>
+    <figcaption class="img-caption">
+        На заводе работали в&nbsp;основном выходцы из&nbsp;деревни, бывшие крестьяне.<br>
+        <a href="https://www.pinterest.ru/pin/608971180833963661/" target="_blank">Источник фотографии</a>
+    </figcaption>
+</figure>
+                    <br><br><br>
+                </div>
             </div>
                 
 <div class="quote-section">
@@ -73,8 +88,18 @@
     </div>
 </div>
             <div class="text-section content-6-column">
-                <p class="text-regular">В 1895 году пайщица ММЗ Эмилия ОСтерид предложила на&nbsp;свои деньги построить при&nbsp;заводе школу для&nbsp;рабочих с&nbsp;тем, чтобы завод в&nbsp;течение 10&nbsp;лет выкупил её&nbsp;себе. Администрация и&nbsp;лично Гурон поддержали эту&nbsp;идею и&nbsp;даже выкупили училище раньше срока.</p>
-                <p class="text-regular">Открытая при&nbsp;заводе начальная школа была рассчитана на&nbsp;120&nbsp;детей, однако ежегодно школу оканчивали только около 20&nbsp;человек. Причиной тому были сложные выпускные экзамены а&nbsp;также тот&nbsp;факт, что&nbsp;многим детям приходилось досрочно оставлять школу.</p>
+                <div class="paragraph-with-img">
+                    <p class="text-regular">В 1895 году пайщица ММЗ Эмилия Остерид предложила на&nbsp;свои деньги построить при&nbsp;заводе школу для&nbsp;рабочих с&nbsp;тем, чтобы завод в&nbsp;течение 10&nbsp;лет выкупил её&nbsp;себе. Администрация и&nbsp;лично Гужон поддержали эту&nbsp;идею и&nbsp;даже выкупили училище раньше срока.</p>
+                    <p class="text-regular">Открытая при&nbsp;заводе начальная школа была рассчитана на&nbsp;120&nbsp;детей, однако ежегодно школу оканчивали только около 20&nbsp;человек. Причиной тому были сложные выпускные экзамены а&nbsp;также тот&nbsp;факт, что&nbsp;многим детям приходилось досрочно оставлять школу.</p>
+                    <figure class="img-section img-section-left" style="width: 40rem">
+    <img src="https://storage.yandexcloud.net/hh-files/history/photo/zhilie-rabochih.png"/>
+    <figcaption class="img-caption">
+        Репродукция фотографии дома рабочих. Вопрос жилья для&nbsp;служащих сохранял остроту вплоть до&nbsp;второй половины ХХ&nbsp;века.<br>
+        <a href="http://visualrian.ru/media/528794.html" target="_blank">Источник фотографии</a>
+    </figcaption>
+</figure>
+                    <br><br><br>
+                </div>
             </div>
         </div>
     </section><nav class="content-10-column article-pagination">

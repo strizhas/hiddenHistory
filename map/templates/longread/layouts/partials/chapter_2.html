@@ -17,20 +17,24 @@
                 <li>{{ $r | safeHTML }}</li>
                 {{ end }}
                 </ul>
-                <p class="text-regular">{{ (index $data.chapter_2 3).Text | safeHTML }}</p>
-                <p class="text-regular">
-                    {{ (index $data.chapter_2 4).Text | safeHTML }}
-                    {{ (index $data.chapter_2 5).Text | safeHTML }}
-                </p>
-            </div>
-            {{ partial "components/img_section.html" (dict "index" 1) }}
-            <div class="text-section content-6-column">
+
+                <div class="paragraph-with-img">
+                    <p class="text-regular">{{ (index $data.chapter_2 3).Text | safeHTML }}</p>
+                    <p class="text-regular">
+                        {{ (index $data.chapter_2 4).Text | safeHTML }}
+                        {{ (index $data.chapter_2 5).Text | safeHTML }}
+                    </p>
+                    {{ partial "components/img_section.html" (dict "index" 1 "left" "true") }}
+                </div>
                 <p class="text-regular">{{ (index $data.chapter_2 6).Text | safeHTML }}</p>
                 {{ partial "components/number.html" (dict "index" 1) }}
-                <p class="text-regular">
-                    {{ (index $data.chapter_2 7).Text | safeHTML }}
-                    {{ (index $data.chapter_2 8).Text | safeHTML }}
-                </p>
+                <div class="paragraph-with-img">
+                    <p class="text-regular">
+                        {{ (index $data.chapter_2 7).Text | safeHTML }}
+                        {{ (index $data.chapter_2 8).Text | safeHTML }}
+                    </p><br><br><br>
+                    {{ partial "components/img_section.html" (dict "index" 4 "left" "true") }}
+                </div>
                 <h2 class="longread-h2">{{ (index $data.chapter_2 9).Title | safeHTML }}</h2>
                 <p class="text-regular">{{ (index $data.chapter_2 9).Text | safeHTML }}</p>
             </div>
