@@ -26,7 +26,7 @@ body {
 }
 
 .content-wrapper {
-    padding: 5rem 0;
+    padding: 2rem 0;
 }
 
 .content-10-column {
@@ -492,6 +492,20 @@ b {
         }
     }
 
+    .site-header {
+
+        h1 {
+            max-width: 600px;
+            font-size: 1.6rem;
+        }
+        h1 b {
+            text-transform: uppercase;
+            font-size: 4rem;
+            color: $ascent_red;
+        }
+
+    }
+
 }
 
 @media screen and (max-width: 520px) {
@@ -507,21 +521,6 @@ b {
         margin: 40px 0;
         padding-left: 30px;
         text-indent: -30px;
-    }
-    .site-header {
-
-        h1 {
-            max-width: 600px;
-            font-size: 1.6rem;
-        }
-        h1 b {
-            text-transform: uppercase;
-            font-size: 4rem;
-            color: $ascent_red;
-        }
-        h1 small {
-
-        }
     }
 
 }

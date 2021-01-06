@@ -14,18 +14,37 @@
     <script src="{% static 'js/jquery.js' %}"></script>
     {% block head %}{% endblock %}
     <script type="text/javascript">
+
+        var menu_is_mobile = false;
+        var mobile = false;
+
+        function detect_mobile() {
+            if ($( document ).width() < 640) {
+                mobile = true;
+            } else {
+                mobile = false;
+            }
+        };
+        function switch_menu_to_mobile(enabled) {
+            if (enabled == true || mobile == true) {
+                $("#main-menu-wrapper").addClass("mobile-menu").removeClass("desktop-menu");
+                menu_is_mobile = true;
+            } else {
+                $("#main-menu-wrapper").addClass("desktop-menu").removeClass("mobile-menu");
+                menu_is_mobile = false;
+            }
+        };
+
         $(document).ready(function(){
 
-            /* Hamburger menu animation */
-            $('#main-menu-button').click(function(){
-              $(this).toggleClass('open');
-            });
-
-             /* Menu fade/in out on mobile */
             $("#main-menu-button").click(function(e){
                 e.preventDefault();
+                $(this).toggleClass('open');
                 $("#main-menu-nav").toggleClass('mobile-menu-open');
             });
+
+            detect_mobile();
+            switch_menu_to_mobile();
 
             $.get( "/mmz/require_sources", function( data ) {
                 if (Array.isArray(data) == true) {
@@ -40,6 +59,25 @@
                 }
             });
 
+            if ($('#header-out-trigger').length != 0) {
+                var trigger_pos = $('#header-out-trigger').offset().top;
+                $(window).scroll(function() {
+                    if ($(this).scrollTop() > trigger_pos && menu_is_mobile == false) {
+                        console.log("toggle to mobile");
+                        switch_menu_to_mobile(true);
+                    }
+
+                    if ($(this).scrollTop() < trigger_pos && mobile == false && menu_is_mobile == true) {
+                        console.log("toggle to desktop");
+                        switch_menu_to_mobile();
+                    }
+                })
+            }
+
+            $(window).on('resize', function() {
+                detect_mobile();
+                switch_menu_to_mobile();
+            });
         });
     </script>
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -49,8 +87,9 @@
 
 <body>
   <div class="main-wrapper">
-    <div id="legend-container" class="sidebar-container">
-        <div class="main-menu-wrapper">
+
+    <div id="main-menu-wrapper" class="main-menu-wrapper desktop-menu">
+        <div class="menu-container">
             <a id="main-menu-button" href="#" class="open-button">
                     <span></span>
                     <span></span>
@@ -58,14 +97,19 @@
                 </a>
             <div id="main-menu" class="main-menu">
               <nav id="main-menu-nav" class="main-menu-nav">
-                  <a href="{% url 'mmz:history' %}">история</a>
-                  <a href="{% url 'mmz:map' %}">интерактивная карта</a>
-                  <a href="{% url 'mmz:albums' %}">фотоальбом</a>
-                  <a href="{% url 'mmz:about' %}">о проекте</a>
+                <a href="{% url 'mmz:history' %}">История</a>
+                <a class="nested" href="{% url 'mmz:osnovanie_zavoda' %}">Глава 1. 1884–1900</a>
+                <a class="nested" href="{% url 'mmz:zavod_v_nachale_veka' %}">Глава 2. 1900–1917</a>
+                <a class="nested" href="{% url 'mmz:zavod_posle_revolucii' %}">Глава 3. 1917–1930</a>
+                <a class="nested" href="{% url 'mmz:rekonstrukciya_zavoda' %}">Глава 4. 1930–1945</a>
+                <a href="{% url 'mmz:map' %}">Интерактивная карта</a>
+                <a href="{% url 'mmz:albums' %}">Фотоальбом</a>
+                <a href="{% url 'mmz:about' %}">О проекте</a>
               </nav>
             </div>
         </div>
     </div>
+
     <div id="content-wrapper" class="map-wrapper">
       {% block content %}<!-- default content text (typically empty) -->{% endblock %}
     </div>

@@ -52,8 +52,13 @@ def show_albums(request):
 
 
 def show_photo(request, pk):
+    print("SHOW PHOTO")
+    print()
     context = Photo.objects.get(pk=pk).get_view_context(request)
-    return render(request, 'app/show.html', context=context)
+    if request.headers.get('x-requested-with') == "XMLHttpRequest":
+        return render(request, 'app/show_photo_ajax.html', context=context)
+    else:
+        return render(request, 'app/show.html', context=context)
 
 
 def get_photo(request):

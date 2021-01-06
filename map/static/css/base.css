@@ -42,7 +42,7 @@ h4 {
 }
 
 .help-text {
-    font-size: 14px;
+    font-size: 1.4rem;
     color: #B1B1B1;
 }
 
@@ -73,7 +73,7 @@ body {
 
 .no-map-content {
     padding: 60px 10px;
-    max-width: 880px;
+    max-width: 88rem;
     margin: 0 auto;
 }
 
@@ -214,36 +214,31 @@ input, select {
     min-height: 30px;
 }
 
-.main-menu {
-
-    margin: 0 auto;
-    padding: 0 10px;
-    background: #F6F6F2;
-    max-width: 88rem;
-}
-
 .main-menu a {
     text-decoration: none;
     margin-right: 20px;
     color: #000;
 }
 
+
+
 #main-menu-button {
     display: none;
+    opacity: 0;
+    background: #222222;
+    border: 1rem solid #222222;
+    transition: .5s ease-in-out;
 }
 
 .open-button {
-	width: 18px;
-	height: 14px;
-	transform: rotate(0deg);
-	transition: .5s ease-in-out;
-	position: absolute;
+	width: 25px;
+	height: 20px;
 	cursor: pointer;
 	border-bottom: 0;
-	top: 20px;
-	right: 25px;
 	z-index: 9999;
 	border-bottom: 0;
+	transform: rotate(0deg);
+	transition: .5s ease-in-out;
 }
 
 .open-button span {
@@ -251,14 +246,14 @@ input, select {
 	position: absolute;
 	height: 2px;
 	width: 100%;
-	background: black;
+	background: #F6F6F2;
 	border-radius: 2px;
 	opacity: 1;
 	left: 0;
 	transform: rotate(0deg);
 	transition: .25s ease-in-out;
-
 }
+
 
 .open-button span:nth-child(1) {
 	top: 0px;
@@ -277,8 +272,8 @@ input, select {
 
 .open-button.open span:nth-child(1) {
 	transform: rotate(45deg);
-	top: -3px;
-	left: 8px;
+	top: 0px;
+	left: 5px;
 }
 
 .open-button.open span:nth-child(2) {
@@ -288,9 +283,97 @@ input, select {
 
 .open-button.open span:nth-child(3) {
 	transform: rotate(-45deg);
-	top: 10px;
-	left: 8px;
+	top: 17px;
+	left: 5px;
 }
+
+/*----------------------- Меню на декстопе ------------------- */
+/*--- Класс desktop-menu добавляется к меню с помощью JS ----- */
+/*--- При этом в виде шапки в верхней части страниц ---------- */
+
+.desktop-menu .main-menu {
+    margin: 0 auto;
+    padding: 0 10px;
+    max-width: 88rem;
+}
+
+.desktop-menu .nested {
+    display: none;
+}
+
+.main-menu-wrapper.desktop-menu {
+    padding: 10px 0;
+    border-bottom: 1px solid #BABAB3;
+}
+
+
+/*----------------------- Мобильное меню -------------------- */
+/*--- Класс mobile-menu добавляется к меню с помощью JS ----- */
+/*--- При этом вид меню переключается на гамбургер ---------- */
+
+.mobile-menu {
+    padding: 0;
+    position: fixed;
+    width: 100vw;
+    z-index: 888;
+}
+
+
+
+.mobile-menu .menu-container {
+    width: 100%;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+}
+
+.mobile-menu #main-menu-button {
+    display: block;
+    opacity: 1;
+}
+
+.main-menu-wrapper.mobile-menu  {
+    border-bottom: none;
+}
+
+.mobile-menu .main-menu {
+    margin: 0;
+    padding: 0;
+    background: #F6F6F2;
+    max-width: 40rem;
+}
+
+
+.mobile-menu .main-menu-nav {
+    display: none;
+    height: 0px;
+    top: 50px;
+    z-index: 15100;
+    width: 100%;
+    transition: .25s ease-in-out;
+    box-shadow: 1px 1px 7px 2px rgba(20, 20, 20, 0.18);
+}
+
+.mobile-menu .main-menu-nav a {
+    display: block;
+    height: 3rem;
+    padding: 10px 20px;
+    background: #F6F6F2;
+}
+
+.mobile-menu .main-menu-nav .nested:before {
+    content: "—";
+    font-size: 2rem;
+    margin-right: 1rem;
+    color: #CD471C;
+}
+
+.mobile-menu .mobile-menu-open {
+    display: block;
+    height: auto;
+}
+
+
+
 
 /*----------------------- Страница о проекте ------------------------------ */
 
@@ -322,15 +405,15 @@ input, select {
 /*----------------------- Попаз фотографии ----------------------------- */
 
 .photo-captions {
-    margin-top: 20px;
+    margin-top: 2rem;
 }
 
 .photo-captions .main-section {
-    padding-bottom: 5px;
+    padding-bottom: 0.5rem;
 }
 
 .photo-captions .main-section * {
-    font-size: 18px;
+    font-size: 1.8rem;
     display: inline-block;
 }
 
@@ -339,9 +422,9 @@ input, select {
 }
 
 .help-links {
-    font-size: 14px;
+    font-size: 1.4rem;
     display: block;
-    margin: 0 0 10px 0;
+    margin: 0 0 1rem 0;
     display: inline-block;
     color: #000;
 }
@@ -353,19 +436,23 @@ input, select {
     font-size: 0;
 }
 
+.popup-img-frame img {
+    max-width: 100%;
+}
+
 .album-photo-preview {
     font-size: 0;
 }
 
 .album-photo-preview img {
-    width: 150px;
-    height: 100px;
+    width: 15rem;
+    height: 10rem;
     padding: 0 2px;
 }
 
 .pagination {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 .pagination .step-links a {
     display: inline-block;
@@ -375,8 +462,8 @@ input, select {
 }
 
 .pagination .step-links .page-nums {
-    width: 30px;
-    height: 30px;
+    width: 3rem;
+    height: 3rem;
 }
 
 .inactive-page-button {
@@ -394,8 +481,8 @@ input, select {
 
 .popup-img-frame .toggle-photo-button {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 1rem;
+    height: 1rem;
     top: 50%;
     border: solid black;
     border-width: 0 3px 3px 0;
@@ -435,19 +522,23 @@ input, select {
 }
 
 .img-slider .no-map-content {
-    padding: 20px;
-    max-width: 800px;
+    padding: 2rem;
+    max-width: 100rem;
+    width: calc(100vw - 80px);
     background: #f6f6f2;
     border-radius: 10px;
-    margin-top: 100px;
+    margin-top: 10rem;
 }
 
 .frame-header-section {
-    height: 10px;
-    padding: 20px;
+    height: 1rem;
+    padding: 0 0 2rem 0;
     position: relative;
 }
 
+.frame-header-section .close-window-button {
+    text-decoration: none;
+}
 /*----------------------- Попап----------------------------- */
 
 
@@ -462,7 +553,7 @@ input, select {
 
 
 @media only screen and (max-width: 1440px) {
-    .popup-img-frame img {
+    .map-img-popup {
         max-width: 520px;
     }
 
@@ -621,33 +712,7 @@ input, select {
     }
 
 
-    #main-menu-button {
-        display: block;
-    }
 
-
-    .main-menu-nav {
-        display: none;
-        height: 0px;
-        position: absolute;
-        top: 50px;
-        z-index: 15100;
-        width: 100%;
-        transition: .25s ease-in-out;
-    }
-
-    .main-menu-nav a {
-        display: block;
-        height: 30px;
-        width: 100%;
-        padding: 10px 20px;
-        background: #F6F6F2;
-    }
-
-    .mobile-menu-open {
-        display: block;
-        height: auto;
-    }
 
 }
 

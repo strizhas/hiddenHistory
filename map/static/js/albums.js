@@ -195,8 +195,12 @@ function change_url(p_id) {
     for (var key in params) {
         p_arr.push(`${key}=${params[key]}`)
     }
+    if (p_arr.length > 0) {
+        var url = base_url + '?' + p_arr.join('&');
+    } else {
+        var url = base_url;
+    }
 
-    var url = base_url + '?' + p_arr.join('&')
 
     window.history.pushState( {} , '', url );
 };

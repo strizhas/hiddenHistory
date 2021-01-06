@@ -352,7 +352,14 @@ b {
   .article-pagination a {
     margin-left: 30px; }
   .svg-object .svg-fig-caption {
-    margin-left: auto; } }
+    margin-left: auto; }
+  .site-header h1 {
+    max-width: 600px;
+    font-size: 1.6rem; }
+  .site-header h1 b {
+    text-transform: uppercase;
+    font-size: 4rem;
+    color: #CD471C; } }
 
 @media screen and (max-width: 520px) {
   .quote-section {
@@ -363,14 +370,7 @@ b {
     list-style: none;
     margin: 40px 0;
     padding-left: 30px;
-    text-indent: -30px; }
-  .site-header h1 {
-    max-width: 600px;
-    font-size: 1.6rem; }
-  .site-header h1 b {
-    text-transform: uppercase;
-    font-size: 4rem;
-    color: #CD471C; } }
+    text-indent: -30px; } }
 
 @media screen and (max-width: 380px) {
   html {
