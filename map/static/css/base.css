@@ -205,6 +205,8 @@ input, select {
     background: #CD471C;
 }
 
+
+
 /*----------------------- Навигация ------------------------------ */
 
 
@@ -220,23 +222,26 @@ input, select {
     color: #000;
 }
 
-
-
-#main-menu-button {
-    display: none;
+.menu-button {
+    padding: 1rem;
+    width: 1.4rem;
+	height: 1.4rem;
+	cursor: pointer;
+	display: none;
     opacity: 0;
     background: #222222;
     border: 1rem solid #222222;
     transition: .5s ease-in-out;
 }
 
+#sharing-menu-button {
+    background-image: url("../img/sharing-menu.svg");
+    background-size: 90%;
+    background-repeat: no-repeat;
+}
+
 .open-button {
-	width: 25px;
-	height: 20px;
-	cursor: pointer;
-	border-bottom: 0;
 	z-index: 9999;
-	border-bottom: 0;
 	transform: rotate(0deg);
 	transition: .5s ease-in-out;
 }
@@ -256,24 +261,24 @@ input, select {
 
 
 .open-button span:nth-child(1) {
-	top: 0px;
+	top: 0.3rem;
 	transform-origin: left center;
 }
 
 .open-button span:nth-child(2) {
-	top: 7px;
+	top: 1.4rem;
 	transform-origin: left center;
 }
 
 .open-button span:nth-child(3) {
-	top: 14px;
+	top: 2.6rem;
 	transform-origin: left center;
 }
 
 .open-button.open span:nth-child(1) {
 	transform: rotate(45deg);
-	top: 0px;
-	left: 5px;
+	top: 0.1rem;
+	left: 0px;
 }
 
 .open-button.open span:nth-child(2) {
@@ -283,8 +288,48 @@ input, select {
 
 .open-button.open span:nth-child(3) {
 	transform: rotate(-45deg);
-	top: 17px;
-	left: 5px;
+	top: 2.5rem;
+	left: 0px;
+}
+
+/*------------------- Меню - шаринги ------------------ */
+
+.share-menu .share-link {
+    background: transparent;
+    width: 20px;
+    height: 20px;
+    padding: 5px;
+    display: block;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.share-menu .badge {
+    width: 20px;
+    height: 20px;
+    display: block;
+    background-size: 20px 20px;
+    background-position: center;
+    color: #000;
+}
+.share-menu .share_button_fb .badge {
+    background-image: url("../img/share-fb.svg");
+}
+
+.share-menu .share_button_vk .badge {
+    background-image: url("../img/share-vk.svg");
+}
+
+.share-menu .share_button_tw .badge {
+    background-image: url("../img/share-tw.svg");
+}
+
+.share-menu .share_button_ok .badge {
+    background-image: url("../img/share-ok.svg");
+}
+
+.share-menu .share_button_tg .badge {
+    background-image: url("../img/share-tg.svg");
 }
 
 /*----------------------- Меню на декстопе ------------------- */
@@ -295,6 +340,7 @@ input, select {
     margin: 0 auto;
     padding: 0 10px;
     max-width: 88rem;
+    position: relative;
 }
 
 .desktop-menu .nested {
@@ -306,6 +352,20 @@ input, select {
     border-bottom: 1px solid #BABAB3;
 }
 
+.desktop-menu .share-menu {
+    list-style: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+}
+
+.desktop-menu .share-menu li {
+    display: inline-block;
+}
+
+
+
 
 /*----------------------- Мобильное меню -------------------- */
 /*--- Класс mobile-menu добавляется к меню с помощью JS ----- */
@@ -315,9 +375,8 @@ input, select {
     padding: 0;
     position: fixed;
     width: 100vw;
-    z-index: 888;
+    z-index: 8888;
 }
-
 
 
 .mobile-menu .menu-container {
@@ -326,24 +385,26 @@ input, select {
     margin: 0 auto;
 }
 
-.mobile-menu #main-menu-button {
-    display: block;
+.mobile-menu .menu-button {
+    display: inline-block;
     opacity: 1;
 }
 
 .main-menu-wrapper.mobile-menu  {
     border-bottom: none;
+    font-size: 0;
 }
 
 .mobile-menu .main-menu {
     margin: 0;
     padding: 0;
-    background: #F6F6F2;
+    font-size: 1.6rem;
+    background: none;
     max-width: 40rem;
 }
 
 
-.mobile-menu .main-menu-nav {
+.mobile-menu .hidden-menu {
     display: none;
     height: 0px;
     top: 50px;
@@ -351,6 +412,10 @@ input, select {
     width: 100%;
     transition: .25s ease-in-out;
     box-shadow: 1px 1px 7px 2px rgba(20, 20, 20, 0.18);
+}
+
+.mobile-menu .main-menu-nav {
+    background: #F6F6F2;
 }
 
 .mobile-menu .main-menu-nav a {
@@ -372,8 +437,18 @@ input, select {
     height: auto;
 }
 
+.mobile-menu .share-menu {
+    margin: 0;
+    list-style: none;
+    padding: 0;
+    width: 5.4rem;
+    background: #F6F6F2;
+    margin-left: 5.4rem;
+}
 
-
+.mobile-menu .share-menu li {
+    padding: 10px;
+}
 
 /*----------------------- Страница о проекте ------------------------------ */
 
@@ -697,7 +772,9 @@ input, select {
     .popup-img-frame img {
         max-width: calc(80vw - 20px);
     }
-
+    #map {
+        height: 100vh ;
+    }
 
 
     .leaflet-popup-content {
@@ -711,6 +788,9 @@ input, select {
         marin-left: -40vw;
     }
 
+    .leaflet-control-container .leaflet-top.leaflet-left {
+        top: 50px;
+    }
 
 
 

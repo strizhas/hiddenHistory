@@ -37,10 +37,20 @@
 
         $(document).ready(function(){
 
+            // основное меню - мобильная версия
             $("#main-menu-button").click(function(e){
                 e.preventDefault();
                 $(this).toggleClass('open');
                 $("#main-menu-nav").toggleClass('mobile-menu-open');
+                $("#share-menu-list").removeClass('mobile-menu-open');
+            });
+
+            // меню шарингов - мобильная версия
+            $("#sharing-menu-button").click(function(e){
+                e.preventDefault();
+                $(this).toggleClass('open');
+                $("#share-menu-list").toggleClass('mobile-menu-open');
+                $("#main-menu-nav").removeClass('mobile-menu-open');
             });
 
             detect_mobile();
@@ -90,13 +100,15 @@
 
     <div id="main-menu-wrapper" class="main-menu-wrapper desktop-menu">
         <div class="menu-container">
-            <a id="main-menu-button" href="#" class="open-button">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </a>
+            <div id="main-menu-button" class="menu-button open-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div id="sharing-menu-button" class="menu-button sharing-button"></div>
+
             <div id="main-menu" class="main-menu">
-              <nav id="main-menu-nav" class="main-menu-nav">
+              <nav id="main-menu-nav" class="hidden-menu main-menu-nav">
                 <a href="{% url 'mmz:history' %}">История</a>
                 <a class="nested" href="{% url 'mmz:osnovanie_zavoda' %}">Глава 1. 1884–1900</a>
                 <a class="nested" href="{% url 'mmz:zavod_v_nachale_veka' %}">Глава 2. 1900–1917</a>
@@ -106,8 +118,39 @@
                 <a href="{% url 'mmz:albums' %}">Фотоальбом</a>
                 <a href="{% url 'mmz:about' %}">О проекте</a>
               </nav>
+                {% with base_url="https://hidden-history.ru/mmz/" %}
+                <ul id="share-menu-list" class='hidden-menu share-menu'>
+                    <li>
+                        <a class='share-link share_button_fb' href= "https://www.facebook.com/sharer.php?u={{ base_url }}" target='_blank' rel='noopener noreferrer'>
+                            <span class="badge"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class='share-link share_button_vk' href="https://vk.com/share.php?url={{ base_url }}" target='_blank' rel='noopener noreferrer'>
+                            <span class="badge"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class='share-link share_button_ok' href="https://connect.ok.ru/offer?url={{ base_url }}" target='_blank' rel='noopener noreferrer'>
+                            <span class="badge"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class='share-link share_button_tw' href="https://twitter.com/intent/tweet?url={{ base_url }}" target='_blank' rel='noopener noreferrer'>
+                            <span class="badge"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class='share-link share_button_tg' href="https://t.me/share/url?url={{ base_url }}" target='_blank' rel='noopener noreferrer'>
+                            <span class="badge"></span>
+                        </a>
+                    </li>
+                </ul>
+                {% endwith %}
             </div>
+
         </div>
+
     </div>
 
     <div id="content-wrapper" class="map-wrapper">

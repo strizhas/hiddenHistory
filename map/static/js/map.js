@@ -16,19 +16,25 @@ const _setPosOriginal = L.Marker.prototype._setPos;
 
 L.Marker.addInitHook(function() {
     const anchor = this.options.icon.options.iconAnchor
-    this.options.rotationOrigin = anchor ? `${anchor[0]}px ${anchor[1]}px` : 'center center'
-    // Ensure marker remains rotated during dragging.
-    this.on('drag', data => { this._rotate() })
-    })
 
-    L.Marker.include({
+    if (anchor != undefined) {
+        this.options.rotationOrigin = anchor[0] + 'px ' + anchor[1] + 'px'
+    } else {
+        this.options.rotationOrigin = 'center center'
+    }
+
+    // Ensure marker remains rotated during dragging.
+    this.on('drag', function(data) {this._rotate()})
+})
+
+L.Marker.include({
     _setPos: function(pos) {
       _setPosOriginal.call(this, pos)
       if (this.options.rotation) this._rotate()
     },
     _rotate: function() {
-      this._icon.style[`${L.DomUtil.TRANSFORM}Origin`] = this.options.rotationOrigin
-      this._icon.style[L.DomUtil.TRANSFORM] += ` rotate(${this.options.rotation}deg)`
+      this._icon.style[L.DomUtil.TRANSFORM + 'Origin'] = this.options.rotationOrigin
+      this._icon.style[L.DomUtil.TRANSFORM] += ' rotate(' + this.options.rotation + 'deg)'
     }
 });
 
@@ -179,7 +185,7 @@ function build_slider(years, data) {
         values: [year_min, year_max]
     });
 
-    range.addEventListener('update', (input, value) => {
+    range.addEventListener('update', function(input, value) {
         var name = $(input).attr('name');
 
         if (name == "min") {
@@ -280,8 +286,8 @@ function get_map_params() {
 };
 
 function change_url(center, zoom) {
-    var url = base_url + `?center=${center.lat},${center.lng}`;
-        url += `&zoom=${zoom}`;
+    var url = base_url + '?center=' + center.lat + ',' + center.lng;
+        url += '&zoom=' + zoom;
 
     window.history.replaceState( {} , '', url );
 };
@@ -293,7 +299,7 @@ function init_map() {
 
     var tile_urls = {
         'ge-2010': 'https://storage.yandexcloud.net/hh-files/tilesets/ge-2010/{z}/{x}/{y}.png',
-        '1906': 'https://storage.yandexcloud.net/hh-files/tileset-1906/{z}/{x}/{y}.png',
+        // '1906': 'https://storage.yandexcloud.net/hh-files/tileset-1906/{z}/{x}/{y}.png',
         'osm': 'http://{s}.tile.osm.org/{z}/{x}/{y}.png'
     };
 
@@ -306,10 +312,14 @@ function init_map() {
         maxNativeZoom: 17,
         maxZoom: 18
         });
+    var basemap_osm = L.tileLayer(tile_urls['osm'], {
+        id: 'basemap-osm',
+        maxZoom: 20
+        });
 
     basemaps = {
         'спутниковый снимок 2010 года': basemap_ge_2010,
-        'план 1906 года': basemap_1906
+        'карта OSM': basemap_osm
     };
     var params = get_map_params()
 
