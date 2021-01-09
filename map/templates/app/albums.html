@@ -10,6 +10,31 @@
 
 {% block content %}
     <div class="no-map-content">
+        <div id="filter-by-decade" class="filter-photo-select">
+            <b class="filter-header">эпоха</b>
+            <div class="current-value">{{ decade_header }}
+            </div>
+            <div class="values-dropdown">
+                <ul>
+                    <li>
+                        <a href="?decade=all">все</a>
+                    </li>
+                    {% for d in decades_list %}
+                        <li>
+                            <a href="?decade={{ d.decade }}">{{ d.decade }}-ые <span>{{ d.dcount }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="image-album-section">
+        {% for p in page_obj %}
+            <a class="album-photo-preview" href="show/{{ p.id }}" data-id="{{ p.id }}" >
+                <img src="{{ p.img_small.url }}"/>
+            </a>
+        {% endfor %}
+        </div>
          <div class="pagination">
             <span class="step-links">
                 {% if page_obj.has_previous %}
@@ -20,24 +45,33 @@
 
                 {% for p in  page_obj.paginator.page_range %}
                     {% if p == page_obj.number %}
-                        <a class="page-nums page-active" href="?page={{ p }}">{{ p }}</a>
+                        <a class="page-nums page-active" href="?page={{ p }}&decade={{ decade }}">{{ p }}</a>
                     {% else %}
-                        <a class="page-nums" href="?page={{ p }}">{{ p }}</a>
+                        <a class="page-nums" href="?page={{ p }}&decade={{ decade }}">{{ p }}</a>
                     {% endif %}
                 {% endfor %}
 
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">&rarr;</a>
+                    <a href="?page={{ page_obj.next_page_number }}&decade={{ decade }}">&rarr;</a>
                 {% else %}
                     <span class="inactive-page-button">&rarr;</span>
                 {% endif %}
             </span>
         </div>
-        {% for p in page_obj %}
-            <a class="album-photo-preview" href="show/{{ p.id }}" data-id="{{ p.id }}" >
-                <img src="{{ p.img_small.url }}"/>
-            </a>
-        {% endfor %}
+
 
     </div>
+    <script>
+        function hide_dropdown(e) {
+            e.data.ul.toggleClass('visible');
+            $(document).unbind('click', hide_dropdown)
+        }
+        $('#filter-by-decade').find('.current-value').eq(0).on('click', function(e) {
+            e.stopPropagation();
+            var ul = $(this).parent().find('ul').eq(0);
+                ul.toggleClass('visible');
+
+            $(document).bind('click', {ul: ul}, hide_dropdown)
+        })
+    </script>
 {% endblock %}

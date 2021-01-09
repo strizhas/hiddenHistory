@@ -515,19 +515,98 @@ input, select {
     max-width: 100%;
 }
 
+
+/*---------------------- Страницы фотоальбома --------------------------- */
+
+
+.filter-photo-select {
+    max-width: 30rem;
+}
+
+.filter-photo-select .filter-header {
+display: block;
+    margin: 0 0 1rem 0;
+}
+
+.filter-photo-select .current-value {
+    position: relative;
+    border-bottom: 1px solid #BABAB3;
+    padding: 0.5rem 0;
+    cursor: pointer;
+}
+
+.filter-photo-select .current-value::after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 35%;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    width: 0.8rem;
+    height: 0.8rem;
+    margin-bottom: 0.4rem;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+.filter-photo-select .values-dropdown {
+    position: relative;
+}
+
+.filter-photo-select .values-dropdown ul {
+    position: absolute;
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    z-index: 7761;
+    background: #f6f6f2;
+    width: 100%;
+    box-shadow: 1px 1px 7px 2px rgba(20, 20, 20, 0.18);
+}
+
+.filter-photo-select .values-dropdown ul.visible {
+    display: block;
+}
+
+.filter-photo-select .values-dropdown li {
+    padding: 1rem;
+    border-bottom: 1px solid #BABAB3;
+}
+
+.filter-photo-select .values-dropdown li a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+}
+
+.filter-photo-select .values-dropdown li:hover {
+    background: #e8e8e1;
+}
+
+.filter-photo-select .values-dropdown li a span {
+    float: right;
+    color: #B1B1B1;
+}
+
 .album-photo-preview {
     font-size: 0;
 }
 
 .album-photo-preview img {
-    width: 15rem;
-    height: 10rem;
-    padding: 0 2px;
+    width: 17rem;
+    height: auto;
+    padding: 0 0.3rem;
+}
+
+.image-album-section {
+    margin-top: 3rem;
 }
 
 .pagination {
     text-align: center;
-    margin-bottom: 2rem;
+    margin: 2rem 0;
 }
 .pagination .step-links a {
     display: inline-block;
@@ -725,6 +804,13 @@ input, select {
 /*----------------------- Стили для устройств ------------------------------ */
 
 
+@media screen and (min-width: 1920px) {
+    .album-photo-preview img {
+        width: 14rem;
+        height: auto;
+    }
+}
+
 @media screen and (max-width: 1440px) {
     html {
         font-size: 0.7vw;
@@ -812,7 +898,7 @@ input, select {
 @media only screen and (max-width: 360px) {
 
     .album-photo-preview img {
-        width: 100px;
+        width: 17.5rem;
         height: auto;
     }
 }

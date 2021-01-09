@@ -10,6 +10,10 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.utils import timezone
 
+# для подсчёта сколько фотографий
+# сделано в каждом десятилетий
+from django.db.models import Count
+
 from .models import Photo
 from .models import Source
 from .forms import PhotoForm
@@ -41,12 +45,31 @@ def show_about(request):
 
 
 def show_albums(request):
+
+    d = request.GET.get('decade')
     p = Photo.objects.filter(published=True).order_by('-id')
-    paginator = Paginator(p, 50)  # Show 25 contacts per page.
+
+    # decades = p.order_by("decade").values_list("decade", flat=True).distinct()
+
+    # получаем queryset с уникальными десятилетиями
+    # и количествои фотографий для каждого десятилетия
+    decades = p.order_by("decade").values("decade")\
+        .exclude(decade__isnull=True).annotate(dcount=Count('decade'))
+
+    if d is not None and d != 'all':
+        p = p.filter(decade=d)
+    else:
+        d = 'all'
+
+    print(decades)
+    paginator = Paginator(p, 50)
     page_number = request.GET.get('page')
 
     context = {
-        'page_obj': paginator.get_page(page_number)
+        'page_obj': paginator.get_page(page_number),
+        'decades_list': decades,
+        'decade': d,
+        'decade_header': '%s-ые' % d if d != 'all' else 'все'
     }
     return render(request, 'app/albums.html', context)
 
