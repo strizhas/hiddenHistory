@@ -4,5 +4,10 @@
 <body id="project_content">
     {{ $data := getJSON "Data/СиМ-история.json" }}
     {{ partial "chapter_1.html" . }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            window['run_scripts']();
+        })
+    </script>
 </body>
 </html>

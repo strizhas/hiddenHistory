@@ -2,25 +2,34 @@
 <article>
     <section class="chapter" id="chapter-0">
         <header class="site-header" id="header-container">
-            <div class="header-container">
-                <h1>Московский металлургический завод<br><b>"Серп и молот"</b><br>
-                    <small>История территории&nbsp;— от&nbsp;пахотных земель до&nbsp;многоэтажного жилого квартала</small>
-                </h1>
+            <div id="header-img-frame" class="header-img-frame">
+                <img src="https://storage.yandexcloud.net/hh-files/history/photo/cover-slider/shosse-entusiastov_auto_x2-2.jpg">
             </div>
+            <div class="text-section">
+                <h1><b>лефортовский треугольник</b><br>
+                <small>1800 — 2020</small>
+                </h1>
+                <p>История одного из московских районов - как на месте пашни возник металлургический завод, как он развивался и как на его месте появился жилой квартал</p>
+                <span class="arrow">↓</span>
+            </div>
+
         </header>
+        <div id="header-out-trigger"></div>
         <div class="content-wrapper">
-            <div id="header-out-trigger"></div>
             <div class="content-10-column">
-                <p class="text-intro">{{ (index $data.chapter_0 0).Intro | safeHTML }}</p>
-                <p class="text-annotation-wide">
-                    <i>От автора:</i><br><br>
-                    {{ (index $data.chapter_0 1).Intro | safeHTML }}
-                </p>
-                <div class="text-section content-6-column">
-                    {{ partial "components/timeline_navigation.html" . }}
-                    <h2 class="longread-h2">История территории до 1883 года</h2>
+                <div class="text-section content-5-column">
                     <p class="text-regular">{{ (index $data.chapter_0 0).Text | safeHTML }}</p>
                     <p class="text-regular">{{ (index $data.chapter_0 1).Text | safeHTML }}</p>
+                </div>
+                <p class="text-annotation-wide">
+                    <i>От автора:</i><br><br>
+                    {{ (index $data.chapter_0 3).Intro | safeHTML }}
+                </p>
+                <div class="text-section content-5-column">
+                    {{ partial "components/timeline_navigation.html" . }}
+                    <h2 class="longread-h2">История территории до 1883 года</h2>
+                    <p class="text-regular">{{ (index $data.chapter_0 2).Text | safeHTML }}</p>
+                    <p class="text-regular">{{ (index $data.chapter_0 3).Text | safeHTML }}</p>
                 </div>
                 {{ partial "components/img_section.html" (dict "index" 0) }}
             </div>

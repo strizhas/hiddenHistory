@@ -5,5 +5,10 @@
     {{ if isset .Params "partial" }}
         {{ partial $.Params.partial . }}
     {{ end }}
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            window['run_scrips']()
+        })
+    </script>
 </body>
 </html>

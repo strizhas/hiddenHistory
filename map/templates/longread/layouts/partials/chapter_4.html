@@ -3,7 +3,7 @@
     <section class="chapter" id="chapter-4">
         {{ partial "components/chapter_header.html" (dict "num" 4 "year" "1930 – 1945" "text" (index $data.chapter_4 0).Title) }}
         <div class="content-10-column">
-            <div class="text-section content-6-column">
+            <div class="text-section content-5-column">
                 <p class="text-regular">{{ (index $data.chapter_4 0).Text | safeHTML }}</p>
 
                 <ul class="timeline-navigation">
@@ -34,7 +34,7 @@
                 <object type="image/svg+xml" data="https://storage.yandexcloud.net/hh-files/history/svg/ITR_vs_workers_2.svg" class="svg-object itr-vs-workers">
                 </object>
             </figure>
-            <div class="text-section content-6-column">
+            <div class="text-section content-5-column">
                 <p class="text-regular">{{ (index $data.chapter_4 4).Text | safeHTML }}</p>
                 {{ partial "components/number.html" (dict "index" 2) }}
                 <p class="text-regular">{{ (index $data.chapter_4 5).Text | safeHTML }}</p>

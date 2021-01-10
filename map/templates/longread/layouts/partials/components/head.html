@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta name="description" content="{{ .Params.description }}"/>
     <title>{{ .Params.title }}</title>
-    <script src="{{.Site.BaseURL}}js/main.js"></script>
+    <script src="{{.Site.BaseURL}}history-page.js"></script>
     {{- $sass := resources.Get "history-page.scss" -}}
     {{- $style := $sass | resources.ToCSS -}}
     <link rel="stylesheet" href="{{ $style.RelPermalink | absURL }}"/>

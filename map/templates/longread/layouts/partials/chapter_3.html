@@ -3,7 +3,7 @@
     <section class="chapter" id="chapter-3">
         {{ partial "components/chapter_header.html" (dict "num" 3 "year" "1917 – 1930" "text" (index $data.chapter_3 0).Title) }}
         <div class="content-10-column">
-            <div class="text-section content-6-column">
+            <div class="text-section content-5-column">
                 <div class="paragraph-with-img">
                     <p class="text-regular">{{ (index $data.chapter_3 0).Text | safeHTML }}</p>
                     {{ partial "components/img_section.html" (dict "index" 6 "left" "true") }}
@@ -14,7 +14,7 @@
                 </div>
             </div>
             {{ partial "components/quote.html" (dict "index" 2) }}
-            <div class="text-section content-6-column">
+            <div class="text-section content-5-column">
                 <div class="paragraph-with-img">
                     <p class="text-regular">{{ (index $data.chapter_3 3).Text | safeHTML }}</p>
                     <p class="text-regular">{{ (index $data.chapter_3 4).Text | safeHTML }}</p>

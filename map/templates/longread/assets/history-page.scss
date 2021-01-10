@@ -6,12 +6,12 @@ $ascent_red: #CD471C;
 $ascent_gray: #999999;
 $light_gray: #E9E6E1;
 
-$size_10_column: 88rem;
-$size_8_column: 70rem;
-$size_6_column: 52rem;
-$size_5_column: 43rem;
-$size_4_column: 34rem;
-$size_2_column: 16rem;
+$size_10_column: 110rem;
+$size_8_column: 777rem;
+$size_6_column: 66rem;
+$size_5_column: 55rem;
+$size_4_column: 44rem;
+$size_2_column: 22rem;
 
 
 html {
@@ -52,6 +52,7 @@ body {
 .content-5-column {
     margin: 0;
     max-width: $size_5_column;
+    margin-left: 50%;
     padding: 5rem 0;
 }
 
@@ -86,13 +87,15 @@ b {
 }
 
 .text-annotation-wide {
-    width: 100%;
+
     font-size: 1.6rem;
     line-height: 2.5rem;
     border-top: 6px solid $light_gray;
     border-bottom: 6px solid $light_gray;
-    padding: 30px 0;
+    padding: 30px 15rem;
     margin: 60px 0 30px 0;
+    width: 100%;
+    width: calc(100% - 30rem);
 }
 
 .text-annotation-wide a {
@@ -107,7 +110,6 @@ b {
         color: $ascent_red;
         font-size: 4.8rem;
         line-height: 5rem;
-        font-weight: 800;
     }
 
     .value {
@@ -181,10 +183,75 @@ b {
 /*----------------------- Всупительный баннер ------------------------------ */
 
 .site-header {
-    height: 700px;
-    background-image: url("https://storage.yandexcloud.net/hh-files/history/photo/cover-3.jpg");
-    background-size: cover;
+    height: 80vh;
+    max-height: 120rem;
+    width: 100vw;
+    position: relative;
+    margin-bottom: 5rem;
 }
+
+.site-header {
+    .header-content {
+        position: relative;
+        width: 50%;
+    }
+
+    .header-img-frame {
+        background: #ddd;
+        position: absolute;
+        margin: 1rem 0;
+        top: 5rem;
+        max-width: 100rem;
+        border: 2rem solid $background;
+        outline: 2px solid $light_gray;
+        right: 50%;
+        right: calc(50% + 7rem);
+        width: 50%;
+        width: calc(50% - 16rem);
+        height: 100%;
+        height: calc(100% - 20rem);
+        overflow: hidden;
+
+    }
+
+    .text-section {
+        position: relative;
+        padding: 2rem 2rem 2rem 0;
+        height: 100%;
+
+        margin-left: 50%;
+        width: 50%;
+        width: calc(50% - 4rem);
+    }
+
+    .header-img-frame img {
+        min-width: 100%;
+        height: 100%;
+        width: auto;
+        position: absolute;
+        -webkit-transition-property: opacity;
+        -moz-transition-property: opacity;
+        -o-transition-property: opacity;
+        transition-property: opacity;
+        -webkit-transition-duration: 2s;
+        -moz-transition-duration: 2s;
+        -o-transition-duration: 2s;
+        transition-duration: 2s;
+    }
+
+    .header-img-frame .img-hidden {
+        opacity: 0;
+    }
+    .header-img-frame .img-visible {
+        opacity: 1;
+    }
+    .arrow {
+        display: block;
+        font-size: 4rem;
+    }
+}
+
+
 
 .site-header {
 
@@ -196,19 +263,25 @@ b {
     h1 {
         max-width: 60rem;
         font-size: 2rem;
-        padding-top: 3rem;
+        padding: 15rem 0 3rem 0;
     }
     h1 b {
         text-transform: uppercase;
-        font-size: 4.7rem;
-        color: $ascent_red;
+        font-size: 7rem;
+        color: $font_main;
     }
     h1 small {
-        font-size: 1.6rem;
+        font-size: 3rem;
         font-weight: normal;
+        color: $ascent_red;
         display: block;
-        margin-top: 20px;
         max-width: 45rem;
+    }
+
+    p {
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+        max-width: 70rem;
     }
 }
 
@@ -226,8 +299,8 @@ b {
     .chapter-header-top {
         margin: 0 auto;
 
-        max-width: $size_6_column;
-        margin-left: calc(100% - #{$size_6_column});
+        max-width: $size_5_column;
+        margin-left: 50%;
     }
 
     .chapter-header-top {
@@ -254,8 +327,8 @@ b {
     .chapter-header-bottom {
         margin: 0 auto;
         padding: 20px 0;
-        max-width: $size_6_column;
-        margin-left: calc(100% - #{$size_6_column});
+        max-width: $size_5_column;
+        margin-left: 50%;
     }
 
     .chapter-header-bottom h1 {
@@ -283,7 +356,7 @@ b {
     position: absolute;
     margin: 1rem 0;
     top: 0;
-    right: calc(#{$size_6_column + 4rem});
+    right: calc(#{$size_5_column + 4rem});
 }
 
 .paragraph-with-img {
@@ -295,13 +368,13 @@ b {
         position: absolute;
         top: 0;
         left: 0;
-        width: 16rem;
+        width: 20rem;
 
     }
 
     img {
-        margin-left: 18rem;
-        width: calc(#{$size_10_column - 18rem});
+        margin-left: 22rem;
+        width: calc(#{$size_10_column - 22rem});
         height: auto;
     }
 }
@@ -329,9 +402,9 @@ b {
 .svg-object {
     .svg-fig-caption {
         display: block;
-        max-width: $size_6_column;
+        max-width: $size_5_column;
         font-size: 1.6rem;
-        margin-left: calc(100% - #{$size_6_column});
+        margin-left: calc(100% - #{$size_5_column});
         margin-bottom: 20px;
     }
     object {
@@ -350,6 +423,7 @@ b {
         display: block;
         color: $font_main;
         font-size: 1.6rem;
+        line-height: 2.5rem;
         position: relative;
         margin: 10px 0;
     }
@@ -357,7 +431,7 @@ b {
         position: absolute;
         top: 0;
         left: 0;
-
+        font-weight: normal;
         color: $ascent_red;
     }
     span {
@@ -381,8 +455,8 @@ b {
         padding: 10px 0;
         display: block;
         text-indent: -3rem;
-        max-width: $size_6_column;
-        margin-left: calc(100% - #{$size_6_column});
+        max-width: $size_5_column;
+        margin-left: 50%;
 
     }
 
@@ -409,25 +483,6 @@ b {
         font-size: 0.7vw;
     }
 
-    .site-header {
-        height: 500px;
-    }
-}
-
-@media screen and (max-width: 1280px) {
-    .site-header {
-        height: 400px;
-    }
-    .site-header {
-
-         h1 {
-            padding-top: 20px;
-        }
-
-        h1 small {
-            max-width: 400px;
-        }
-    }
 }
 
 @media screen and (max-width: 800px) {
@@ -435,6 +490,43 @@ b {
     html {
         font-size: 1.3vw;
     }
+
+    .site-header {
+        .text-section {
+            position: relative;
+            padding: 1rem;
+            height: 100%;
+
+            margin-left: 50%;
+            width: 50%;
+            width: calc(50% - 2rem);
+        }
+
+
+        .header-container {
+            max-width: 120rem;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        h1 {
+            max-width: 60rem;
+            font-size: 2rem;
+            padding-top: 3rem;
+        }
+        h1 b {
+            font-size: 3rem;
+        }
+        h1 small {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 1.6rem;
+            line-height: 2.5rem;
+        }
+
+    }
+
 
     .img-section {
         overflow: hidden;
@@ -493,18 +585,52 @@ b {
     }
 
     .site-header {
+        height: auto;
+        max-height: none;
+        margin-bottom: 5rem;
+    }
 
+    .site-header {
         h1 {
             max-width: 600px;
             font-size: 1.6rem;
+            margin: 0;
+            padding: 0 0 0.5rem 0;
         }
         h1 b {
             text-transform: uppercase;
             font-size: 4rem;
-            color: $ascent_red;
+        }
+
+        .header-content {
+            position: relative;
+            width: 50%;
+        }
+
+        .header-img-frame {
+            width: 100%;
+            height: 50vh;
+            position: relative;
+            border: none;
+            outline: none;
+            top: 0;
+            margin: 0;
+            left: 0;
+            overflow: hidden;
+
+        }
+
+        .text-section {
+            position: relative;
+            padding: 2rem;
+            height: auto;
+            margin-left: 0;
+            width: 100%;
+            width: calc(100% - 4rem);
         }
 
     }
+
 
 }
 
@@ -537,7 +663,6 @@ b {
         h1 b {
             text-transform: uppercase;
             font-size: 32px;
-            color: $ascent_red;
         }
         h1 small {
 

@@ -3,13 +3,14 @@
 {% block head %}
     <meta name="description" content="Московский металлический завод, в последствие ставший заводом &#39;Серп и молот&#39;, в начале ХХ века. Годы первой ревообции 1905 г. и период первой мировой войны"/>
     <link rel="stylesheet" href="{% static 'css/history-page.css' %}">
+    <script src="{% static 'js/history-page.js' %}"></script>
     <script>
         function setScroll(s_id) {
             let section = document.getElementById(s_id);
 
             let scrolled = window.scrollY;
             let etop = section.getBoundingClientRect().top;
-            window.scrollTo(0, scrolled + etop - 30);
+            window.scrollTo(0, scrolled + etop - 50);
         }
         function load_content() {
             var xhr = new XMLHttpRequest();
@@ -25,6 +26,7 @@
                     var s_id = section.getAttribute("id")
 
                     document.getElementById("content-wrapper").innerHTML = xhr.responseText ;
+                    window['run_scrips']();
                     setScroll(s_id);
                 }
             }
@@ -51,7 +53,7 @@
     </div>
 </header>
         <div class="content-10-column">
-            <div class="text-section content-6-column">
+            <div class="text-section content-5-column">
                 <p class="text-regular">
                     Экономический кризис, а&nbsp;также завершение строительства транссибирской магистрали привели к&nbsp;тому, что на&nbsp;рынке сильно уменьшилась потребность в&nbsp;металле. У&nbsp;предприятия начались тяжелые времена.
                     Гужон был вынужден закрыть часть производственных программ, сократив при&nbsp;этом штат рабочих. У&nbsp;оставшихся уменьшились заработки, что привело к&nbsp;нарастанию напряженности в&nbsp;среде рабочих.
@@ -120,7 +122,7 @@
         </p>
     </div>
 </div>
-            <div class="text-section content-6-column">
+            <div class="text-section content-5-column">
                 <p class="text-regular">ММЗ, как&nbsp;и&nbsp;многие другие предприятия, пытался привлечь к&nbsp;работе военнопленных, однако только в&nbsp;конце 1916&nbsp;года смог добиться присылки 300 пленных. Несмотря на&nbsp;их&nbsp;малое количество, некоторые из&nbsp;них,&nbsp;благодаря своим инженерным навыкам, сумели внести большой вклад в&nbsp;развитие производства. Однако негативные последствия первой мобилизации полностью преодолеть так и&nbsp;не&nbsp;удалось.</p>
             </div>
         </div>
