@@ -29,7 +29,10 @@
                     {{ partial "components/timeline_navigation.html" . }}
                     <h2 class="longread-h2">История территории до 1883 года</h2>
                     <p class="text-regular">{{ (index $data.chapter_0 2).Text | safeHTML }}</p>
-                    <p class="text-regular">{{ (index $data.chapter_0 3).Text | safeHTML }}</p>
+                    <p class="text-regular">
+                        {{ (index $data.chapter_0 3).Text | safeHTML }}
+                        {{ (index $data.chapter_0 4).Text | safeHTML }}
+                    </p>
                 </div>
                 {{ partial "components/img_section.html" (dict "index" 0) }}
             </div>
