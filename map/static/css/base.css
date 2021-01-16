@@ -10,6 +10,21 @@ html {
 	font-family: 'Open Sans', sans-serif;
 }
 
+@font-face {
+    font-family: "Yeseva One";
+    src: url("https://storage.yandexcloud.net/hh-files/fonts/YesevaOne-Regular.ttf"),
+        url("../fonts/YesevaOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-style: italic;
+    src: url("https://storage.yandexcloud.net/hh-files/fonts/OpenSans-Italic.ttf"),
+        url("../fonts/OpenSans-Italic.ttf");
+}
+
+
 p {
 	margin: 0;
 	margin-bottom: 3rem;
@@ -20,8 +35,8 @@ p {
 }
 
 h2, h3, h4 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: bold;
+    font-family: "Yeseva One";
+    font-weight: normal;
     margin: 0;
 }
 h2 {
@@ -180,7 +195,7 @@ input, select {
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 5rem);
 
 }
 
@@ -211,14 +226,14 @@ input, select {
 
 
 .main-menu-wrapper {
-    padding: 10px 0;
+    padding: 1rem 0;
     border-bottom: 1px solid #BABAB3;
-    min-height: 30px;
+    height: 3rem;
 }
 
 .main-menu a {
     text-decoration: none;
-    margin-right: 20px;
+    margin-right: 2rem;
     color: #000;
 }
 
@@ -348,8 +363,12 @@ input, select {
 }
 
 .main-menu-wrapper.desktop-menu {
-    padding: 10px 0;
+    padding: 1rem 0;
     border-bottom: 1px solid #BABAB3;
+}
+
+.main-menu-wrapper.desktop-menu .main-menu-nav {
+    line-height: 3rem;
 }
 
 .desktop-menu .share-menu {
@@ -524,9 +543,12 @@ input, select {
 }
 
 .filter-photo-select .filter-header {
-display: block;
+    display: block;
+    font-family: "Yeseva One";
+    font-size: 2rem;
     margin: 0 0 1rem 0;
 }
+
 
 .filter-photo-select .current-value {
     position: relative;

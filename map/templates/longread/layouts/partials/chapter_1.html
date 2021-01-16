@@ -33,14 +33,14 @@
     </section>
     {{- if eq .Page.Params.type "static" -}}
     <nav class="content-10-column article-pagination">
-        <a href='{{ ref . "chapter_2.md" }}' class="next-page">Глава 2. Завод в годы первой революции</a>
-        <a href='{{ ref . "prologue.md" }}' class="previous-page">Пролог. Лефортово до последней четверти XIX ека</a>
+        <a href='{{ ref . "chapter_2.md" }}' class="next-page" rel="next">Глава 2. Завод в годы первой революции</a>
+        <a href='{{ ref . "prologue.md" }}' class="previous-page" rel="prev">Пролог. Лефортово до последней четверти XIX ека</a>
     </nav>
     {{- end -}}
     {{- if eq .Page.Params.type "django_html" -}}
     <nav class="content-10-column article-pagination">
-        <a href="{% url 'mmz:zavod_v_nachale_veka' %}" class="next-page">Глава 2. Завод в начале ХХ века</a>
-        <a href="{% url 'mmz:history' %}" class="previous-page">Пролог. Лефортово до последней четверти XIX ека</a>
+        <a href="{% url 'mmz:zavod_v_nachale_veka' %}" class="next-page" rel="next">Глава 2. Завод в начале ХХ века</a>
+        <a href="{% url 'mmz:history' %}" class="previous-page" rel="prev">Пролог. Лефортово до последней четверти XIX ека</a>
     </nav>
     {{- end -}}
 </article>

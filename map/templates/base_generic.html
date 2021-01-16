@@ -19,7 +19,6 @@
     <script src="{% static 'js/jquery.js' %}"></script>
     {% block head %}{% endblock %}
     <script type="text/javascript">
-
         var menu_is_mobile = false;
         var mobile = false;
 
@@ -98,6 +97,20 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(71246089, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true
+       });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/71246089" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->
 </head>
 
 <body>
@@ -115,13 +128,14 @@
             <div id="main-menu" class="main-menu">
               <nav id="main-menu-nav" class="hidden-menu main-menu-nav">
                 <a href="{% url 'mmz:history' %}">История</a>
-                <a class="nested" href="{% url 'mmz:osnovanie_zavoda' %}">Глава 1. 1884–1900</a>
-                <a class="nested" href="{% url 'mmz:zavod_v_nachale_veka' %}">Глава 2. 1900–1917</a>
-                <a class="nested" href="{% url 'mmz:zavod_posle_revolucii' %}">Глава 3. 1917–1930</a>
-                <a class="nested" href="{% url 'mmz:rekonstrukciya_zavoda' %}">Глава 4. 1930–1945</a>
+                <a class="nested" href="{% url 'mmz:osnovanie_zavoda' %}" rel="bookmark">Глава 1. 1884–1900</a>
+                <a class="nested" href="{% url 'mmz:zavod_v_nachale_veka' %}" rel="bookmark">Глава 2. 1900–1917</a>
+                <a class="nested" href="{% url 'mmz:zavod_posle_revolucii' %}" rel="bookmark">Глава 3. 1917–1930</a>
+                <a class="nested" href="{% url 'mmz:rekonstrukciya_zavoda' %}" rel="bookmark">Глава 4. 1930–1945</a>
+                <a class="nested" href="{% url 'mmz:zavod_v_poslevoennie_godi' %}" rel="bookmark">Глава 5. 1945–1990</a>
                 <a href="{% url 'mmz:map' %}">Интерактивная карта</a>
                 <a href="{% url 'mmz:albums' %}">Фотоальбом</a>
-                <a href="{% url 'mmz:about' %}">О проекте</a>
+                <a href="{% url 'mmz:about' %}" rel="contact">О проекте</a>
               </nav>
                 {% with base_url="https://hidden-history.ru/mmz/" %}
                 <ul id="share-menu-list" class='hidden-menu share-menu'>
@@ -172,8 +186,8 @@
                         <ol>
                             <li>"Магнитка близ Садового кольца": Стимулы к&nbsp;работе на&nbsp;Московском заводе "Серп и&nbsp;молот", 1883-2001&nbsp;гг.&nbsp;— Андрей Маркевич, Андрей Соколов, 2005;</li>
                             <li>Заводское жильё в&nbsp;1935–первой половине 1960-х&nbsp;гг. По&nbsp;материалам завода "Серп и&nbsp;молот"&nbsp;—  В.С.&nbsp;Тяжельникова;</li>
-                            <li><a href="http://xn----8sbeckcargt5bj2ado8m.xn--p1ai/chyornaya-metallurgiya/mmz-serp-i-molot.html" target="_blank">Советские-заводы.рф;</a></li>
-                            <li><a href="https://archi.ru/russia/50973/serp-i-molot-istoriya-mesta" target="_blank">"Серп и Молот": история места — archi.ru</a></li>
+                            <li><a href="http://xn----8sbeckcargt5bj2ado8m.xn--p1ai/chyornaya-metallurgiya/mmz-serp-i-molot.html" target="_blank" rel="nofollow">Советские-заводы.рф;</a></li>
+                            <li><a href="https://archi.ru/russia/50973/serp-i-molot-istoriya-mesta" target="_blank" rel="nofollow">"Серп и Молот": история места — archi.ru</a></li>
                         </ol>
                     </section>
                     <section class="column-left">

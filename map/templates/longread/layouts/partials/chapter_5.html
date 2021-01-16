@@ -1,0 +1,36 @@
+{{ $data := getJSON "Data/СиМ-история.json" }}
+<article class="content-wrapper">
+    <section class="chapter" id="chapter-5">
+        {{ partial "components/chapter_header.html" (dict "num" 5 "year" "1945 – 1990" "text" (index $data.chapter_5 0).Title) }}
+        <div class="content-10-column">
+            <div class="text-section content-5-column">
+                <div class="paragraph-with-img">
+                    <p class="text-regular">{{ (index $data.chapter_5 0).Text | safeHTML }}</p>
+                    {{ partial "components/img_section.html" (dict "index" 9 "left" "true") }}
+                </div>
+                <p class="text-regular">{{ (index $data.chapter_5 1).Text | safeHTML }}</p>
+                <p class="text-regular">{{ (index $data.chapter_5 2).Text | safeHTML }}</p>
+                <h2 class="longread-h2">{{ (index $data.chapter_5 3).Title | safeHTML }}</h2>
+                <div class="paragraph-with-img">
+                    <p class="text-regular">{{ (index $data.chapter_5 3).Text | safeHTML }}</p>
+                    {{ partial "components/img_section.html" (dict "index" 10 "left" "true") }}
+                </div>
+                <p class="text-regular">{{ (index $data.chapter_5 4).Text | safeHTML }}</p>
+            </div>
+            {{ partial "components/quote.html" (dict "index" 5) }}
+            <div class="text-section content-5-column">
+                <p class="text-regular">{{ (index $data.chapter_5 5).Text | safeHTML }}</p>
+            </div>
+        </div>
+    </section>
+    {{- if eq .Page.Params.type "static" -}}
+    <nav class="content-10-column article-pagination">
+        <a href='{{ ref . "chapter_4.md" }}' class="previous-page" rel="prev">Глава 4. Грандиозная реконструкция, знаковые символы эпохи и великая отечественная война</a>
+    </nav>
+    {{- end -}}
+    {{- if eq .Page.Params.type "django_html" -}}
+    <nav class="content-10-column article-pagination">
+        <a href="{% url 'mmz:rekonstrukciya_zavoda' %}" class="previous-page" rel="prev">Глава 4. Грандиозная реконструкция, знаковые символы эпохи и великая отечественная война</a>
+    </nav>
+    {{- end -}}
+</article>

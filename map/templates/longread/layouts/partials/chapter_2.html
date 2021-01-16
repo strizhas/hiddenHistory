@@ -46,14 +46,14 @@
     </section>
     {{- if eq .Page.Params.type "static" -}}
     <nav class="content-10-column article-pagination">
-        <a href='{{ ref . "chapter_3.md" }}' class="next-page">Глава 3. Завод после Октябрьской революции</a>
-        <a href='{{ ref . "chapter_1.md" }}' class="previous-page">Глава 1. Основание завода</a>
+        <a href='{{ ref . "chapter_3.md" }}' class="next-page" rel="next">Глава 3. Завод после Октябрьской революции</a>
+        <a href='{{ ref . "chapter_1.md" }}' class="previous-page" rel="prev">Глава 1. Основание завода</a>
     </nav>
     {{- end -}}
     {{- if eq .Page.Params.type "django_html" -}}
     <nav class="content-10-column article-pagination">
-        <a href="{% url 'mmz:zavod_posle_revolucii' %}" class="next-page">Глава 3. Завод после Октябрьской революции</a>
-        <a href="{% url 'mmz:osnovanie_zavoda' %}" class="previous-page">Глава 1. Основание завода</a>
+        <a href="{% url 'mmz:zavod_posle_revolucii' %}" class="next-page" rel="next">Глава 3. Завод после Октябрьской революции</a>
+        <a href="{% url 'mmz:osnovanie_zavoda' %}" class="previous-page" rel="prev">Глава 1. Основание завода</a>
     </nav>
     {{- end -}}
 </article>

@@ -12,15 +12,19 @@
                 {{ end }}
                 </ul>
                 <div class="paragraph-with-img">
-                    <p class="text-regular">{{ (index $data.chapter_4 1).Text | safeHTML }}</p>
+                    <p class="text-regular">
+                        {{ (index $data.chapter_4 1).Text | safeHTML }}
+                        {{ (index $data.chapter_4 2).Text | safeHTML }}
+                    </p>
                     {{ partial "components/img_section.html" (dict "index" 7 "left" "true") }}
                 </div>
-                <p class="text-regular">{{ (index $data.chapter_4 2).Text | safeHTML }}</p>
+                <!--
                 <ul class="in-text-ul">
                 {{ range $i, $r := (index $data.chapter_4 2).Table }}
                 <li>{{ $r | safeHTML }}</li>
                 {{ end }}
                 </ul>
+                -->
                 <p class="text-regular">{{ (index $data.chapter_4 3).Text | safeHTML }}</p>
 
             </div>
@@ -36,8 +40,12 @@
             </figure>
             <div class="text-section content-5-column">
                 <p class="text-regular">{{ (index $data.chapter_4 4).Text | safeHTML }}</p>
+                <!--
                 {{ partial "components/number.html" (dict "index" 2) }}
                 <p class="text-regular">{{ (index $data.chapter_4 5).Text | safeHTML }}</p>
+                -->
+            </div>
+            <section class="text-section content-5-column">
                 <h2 class="longread-h2">{{ (index $data.chapter_4 6).Title | safeHTML }}</h2>
                 <div class="paragraph-with-img">
                     <p class="text-regular">{{ (index $data.chapter_4 6).Text | safeHTML }}</p>
@@ -45,19 +53,21 @@
                     {{ partial "components/img_section.html" (dict "index" 8 "left" "true") }}
                 </div>
                 <p class="text-regular">{{ (index $data.chapter_4 8).Text | safeHTML }}</p>
-            </div>
+            </section>
         </div>
 
 
     </section>
     {{- if eq .Page.Params.type "static" -}}
     <nav class="content-10-column article-pagination">
-        <a href='{{ ref . "chapter_3.md" }}' class="previous-page">Глава 3. Завод после Октябрьской революции</a>
+        <a href='{{ ref . "chapter_5.md" }}' class="next-page" rel="next">Глава 5. Послевоенные годы. Возвращение производства в мирное русло и новая реконструкция</a>
+        <a href='{{ ref . "chapter_3.md" }}' class="previous-page" rel="prev">Глава 3. Завод после Октябрьской революции</a>
     </nav>
     {{- end -}}
     {{- if eq .Page.Params.type "django_html" -}}
     <nav class="content-10-column article-pagination">
-        <a href="{% url 'mmz:zavod_posle_revolucii' %}" class="previous-page">Глава 3. Завод после Октябрьской революции</a>
+        <a href="{% url 'mmz:zavod_v_poslevoennie_godi' %}" class="next-page" rel="next">Глава 5. Послевоенные годы. Возвращение производства в мирное русло и новая реконструкция</a>
+        <a href="{% url 'mmz:zavod_posle_revolucii' %}" class="previous-page" rel="prev">Глава 3. Завод после Октябрьской революции</a>
     </nav>
     {{- end -}}
 </article>

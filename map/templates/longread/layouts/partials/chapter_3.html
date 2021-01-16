@@ -32,14 +32,14 @@
     </section>
     {{- if eq .Page.Params.type "static" -}}
     <nav class="content-10-column article-pagination">
-        <a href='{{ ref . "chapter_4.md" }}' class="next-page">Глава 4. Грандиозная реконструкция, знаковые символы эпохи и великая отечественная война</a>
-        <a href='{{ ref . "chapter_2.md" }}' class="previous-page">Глава 2. Завод в начале ХХ века</a>
+        <a href='{{ ref . "chapter_4.md" }}' class="next-page" rel="next">Глава 4. Грандиозная реконструкция, знаковые символы эпохи и великая отечественная война</a>
+        <a href='{{ ref . "chapter_2.md" }}' class="previous-page" rel="prev">Глава 2. Завод в начале ХХ века</a>
     </nav>
     {{- end -}}
     {{- if eq .Page.Params.type "django_html" -}}
     <nav class="content-10-column article-pagination">
-        <a href="{% url 'mmz:rekonstrukciya_zavoda' %}" class="next-page">Глава 4. Грандиозная реконструкция, знаковые символы эпохи и великая отечественная война</a>
-        <a href="{% url 'mmz:zavod_v_nachale_veka' %}" class="previous-page">Глава 2. Завод в начале ХХ века</a>
+        <a href="{% url 'mmz:rekonstrukciya_zavoda' %}" class="next-page" rel="next">Глава 4. Грандиозная реконструкция, знаковые символы эпохи и великая отечественная война</a>
+        <a href="{% url 'mmz:zavod_v_nachale_veka' %}" class="previous-page" rel="prev">Глава 2. Завод в начале ХХ века</a>
     </nav>
     {{- end -}}
 </article>

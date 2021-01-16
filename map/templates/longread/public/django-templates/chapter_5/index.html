@@ -1,0 +1,103 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block head %}
+    <meta name="description" content="Процесс восстановления был непростым, поскольку не только металлургические заводы, но и вся экономика была переориентирована на военные цели. Возвращение завода &#39;Серп и молот&#39; к мирному производству плавно вылилось в новую реконструкцию"/>
+    <link rel="stylesheet" href="{% static 'css/history-page.css' %}">
+    <script src="{% static 'js/history-page.js' %}"></script>
+    <script>
+        function setScroll(s_id) {
+            let section = document.getElementById(s_id);
+
+            let scrolled = window.scrollY;
+            let etop = section.getBoundingClientRect().top;
+            window.scrollTo(0, scrolled + etop - 50);
+        }
+        function load_content() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "{% static 'html/index.html' %}", true);
+            xhr.send();
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) return;
+
+                if (xhr.status == 200) {
+                    var body = document.getElementById("content-wrapper");
+                    var section = document.getElementsByClassName("chapter")[0]
+                    var s_id = section.getAttribute("id")
+
+                    document.getElementById("content-wrapper").innerHTML = xhr.responseText ;
+                    window['run_scrips']();
+                    setScroll(s_id);
+                }
+            }
+        }
+
+
+    </script>
+{% endblock %}
+{% block title %}
+    <title>Восстановление завода &#39;Серп и молот&#39; в послевоенные годы и переход производства в мирное русло</title>
+{% endblock %}
+{% block content %}
+    
+        
+<article class="content-wrapper">
+    <section class="chapter" id="chapter-5">
+        <header class="chapter-header">
+    <div class="chapter-header-top">
+        <span class="chapter-num">Глава 5</span>
+        <span class="year"><b class="year">1945 – 1990</b></span>
+    </div>
+    <div class="chapter-header-bottom">
+        <h1>Послевоенные годы. Возвращение производства в мирное русло и новая реконструкция</h1>
+    </div>
+</header>
+        <div class="content-10-column">
+            <div class="text-section content-5-column">
+                <div class="paragraph-with-img">
+                    <p class="text-regular">После завершения второй мировой войны предстоял процесс возвращения производства в&nbsp;мирное русло. Это был непростой процесс, так как за&nbsp;прошедшие годы не&nbsp;только металлургия, но&nbsp;и&nbsp;вся экономика страны была переориентирована на&nbsp;военные цели. Окончательное снятие завода с&nbsp;военного положения произошло только в&nbsp;1947&nbsp;году. Однако несмотря на&nbsp;это продолжала действовать большая часть чрезвычайных законов, подразумевающих уголовные наказания за&nbsp;прогулы и&nbsp;подобные нарушения.</p>
+                    <figure class="img-section img-section-left" style="width: 50rem">
+    <img src="https://storage.yandexcloud.net/hh-files/history/photo/sim-1960-1970.jpg"/>
+    <figcaption class="img-caption">
+        Лентопрокатное отделение, 1960–1970&nbsp;гг.<br>
+        <a href="https://pastvu.com/p/529708" target="_blank" rel="nofollow">Источник фотографии</a>
+    </figcaption>
+</figure>
+                </div>
+                <p class="text-regular">Промышленность тем временем восстанавливалась. На&nbsp;СиМ'е началось более активное внедрение механизации и&nbsp;автоматизации, например в&nbsp;1946&nbsp;г. была внедрена автоматизация управления подачи воздуха и&nbsp;мазута в&nbsp;мартеновские печи. В&nbsp;то&nbsp;же время был создан цех &laquo;ширпотреба&raquo;, занимавшийся выпуском товаров народного потребления&nbsp;&mdash; ложек, вилок, металлических игрушек и&nbsp;т.д.</p>
+                <p class="text-regular">Первые послевоенные годы стали серьёзным испытанием для многих людей&nbsp;&mdash; из-за голода, недостатка товаров первой необходимости, подорванного здоровья, требующего восстановления. Обострился вопрос с&nbsp;жильём. И&nbsp;без того скудный жилищный фонд обветшал и&nbsp;частично был разрушен. Людям была необходима социальная инфраструктура, поэтому администрация завода уделяла особое внимание этому вопросу. Сильным подспорьем в&nbsp;голодные годы стали введенные ещё в&nbsp;довоенное время отделы рабочего снабжения (ОРС). Они во&nbsp;многом обеспечивали людей едой и&nbsp;другими необходимыми вещами. На&nbsp;1&nbsp;января 1946&nbsp;г. заводской ОРС включал в&nbsp;себя продуктовые и&nbsp;промтоварные магазины, обувную и&nbsp;трикотажную мастерские, совхозы и&nbsp;т.д.</p>
+                <h2 class="longread-h2">Планы новой реконструкции</h2>
+                <div class="paragraph-with-img">
+                    <p class="text-regular">В&nbsp;1950-1980&nbsp;гг. окончательно определился профиль завода&nbsp;&mdash; прочные металлические конструкции, различные сорта нержавеющей и&nbsp;жаропрочной стали, фасонное литье, тонкая проволока и&nbsp;т.п. Вновь встал вопрос о&nbsp;глобальной модернизации производства, который окончательно оформился в&nbsp;программу реконструкции к&nbsp;концу 70-х гг. В&nbsp;рамках этой программы был построен цех холодной прокатки нержавеющей ленты (ЦХПНЛ), оборудованный автоматической системой управления (АСУ). В&nbsp;начале 80-х гг. началось строительство нового модельного цеха, термического отделения, машинного зала, насосной станции, новых административно-бытовых корпусов.</p>
+                    <figure class="img-section img-section-left" style="width: 50rem">
+    <img src="https://storage.yandexcloud.net/hh-files/history/photo/sim-1980.jpg"/>
+    <figcaption class="img-caption">
+        Строительство нового сортопрокатного цеха, 1980-ые&nbsp;гг. На&nbsp;переднем плане Шоссе энтузиастов. За&nbsp;стоящимя цехом виден ЦХПНЛ.<br>
+        <a href="https://ok.ru/group/53148627435604/album/53547897192532?st._aid=Groups_Photo_Album_List_openAlbum" target="_blank" rel="nofollow">Источник фотографии</a>
+    </figcaption>
+</figure>
+                </div>
+                <p class="text-regular">Однако, все происходящие модернизации никак не&nbsp;могли решить главную проблему, предсказанную еще в&nbsp;30-ые годы&nbsp;&mdash; город вокруг рос и&nbsp;развивался, и&nbsp;завод, появившийся когда-то на&nbsp;окраине, оказался внутри большого города. Уже в&nbsp;конце 80-х гг. началась полемика, связанная с&nbsp;влиянием тяжелой промышленности на&nbsp;экологическую обстановку в&nbsp;городе. Вопрос &laquo;вредности&raquo; производства остро стоял и&nbsp;на&nbsp;самом заводе:</p>
+            </div>
+            
+<div class="quote-section">
+    <div class="quote-content">
+        <p class="quote-text">На&nbsp;сегодняшний день на&nbsp;заводе условия труда не&nbsp;соответствуют требованиям ГОСТов, есть примеры чрезмерной запыленности, загазованности, шума, вибрации</p>
+        <p>
+            <span class="quote-author">Из&nbsp;отчёта комиссии по&nbsp;технике безопасности, 1988&nbsp;г.</span>
+            <span class="author-titul"></span>
+        </p>
+    </div>
+</div>
+            <div class="text-section content-5-column">
+                <p class="text-regular">В&nbsp;результате завод был вынужден сворачивать свое производство стали и&nbsp;сосредоточиться на&nbsp;вторичном металлургическом производстве. Продолжение следует...</p>
+            </div>
+        </div>
+    </section><nav class="content-10-column article-pagination">
+        <a href="{% url 'mmz:rekonstrukciya_zavoda' %}" class="previous-page" rel="prev">Глава 4. Грандиозная реконструкция, знаковые символы эпохи и великая отечественная война</a>
+    </nav></article>
+    
+    <script>
+        load_content()
+    </script>
+{% endblock %}>

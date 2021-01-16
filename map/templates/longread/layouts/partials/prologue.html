@@ -40,12 +40,12 @@
     </section>
     {{- if eq .Page.Params.type "static" -}}
         <nav class="content-10-column article-pagination">
-            <a href='{{ ref . "chapter_1.md" }}' class="next-page">Глава 1. Основание завода</a>
+            <a href='{{ ref . "chapter_1.md" }}' class="next-page" rel="next">Глава 1. Основание завода</a>
         </nav>
         {{- end -}}
         {{- if eq .Page.Params.type "django_html" -}}
         <nav class="content-10-column article-pagination">
-            <a href="{% url 'mmz:osnovanie_zavoda' %}" class="next-page">Глава 1. Основание завода</a>
+            <a href="{% url 'mmz:osnovanie_zavoda' %}" class="next-page" rel="next">Глава 1. Основание завода</a>
         </nav>
     {{- end -}}
 </article>

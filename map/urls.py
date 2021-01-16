@@ -27,6 +27,9 @@ urlpatterns = [
     path('rekonstrukciya_zavoda', TemplateView.as_view(
             template_name='longread/public/django-templates/chapter_4/index.html'),
             name='rekonstrukciya_zavoda'),
+    path('zavod_v_poslevoennie_godi', TemplateView.as_view(
+            template_name='longread/public/django-templates/chapter_5/index.html'),
+            name='zavod_v_poslevoennie_godi'),
     path('albums', views.show_albums, name='albums'),
     path('about', views.show_about, name='about'),
     path('map', views.show_map, name='map'),

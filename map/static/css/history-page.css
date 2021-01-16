@@ -1,4 +1,14 @@
 @charset "UTF-8";
+@font-face {
+  font-family: "Yeseva One";
+  src: url("https://storage.yandexcloud.net/hh-files/fonts/YesevaOne-Regular.ttf"), url("/YesevaOne-Regular.ttf"); }
+
+@font-face {
+  font-family: "Open Sans";
+  font-weight: 400;
+  font-style: italic;
+  src: url("https://storage.yandexcloud.net/hh-files/fonts/OpenSans-Italic.ttf"), url("/OpenSans-Italic.ttf"); }
+
 html {
   font-size: 0.59vw; }
 
@@ -43,6 +53,10 @@ p {
   font-size: 1.6rem;
   line-height: 2.5rem; }
 
+h1, h2 {
+  font-family: "Yeseva One";
+  color: #35353a; }
+
 b {
   font-size: 1.6rem; }
 
@@ -60,8 +74,8 @@ b {
 .text-annotation-wide {
   font-size: 1.6rem;
   line-height: 2.5rem;
-  border-top: 6px solid #E9E6E1;
-  border-bottom: 6px solid #E9E6E1;
+  border-top: 6px solid #dedacf;
+  border-bottom: 6px solid #dedacf;
   padding: 30px 15rem;
   margin: 60px 0 30px 0;
   width: 100%;
@@ -75,11 +89,13 @@ b {
 
 .number .prefix, .number .measure {
   color: #CD471C;
+  font-family: "Yeseva One";
   font-size: 4.8rem;
   line-height: 5rem; }
 
 .number .value {
   color: #CD471C;
+  font-family: "Yeseva One";
   font-size: 6.4rem;
   line-height: 7rem;
   font-weight: 800; }
@@ -91,29 +107,32 @@ b {
   padding: 0.5rem 0; }
 
 .quote-section {
-  margin: 30px 0 30px 22rem;
+  margin: 6rem 0 6rem 0;
   padding: 2rem 0;
   max-width: 110rem;
   font-style: italic;
-  border-top: 1px solid #999999;
-  border-bottom: 1px solid #999999; }
+  font-weight: 400;
+  border-top: 2px solid #bbaf9b;
+  border-bottom: 2px solid #bbaf9b; }
 
 .quote-section .quote-content {
   max-width: 66rem;
   margin: 0 auto; }
 
 .quote-section .quote-text {
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: 3rem; }
 
 .quote-section .quote-author {
   display: block;
-  color: #CD471C;
-  font-size: 2rem; }
+  color: #000000;
+  opacity: 0.7;
+  font-size: 1.4rem; }
 
 .quote-section .author-titul {
   display: block;
-  color: #CD471C;
+  color: #000000;
+  opacity: 0.7;
   font-size: 1.4rem; }
 
 .in-text-ul {
@@ -128,10 +147,10 @@ b {
   margin: 1.5rem 0; }
 
 .in-text-ul li:before {
-  content: "—";
+  content: "■";
   font-size: 2rem;
   margin-right: 1rem;
-  color: #CD471C; }
+  color: #000000; }
 
 /*----------------------- Всупительный баннер ------------------------------ */
 .site-header {
@@ -140,6 +159,9 @@ b {
   width: 100vw;
   position: relative;
   margin-bottom: 5rem; }
+
+.site-header b {
+  font-weight: normal; }
 
 .site-header .header-content {
   position: relative;
@@ -152,7 +174,7 @@ b {
   top: 5rem;
   max-width: 100rem;
   border: 2rem solid #F6F6F2;
-  outline: 2px solid #E9E6E1;
+  outline: 2px solid #dedacf;
   right: 50%;
   right: calc(50% + 7rem);
   width: 50%;
@@ -241,6 +263,7 @@ b {
   margin-bottom: 1rem; }
 
 .chapter-header .chapter-header-top .year {
+  font-family: "Yeseva One";
   font-size: 7.7rem;
   font-weight: 800;
   line-height: 8rem; }
@@ -261,8 +284,8 @@ b {
   font-weight: 600;
   margin: 0 auto;
   padding: 10px 0;
-  border-top: 1px solid #999999;
-  border-bottom: 1px solid #999999; }
+  border-top: 1px solid #bbaf9b;
+  border-bottom: 1px solid #bbaf9b; }
 
 /*----------------------- Изображения ------------------------------ */
 .img-section-inline {
@@ -297,12 +320,12 @@ b {
 
 .img-section .img-caption,
 .img-section .img-caption a {
-  color: #999999;
+  color: #bbaf9b;
   font-size: 1.4rem;
   line-height: 2.1rem; }
 
 .svg-object {
-  margin: 0 0 40px 0;
+  margin: 0 0 3rem 0;
   padding: 0; }
 
 .svg-object .svg-fig-caption {
@@ -331,8 +354,9 @@ b {
   position: absolute;
   top: 0;
   left: 0;
+  font-family: "Yeseva One";
   font-weight: normal;
-  color: #CD471C; }
+  color: #000000; }
 
 .timeline-navigation span {
   display: inline-block; }
@@ -344,9 +368,9 @@ b {
   margin-left: 7rem; }
 
 .article-pagination a {
-  color: #000000;
+  color: #35353a;
+  font-family: "Yeseva One";
   font-size: 1.8rem;
-  font-weight: bold;
   text-decoration: none;
   padding: 10px 0;
   display: block;
@@ -404,7 +428,7 @@ b {
   .img-section-inline .img-caption {
     position: relative;
     width: 100%;
-    color: #999999;
+    color: #bbaf9b;
     padding: 0 0 20px 0; }
   .img-section-inline img {
     max-width: 100%;

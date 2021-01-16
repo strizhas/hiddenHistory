@@ -3,8 +3,8 @@ $font_main: #000000;
 
 $ascent_blue: #9FC7D3;
 $ascent_red: #CD471C;
-$ascent_gray: #999999;
-$light_gray: #E9E6E1;
+$ascent_gray: #bbaf9b;
+$light_gray: #dedacf;
 
 $size_10_column: 110rem;
 $size_8_column: 777rem;
@@ -12,6 +12,23 @@ $size_6_column: 66rem;
 $size_5_column: 55rem;
 $size_4_column: 44rem;
 $size_2_column: 22rem;
+
+$title_font: "Yeseva One";
+$title_color: #35353a;
+
+@font-face {
+    font-family: "Yeseva One";
+    src: url("https://storage.yandexcloud.net/hh-files/fonts/YesevaOne-Regular.ttf"),
+        url("/YesevaOne-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-weight: 400;
+    font-style: italic;
+    src: url("https://storage.yandexcloud.net/hh-files/fonts/OpenSans-Italic.ttf"),
+        url("/OpenSans-Italic.ttf");
+}
 
 
 html {
@@ -69,6 +86,11 @@ p {
     line-height: 2.5rem;
 }
 
+h1, h2 {
+    font-family: $title_font;
+    color: $title_color;
+}
+
 b {
     font-size: 1.6rem;
 }
@@ -108,12 +130,14 @@ b {
 .number {
     .prefix, .measure {
         color: $ascent_red;
+        font-family: $title_font;
         font-size: 4.8rem;
         line-height: 5rem;
     }
 
     .value {
         color: $ascent_red;
+        font-family: $title_font;
         font-size: 6.4rem;
         line-height: 7rem;
         font-weight: 800;
@@ -127,12 +151,13 @@ b {
     }
 }
 .quote-section {
-    margin: 30px 0 30px $size_2_column;
+    margin: 6rem 0 6rem 0;
     padding: 2rem 0;
     max-width: $size_10_column;
     font-style: italic;
-    border-top: 1px solid $ascent_gray;
-    border-bottom: 1px solid $ascent_gray;
+    font-weight: 400;
+    border-top: 2px solid $ascent_gray;
+    border-bottom: 2px solid $ascent_gray;
 }
 
 .quote-section {
@@ -142,17 +167,19 @@ b {
         margin: 0 auto;
     }
     .quote-text {
-        font-size: 2rem;
+        font-size: 1.8rem;
         line-height: 3rem;
     }
     .quote-author {
         display: block;
-        color: $ascent_red;
-        font-size: 2rem;
+        color: $font_main;
+        opacity: 0.7;
+        font-size: 1.4rem;
     }
     .author-titul {
         display: block;
-        color: $ascent_red;
+        color: $font_main;
+        opacity: 0.7;
         font-size: 1.4rem;
     }
 }
@@ -172,10 +199,10 @@ b {
         margin: 1.5rem 0;
     }
     li:before {
-        content: "—";
+        content: "■";
         font-size: 2rem;
         margin-right: 1rem;
-        color: $ascent_red;
+        color: $font_main;
 
     }
 }
@@ -191,6 +218,10 @@ b {
 }
 
 .site-header {
+    b {
+        font-weight: normal;
+    }
+
     .header-content {
         position: relative;
         width: 50%;
@@ -309,11 +340,13 @@ b {
         }
         .chapter-num {
             display: block;
+
             font-size: 1.6rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
         .year {
+            font-family: $title_font;
             font-size: 7.7rem;
             font-weight: 800;
             line-height: 8rem;
@@ -395,7 +428,7 @@ b {
 }
 
 .svg-object {
-    margin: 0 0 40px 0;
+    margin: 0 0 3rem 0;
     padding: 0;
 }
 
@@ -431,8 +464,9 @@ b {
         position: absolute;
         top: 0;
         left: 0;
+        font-family: $title_font;
         font-weight: normal;
-        color: $ascent_red;
+        color: $font_main;
     }
     span {
         display: inline-block;
@@ -448,9 +482,9 @@ b {
 }
 .article-pagination {
     a {
-        color: $font_main;
+        color: $title_color;
+        font-family: $title_font;
         font-size: 1.8rem;
-        font-weight: bold;
         text-decoration: none;
         padding: 10px 0;
         display: block;
