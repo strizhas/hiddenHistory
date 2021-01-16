@@ -13,22 +13,22 @@ app_name = 'mmz'
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(
-        template_name='longread/public/django-templates/prologue/index.html'),
+        template_name='longread/prologue/index.html'),
          name='history'),
     path('osnovanie_zavoda', TemplateView.as_view(
-            template_name='longread/public/django-templates/chapter_1/index.html'),
+            template_name='longread/chapter_1/index.html'),
              name='osnovanie_zavoda'),
     path('zavod_v_nachale_veka', TemplateView.as_view(
-        template_name='longread/public/django-templates/chapter_2/index.html'),
+        template_name='longread/chapter_2/index.html'),
         name='zavod_v_nachale_veka'),
     path('zavod_posle_revolucii', TemplateView.as_view(
-        template_name='longread/public/django-templates/chapter_3/index.html'),
+        template_name='longread/chapter_3/index.html'),
         name='zavod_posle_revolucii'),
     path('rekonstrukciya_zavoda', TemplateView.as_view(
-            template_name='longread/public/django-templates/chapter_4/index.html'),
+            template_name='longread/chapter_4/index.html'),
             name='rekonstrukciya_zavoda'),
     path('zavod_v_poslevoennie_godi', TemplateView.as_view(
-            template_name='longread/public/django-templates/chapter_5/index.html'),
+            template_name='longread/chapter_5/index.html'),
             name='zavod_v_poslevoennie_godi'),
     path('albums', views.show_albums, name='albums'),
     path('about', views.show_about, name='about'),

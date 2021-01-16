@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../../DJANGO/django-location-field-master/example/.idea/example.iml" filepath="$PROJECT_DIR$/../../DJANGO/django-location-field-master/example/.idea/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/hiddenhistory.iml" filepath="$PROJECT_DIR$/.idea/hiddenhistory.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../HH/mmz/.idea/mmz.iml" filepath="$PROJECT_DIR$/../HH/mmz/.idea/mmz.iml" />
     </modules>
   </component>
 </project>

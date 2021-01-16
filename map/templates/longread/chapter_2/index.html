@@ -1,0 +1,163 @@
+{% extends "base_generic.html" %}
+{% load static %}
+{% block head %}
+    <meta name="description" content="Московский металлический завод, в последствие ставший заводом &#39;Серп и молот&#39;, в начале ХХ века. Годы первой ревообции 1905 г. и период первой мировой войны"/>
+    <link rel="stylesheet" href="{% static 'css/history-page.css' %}">
+    <script src="https://storage.yandexcloud.net/hh-files/static/gsap.min.js"></script>
+    <script src="https://storage.yandexcloud.net/hh-files/static/ScrollMagic.min.js"></script>
+    <script src="https://storage.yandexcloud.net/hh-files/static/animation.gsap.min.js"></script>
+    <script src="{% static 'js/history-page.js' %}"></script>
+    <script>
+        function setScroll(s_id) {
+            let section = document.getElementById(s_id);
+
+            let scrolled = window.scrollY;
+            let etop = section.getBoundingClientRect().top;
+            window.scrollTo(0, scrolled + etop - 50);
+        }
+        function load_content() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', "{% static 'html/index.html' %}", true);
+            xhr.send();
+
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState != 4) return;
+
+                if (xhr.status == 200) {
+                    var body = document.getElementById("content-wrapper");
+                    var section = document.getElementsByClassName("chapter")[0]
+                    var s_id = section.getAttribute("id")
+
+                    document.getElementById("content-wrapper").innerHTML = xhr.responseText ;
+                    window['run_scrips']();
+                    setScroll(s_id);
+                }
+            }
+        }
+        var urls = { 5 : {
+                "title": "Восстановление завода 'Серп и молот' в послевоенные годы и переход производства в мирное русло",
+                "description": "Процесс восстановления был непростым, поскольку не только металлургические заводы, но и вся экономика была переориентирована на военные цели. Возвращение завода 'Серп и молот' к мирному производству плавно вылилось в новую реконструкцию",
+                "url": "/mmz/zavod_v_poslevoennie_godi"
+            }, 4 : {
+                "title": "Грандиозная реконструкция 1930-х, знаковые символы эпохи и великая отечественная войнаГрандиозная реконструкция 1930-х, знаковые символы эпохи и великая отечественная война",
+                "description": "В начале 1930-х гг. началась реконструкция завода 'Серп и молот'. Его территория была расширена более чем в два раза, были построены новые цеха. Из металла, произведённого на заводе, были изготовлены скульптура 'Рабочий и колхнозница', отделка станции 'маяковская' и т.п.",
+                "url": "/mmz/rekonstrukciya_zavoda"
+            }, 2 : {
+                "title": "Завод 'Серп и молот' в начале ХХ века и годы первой русской революции",
+                "description": "Московский металлический завод, в последствие ставший заводом 'Серп и молот', в начале ХХ века. Годы первой ревообции 1905 г. и период первой мировой войны",
+                "url": "/mmz/zavod_v_nachale_veka"
+            }, 1 : {
+                "title": "Завод 'Серп и молот', Основание завода и его первые годы",
+                "description": "В 1884 году Юлий Гужон открывает московский металлический завод, который в последствие стал заводом 'Серп и молот'",
+                "url": "/mmz/osnovanie_zavoda"
+            }, 0 : {
+                "title": "Завод 'Серп и молот', Предисловие. Территория с начала 17-ого века и предпосылки создания фабрики",
+                "description": "До 17-ого века на территории современного Лефортово были исключительно пахотные и выгонные земли. В 17-ом веке здесь начинают появляться резиденции знати. Однако самое сильное влияние на развитие этого района оказало строительство железхных дорог",
+                "url": "/mmz"
+            }, 3 : {
+                "title": "Завод в годы Октябрьской революции и последовавших событий",
+                "description": "Завод 'Серп и молот' в годы Октябрьской революции и последовавших событий. Предприятие было на грани уничтожения, но со временем сумело восстановить свое производство",
+                "url": "/mmz/zavod_posle_revolucii"
+            },}
+    </script>
+{% endblock %}
+{% block title %}
+    <title>Завод &#39;Серп и молот&#39; в начале ХХ века и годы первой русской революции</title>
+{% endblock %}
+{% block content %}
+    
+        
+<article class="content-wrapper">
+    <section class="chapter" id="chapter-2">
+        <header class="chapter-header">
+    <div class="chapter-header-top">
+        <span class="chapter-num">Глава 2</span>
+        <span class="year"><b class="year">1900 – 1917</b></span>
+    </div>
+    <div class="chapter-header-bottom">
+        <h1>Завод в&nbsp;начале ХХ&nbsp;века&nbsp;— первая русская революция, модернизация завода, первая мировая война</h1>
+    </div>
+</header>
+        <div class="content-10-column">
+            <div class="text-section content-5-column">
+                <p class="text-regular">
+                    Экономический кризис, а&nbsp;также завершение строительства транссибирской магистрали привели к&nbsp;тому, что на&nbsp;рынке сильно уменьшилась потребность в&nbsp;металле. У&nbsp;предприятия начались тяжелые времена.
+                    Гужон был вынужден закрыть часть производственных программ, сократив при этом штат рабочих. У&nbsp;оставшихся уменьшились заработки, что привело к&nbsp;нарастанию напряженности в&nbsp;среде рабочих.
+                </p>
+
+                <h2 class="longread-h2">Первая русская революция</h2>
+                <p class="text-regular">Серьёзные волнения начались после событий 9&nbsp;января 1905 года в&nbsp;Петербурге.&nbsp;12&nbsp;декабря на&nbsp;заводе началась массовая забастовка. Вот некоторые из&nbsp;требований бастующих:</p>
+
+                <ul class="in-text-ul">
+                
+                <li>8-часовой рабочий день</li>
+                
+                <li>отмена сверхурочных</li>
+                
+                <li>повышение тарифных ставок</li>
+                
+                <li>улучшение санитарного состояния на заводе</li>
+                
+                </ul>
+
+                <div class="paragraph-with-img">
+                    <p class="text-regular">В&nbsp;ответ Гужон уволил всех рабочих, что было для него весьма характерной мерой&nbsp;&mdash; он&nbsp;поступал так каждый раз во&nbsp;время крупных забастовок.&nbsp;17&nbsp;января стачка завершилась, правление завода выразило готовность пойти на&nbsp;некоторые уступки (сократить рабочий день, улучшить санитарное состояние и&nbsp;изменить тарифные ставки).</p>
+                    <p class="text-regular">
+                        Но&nbsp;атмосфера в&nbsp;стране продолжала накаляться, достигнув критического состояния к&nbsp;концу 1905-года. В&nbsp;начале октября, чтобы предотвратить очередную стачку, Гужон пообещал выплатить рабочим деньги за&nbsp;все обсчёты в&nbsp;последние годы, но&nbsp;после передумал, сославшись на&nbsp;бедственное положение завода.
+                        6&nbsp;ноября начались волнения, не&nbsp;прекращавшиеся почти два месяца. Гужон в&nbsp;очередной раз уволил всех рабочих, но&nbsp;на&nbsp;этот раз они не&nbsp;ушли с&nbsp;завода. В&nbsp;лефортовском районе начали расти баррикады, однако крупных стычек и&nbsp;инцидентов не&nbsp;было. В&nbsp;конце концов измученные забастовкой рабочие вернулись к&nbsp;на&nbsp;свои места.
+                    </p>
+                    <figure class="img-section img-section-left" style="width: 50rem">
+    <img src="https://storage.yandexcloud.net/hh-files/history/photo/94c74733299b.jpg"/>
+    <figcaption class="img-caption">
+        10&nbsp;декабря, буквально за&nbsp;одну ночь, Москва оказалась покрыта баррикадами, однако восстание довольно быстро сошло на&nbsp;нет.<br>
+        <a href="https://photochronograph.ru/2013/09/13/dekabrskoe-vosstanie-1905-goda-v-moskve/" target="_blank" rel="nofollow">Источник фотографии</a>
+    </figcaption>
+</figure>
+                </div>
+                <p class="text-regular">Общий кризис в&nbsp;стране, лишь усугубленный массовыми забастовками, вылился в&nbsp;экономическую депрессию, что сказалось также и&nbsp;на&nbsp;предприятии&nbsp;&mdash; завод перестал приносить прибыль.Ситуацию можно было изменить только сделав производство более эффективным, поэтому правление решило начать модернизацию предприятия. На&nbsp;это была выделена колоссальная по&nbsp;тем временам сумма.</p>
+                
+<div class="number number-big">
+    <p><span class="prefix"> </span><span class="value">2.5 </span>
+        <span class="measure">млн рублей</span><br>
+        <span class="caption">стоимость дооборудованния завода</span>
+    </p>
+</div>
+                <div class="paragraph-with-img">
+                    <p class="text-regular">
+                        Были выстроены новые мартеновский печи, была механизирована их&nbsp;загрузка. На&nbsp;заводе появился первый паровоз, облегчивший вспомогательные работы. Появились дизели, паровые машины стали заменяться электромоторами. В&nbsp;цехах появились новые станы, построена трансформаторная подстанция.
+                        Модернизация принесла свои плоды&nbsp;&mdash; &laquo;производительная способность предприятия увеличилась на&nbsp;50%&raquo;. ММЗ вместе с&nbsp;другими предприятиями черной металлургии стал одним из&nbsp;лидеров промышленного роста.
+                    </p><br><br><br>
+                    <figure class="img-section img-section-left" style="width: 40rem">
+    <img src="https://storage.yandexcloud.net/hh-files/history/photo/stroevoi-ceh-edit.jpg"/>
+    <figcaption class="img-caption">
+        Строевой цех и&nbsp;кузница при&nbsp;нём, 1925&nbsp;г.<br>
+        <a href="https://ok.ru/group/53148627435604/album/53160973303892/867073055316" target="_blank" rel="nofollow">Источник фотографии</a>
+    </figcaption>
+</figure>
+                </div>
+                <h2 class="longread-h2">Первая мировая война</h2>
+                <p class="text-regular">С&nbsp;началом первой мировой войны завод стал работать на&nbsp;оборону. Среди заказчиков ММЗ значились военное и&nbsp;морское ведомства, Министерство путей сообщения, предприятия, выпускающие снаряды, гранаты и&nbsp;т.п. В&nbsp;связи с&nbsp;общей мобилизацией завод впервые столкнулся с&nbsp;нехваткой рабочих рук. Во&nbsp;время первой мобилизации 1914 года в&nbsp;армию было призвано более 800 рабочих (около&nbsp;25% от&nbsp;общего штата), среди которых было много квалифицированных сотрудников. Вопрос стоял настолько остро, что на&nbsp;одном и&nbsp;собраний Гужон прямо заявил:</p>
+            </div>
+            
+<div class="quote-section">
+    <div class="quote-content">
+        <p class="quote-text">По поводу рабочих, я скажу, что это самый первый вопрос — их необходимо изъять из армии</p>
+        <p>
+            <span class="quote-author">Юлий Гужон</span>
+            <span class="author-titul">из выступления на заседании правления</span>
+        </p>
+    </div>
+</div>
+            <div class="text-section content-5-column">
+                <p class="text-regular">ММЗ, как и&nbsp;многие другие предприятия, пытался привлечь к&nbsp;работе военнопленных, однако только в&nbsp;конце 1916 года смог добиться присылки 300&nbsp;пленных. Несмотря на&nbsp;их&nbsp;малое количество, некоторые из&nbsp;них, благодаря своим инженерным навыкам, сумели внести огромный вклад в&nbsp;развитие производства. Однако негативные последствия первой мобилизации полностью преодолеть так и&nbsp;не&nbsp;удалось.</p>
+            </div>
+        </div>
+    </section><nav class="content-10-column article-pagination">
+        <a href="{% url 'mmz:zavod_posle_revolucii' %}" class="next-page" rel="next">Глава 3. Завод после Октябрьской революции</a>
+        <a href="{% url 'mmz:osnovanie_zavoda' %}" class="previous-page" rel="prev">Глава 1. Основание завода</a>
+    </nav></article>
+    
+    <script>
+        load_content()
+    </script>
+{% endblock %}>
