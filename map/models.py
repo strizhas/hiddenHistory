@@ -135,10 +135,18 @@ class Photo(models.Model):
     img_small = ImageSpecField(source='img', id='hh:photo:img_small')
     img_medium = ImageSpecField(source='img', id='hh:photo:img_medium')
 
-    def delete_img(self):
+    def delete_img(self, save=True):
+        """
+        :param save: - Будут ли сохранены изменения
+                       в модели после удаления файла.
+                       True, если после удаления файла
+                       объект Photo остаётся в БД
+
+        :return:
+        """
         if settings.DEFAULT_FILE_STORAGE == 'map.s3utils.CustomS3Boto3Storage':
             if self.img:
-                self.img.delete()
+                self.img.delete(save=save)
             return
 
         if self.img:
@@ -286,4 +294,4 @@ def auto_delete_file_on_delete(sender, instance, **kwargs):
     when corresponding `MediaFile` object is deleted.
     """
 
-    instance.delete_img()
+    instance.delete_img(False)
