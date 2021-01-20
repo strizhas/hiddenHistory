@@ -3,29 +3,47 @@ from imagekit import ImageSpec
 from imagekit.utils import get_field_info
 
 
-class MediumOrientedImage(ImageSpec):
-    format = 'JPEG'
-    options = {'quality': 100}
-
-    @property
-    def processors(self):
-        model, field_name = get_field_info(self.source)
-        return [
-            RotateEXIF(model.orientation),
-            ResizeToFit(640, 480)
-        ]
-
-
-class SmallOrientedImage(ImageSpec):
+class LargeOrientedImage(ImageSpec):
     format = 'JPEG'
     options = {'quality': 80}
 
     @property
     def processors(self):
         model, field_name = get_field_info(self.source)
+        if model.img.width > 800:
+            return [
+                RotateEXIF(model.orientation),
+                ResizeToFit(1280, 700)
+            ]
+        else:
+            return [
+                RotateEXIF(model.orientation)
+            ]
+
+
+class MediumOrientedImage(ImageSpec):
+    format = 'JPEG'
+    options = {'quality': 70}
+
+    @property
+    def processors(self):
+        model, field_name = get_field_info(self.source)
         return [
             RotateEXIF(model.orientation),
-            ResizeToFill(150, 100)
+            ResizeToFit(1024, 400)
+        ]
+
+
+class SmallOrientedImage(ImageSpec):
+    format = 'JPEG'
+    options = {'quality': 70}
+
+    @property
+    def processors(self):
+        model, field_name = get_field_info(self.source)
+        return [
+            RotateEXIF(model.orientation),
+            ResizeToFill(200, 130)
         ]
 
 

@@ -11,6 +11,7 @@ from imagekit.models.fields import ImageSpecField
 
 from . import processors
 
+register.generator('hh:photo:img_large', processors.LargeOrientedImage)
 register.generator('hh:photo:img_medium', processors.MediumOrientedImage)
 register.generator('hh:photo:img_small', processors.SmallOrientedImage)
 
@@ -134,6 +135,7 @@ class Photo(models.Model):
     direction = models.FloatField(null=True)
     img_small = ImageSpecField(source='img', id='hh:photo:img_small')
     img_medium = ImageSpecField(source='img', id='hh:photo:img_medium')
+    img_large = ImageSpecField(source='img', id='hh:photo:img_large')
 
     def delete_img(self, save=True):
         """
@@ -271,6 +273,7 @@ class Photo(models.Model):
 
         context = {
             "url": self.img_medium.url,
+            "url_large": self.img_large.url,
             "url_full": self.img.url,
             "author": self.author,
             "uploader": self.uploader,

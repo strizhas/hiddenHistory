@@ -220,6 +220,9 @@ input, select {
     background: #CD471C;
 }
 
+.leaflet-tooltip img {
+    max-height: 100px;
+}
 
 
 /*----------------------- Навигация ------------------------------ */

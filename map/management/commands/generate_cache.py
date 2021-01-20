@@ -10,3 +10,4 @@ class Command(BaseCommand):
         for p in Photo.objects.all():
             p.img_small.generate()
             p.img_medium.generate()
+            p.img_large.generate()
