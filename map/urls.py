@@ -30,7 +30,7 @@ urlpatterns = [
     path('zavod_v_poslevoennie_godi', TemplateView.as_view(
             template_name='longread/chapter_5/index.html'),
             name='zavod_v_poslevoennie_godi'),
-    path('albums', views.show_albums, name='albums'),
+    path('photos', views.show_photos, name='photos'),
     path('about', views.show_about, name='about'),
     path('map', views.show_map, name='map'),
     path('upload', views.load_photo, name='load_photo'),
@@ -41,7 +41,10 @@ urlpatterns = [
     url(r'^photo/(?P<pk>\d+)$', views.edit_photo, name='view'),
     url(r'^edit_photo/(?P<pk>\d+)$', views.edit_photo, name='edit'),
     url(r'^save_changes/(?P<pk>\d+)$', views.save_changes),
+
     path('get_photos_data', views.get_photos_data),
+    url(r'^get_photo_context/(?P<pk>\d+)$', views.get_photo_context, name='get_photo_context'),
+
     path('upload_with_exif', views.upload_with_exif),
     path('accounts/', include('django.contrib.auth.urls')),
 

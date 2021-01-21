@@ -7,11 +7,11 @@
 {% block content %}
 	<div class="no-map-content">
 		<div class="top-image-section">
-			<a href="{% url 'mmz:albums' %}" id="go-back-link" class="help-links">вернуться к альбомам</a> |
+			<a href="{% url 'mmz:photos' %}" id="go-back-link" class="help-links">вернуться к альбомам</a> |
 			<a href="{{ url_full }}" target="_blank" class="help-links">скачать в полном размере</a>
 		</div>
 	<div id="popup-img-frame" class="popup-img-frame">
-		<img src="{{ url }}" alt="{{ alt }}"/>
+		<img src="{{ url_large }}" alt="{{ alt }}"/>
 	</div>
 	<div class="photo-captions">
 		<div class="main-section">

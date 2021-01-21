@@ -90,6 +90,7 @@ body {
     padding: 60px 10px;
     max-width: 88rem;
     margin: 0 auto;
+    pointer-events: all;
 }
 
 button {
@@ -107,7 +108,7 @@ input, select {
 }
 
 .centered-content-wrapper {
-    max-width: 720px;
+    max-width: 88rem;
     margin:0 auto;
     padding: 40px 0;
 }
@@ -501,9 +502,7 @@ input, select {
 
 /*----------------------- Попаз фотографии ----------------------------- */
 
-.photo-captions {
-    margin-top: 2rem;
-}
+
 
 .photo-captions .main-section {
     padding-bottom: 0.5rem;
@@ -512,6 +511,14 @@ input, select {
 .photo-captions .main-section * {
     font-size: 1.8rem;
     display: inline-block;
+}
+
+.top-image-section {
+    padding: 0.5rem 1rem;
+}
+
+.photo-captions {
+    padding: 0.5rem 1rem 2rem 1rem;
 }
 
 .top-image-section a {
@@ -527,7 +534,7 @@ input, select {
 }
 
 .popup-img-frame {
-    background: #e3e3e3;
+    background: #1d1d1d;
     text-align: center;
     position: relative;
     font-size: 0;
@@ -693,6 +700,10 @@ input, select {
     z-index: 15000;
 }
 
+.ajax-content-wrapper {
+    pointer-events: none;
+}
+
 .ajax-content-window.img-slider {
     width: 100vw;
     height: 100vh;
@@ -701,22 +712,38 @@ input, select {
 }
 
 .img-slider .no-map-content {
-    padding: 2rem;
+    padding: 0;
     max-width: 100rem;
     width: calc(100vw - 80px);
     background: #f6f6f2;
-    border-radius: 10px;
+    border-radius: 2px;
     margin-top: 10rem;
+}
+
+.img-slider .popup-img-frame {
+    min-height: 700px;
+    width: 100%;
+    display: table;
+}
+
+.img-slider .popup-img-frame .img-inner {
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
 }
 
 .frame-header-section {
     height: 1rem;
-    padding: 0 0 2rem 0;
+    padding: 0;
+    background: #1d1d1d;
     position: relative;
 }
 
 .frame-header-section .close-window-button {
     text-decoration: none;
+    position: absolute;
+    top: -3rem;
+    color: #c7c7c7;
 }
 /*----------------------- Попап----------------------------- */
 

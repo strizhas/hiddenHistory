@@ -48,6 +48,14 @@ function AjaxWindow() {
 
     this.header_size = 70;
 
+    // ID показываемого изображения
+    this.id = undefined;
+
+    // true если в данный момент идёт загрузка
+    this.loading = false;
+
+    // Срабатывает сразу вместе с инициализацией
+    // AjaxWindow после загрузки страницы с галереей
     this.init = function() {
 
         var _this = this;
@@ -146,17 +154,28 @@ function AjaxWindow() {
             _this.remove_ajax_window()
         })
 
+        // закрытие окна при клике за его пределами
+        $('#ajax-content').on('click', function(e) {
+            if (e.target == this) {
+                _this.remove_ajax_window()
+            }
+        })
+
         $('#close-window-button').on('click', function(e) {
             e.preventDefault();
             _this.remove_ajax_window()
         })
 
         $('#toggle-photo-next').on('click', function() {
-            _this._load_next();
+            if (_this.loading == false) {
+                _this._load_next();
+            };
         })
 
         $('#toggle-photo-previous').on('click', function() {
-            _this._load_previous();
+            if (_this.loading == false) {
+                _this._load_previous();
+            };
         })
     }
 
@@ -164,15 +183,43 @@ function AjaxWindow() {
         var i = img_list.indexOf(this.id);
 
         if (i == 0) return;
-        var url = 'show/' + img_list[i-1];
-        load_photo_frame(url);
+        var url = 'get_photo_context/' + img_list[i-1];
+
+        this._get_new_context(url)
     }
 
     this._load_next = function() {
+
         var i = img_list.indexOf(this.id);
         if (i == img_list.length - 1) return;
-        var url = 'show/' + img_list[i+1]
-        load_photo_frame(url)
+        var url = 'get_photo_context/' + img_list[i+1]
+
+        this._get_new_context(url)
+    }
+
+    // Получает JSON с данными следующего изображения
+    // и вносит данные в соответсвующие элементы
+    this._get_new_context = function(url) {
+
+        var _this = this;
+        this.loading = true;
+        $.get(url)
+            .done(function(data) {
+                _this.id = data['id'];
+                console.log('done')
+                $('#photo-year').html(data['year'] == null ? '' : data['year'])
+                $('#photo-decade').html(data['decade'] == null ? '' : data['decade'] + '-ые')
+                $('#photo-uploader').html(data['uploader'] == null ? '' : data['uploader'])
+                $('#photo-uploaded').html(data['uploaded'] == null ? '' : data['uploaded'])
+                $('#photo-author').html(data['author'] == null ? '' : data['author'])
+                $('#photo-source').html(data['source'] == null ? '' : data['source'])
+                $('#photo-img').attr('src', data['url_large']).attr('alt', data['alt'])
+
+                $('#photo-edit-link').attr('href', '/mmz/edit_photo/' + data['id'])
+            })
+            .always(function() {
+                _this.loading = false;
+            });
     }
 
     this.remove_ajax_window = function() {
@@ -193,7 +240,7 @@ function change_url(p_id) {
 
     var p_arr = []
     for (var key in params) {
-        p_arr.push(`${key}=${params[key]}`)
+        p_arr.push(key + '=' + params[key])
     }
     if (p_arr.length > 0) {
         var url = base_url + '?' + p_arr.join('&');

@@ -276,7 +276,7 @@ class Photo(models.Model):
             "url_large": self.img_large.url,
             "url_full": self.img.url,
             "author": self.author,
-            "uploader": self.uploader,
+            "uploader": self.uploader.username,
             "uploaded": self.uploaded.strftime("%d.%m.%Y"),
             "source": source_name,
             "year": self.year,
@@ -285,6 +285,37 @@ class Photo(models.Model):
             "alt": alt,
             "id": self.id,
             "owner": self.uploader.id == request.user.id
+        }
+
+        return context
+
+    def get_public_context(self, request):
+
+        alt = 'Завод "Серп и молот" '
+
+        if self.year:
+            alt += str(self.year)
+        else:
+            alt += str(self.decade) + '-ые'
+        if self.description:
+            alt += ' - {}'.format(self.description)
+
+        if self.source_obj is not None:
+            source_name = self.source_obj.name
+        else:
+            source_name = None
+
+        context = {
+            "url_large": self.img_large.url,
+            "url_full": self.img.url,
+            "author": self.author,
+            "uploaded": self.uploaded.strftime("%d.%m.%Y"),
+            "source": source_name,
+            "year": self.year,
+            "decade": self.decade,
+            "description": self.description,
+            "alt": alt,
+            "id": self.id,
         }
 
         return context

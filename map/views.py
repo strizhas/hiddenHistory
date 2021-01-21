@@ -44,8 +44,13 @@ def show_about(request):
     return render(request, 'app/about.html')
 
 
-def show_albums(request):
-
+def show_photos(request):
+    """
+    Показывает все фотографии
+    в виде постраничной галереи
+    :param request:
+    :return:
+    """
     d = request.GET.get('decade')
     p = Photo.objects.filter(published=True).order_by('-id')
 
@@ -75,11 +80,31 @@ def show_albums(request):
 
 
 def show_photo(request, pk):
+    """
+    Показывает изображение при просмотре
+    фотографий в режиме галереи.
+    :param request:
+    :param pk:
+    :return:
+    """
     context = Photo.objects.get(pk=pk).get_view_context(request)
     if request.headers.get('x-requested-with') == "XMLHttpRequest":
         return render(request, 'app/show_photo_ajax.html', context=context)
     else:
         return render(request, 'app/show.html', context=context)
+
+
+def get_photo_context(request, pk):
+    """
+    Возвращает все данные изображения в виде JSON.
+    Сейчас используется в галерее при загрузке
+    следующей/предыдущей фотографии
+    :param request:
+    :param pk:
+    :return:
+    """
+    context = Photo.objects.get(pk=pk).get_view_context(request)
+    return JsonResponse(context, safe=False)
 
 
 def get_photo(request):
@@ -108,7 +133,6 @@ def edit_photo(request, pk):
         'filename': p.filename,
         'description': p.description or '',
         'source': p.source_obj.id,
-        'source_old': p.source,
         "year": p.year or '',
         "decade": p.decade or '',
         "pk": pk
@@ -161,6 +185,12 @@ def save_changes(request, pk):
 
 
 def get_photos_data(request):
+    """
+    Метод, который отдаёт JSON с данными
+    фотографий для их отображения на карте
+    :param request:
+    :return:
+    """
     data = {}
     years = []
 
