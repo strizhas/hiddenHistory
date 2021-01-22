@@ -11,8 +11,7 @@ $( document ).ready(function() {
 
     $('.album-photo-preview').on('click', function(e) {
         e.preventDefault();
-        url = $(this).attr('href');
-        load_photo_frame(url);
+        w.build($(this).attr('href'));
     })
 
     window.onpopstate =  function(e) {
@@ -30,19 +29,10 @@ $( document ).ready(function() {
     parse_url();
 
     if ('show' in params) {
-        load_photo_frame('show/'+ params['show'])
+        w.build('show/'+ params['show']);
     }
 })
 
-function load_photo_frame(url) {
-
-    $.get(url).done(function(data) {
-        p_id = url.split('?')[0].split('/');
-        p_id = p_id[p_id.length - 1];
-        change_url(p_id);
-        w.build(data, p_id);
-    });
-}
 
 function AjaxWindow() {
 
@@ -91,51 +81,27 @@ function AjaxWindow() {
         });
     }
 
-    this.build = function(data, p_id) {
+    this.build = function(url) {
 
         var _this = this;
-
-        this.id = parseInt(p_id);
-
-        if ($('#ajax-content').length) {
-            w.update(data, p_id);
-        } else {
-            w.create_new(data, p_id)
-        }
-
-
-    }
-
-    this.create_new = function(data) {
+        var wrapper = $('<div>', {
+                'id': 'ajax-content',
+                'class': 'ajax-content-window img-slider'
+                }).appendTo('#content-wrapper');
 
         $('<div>', {
-            'id': 'ajax-content',
-            'class': 'ajax-content-window img-slider',
-            'html': data
-        }).appendTo('#content-wrapper');
+                'class': 'throbber-loader loader-icon'
+                }).appendTo(wrapper);
 
-        this.bind_events();
-    }
+        p_id = url.split('?')[0].split('/');
+        p_id = p_id[p_id.length - 1];
+        change_url(p_id);
 
-    this.update = function(data) {
-
-        var f = $('#popup-img-frame');
-
-        if (f.length != 0) {
-            var h = f.find('img').eq(0).height() + 'px';
-        } else {
-            var h = 'auto'
-        }
-
-        $('#ajax-content').html(data);
-
-        f = $('#popup-img-frame');
-        f.css({'height': h});
-        f.find('img').eq(0).on('load', function() {
-            f.css({'height': 'auto'})
-        })
-
-        this.bind_events();
+        this.id = parseInt(p_id);
+        $.get(url).done(function(data) {
+            wrapper.html(data);
+            _this.bind_events();
+        });
 
     }
 
@@ -207,7 +173,7 @@ function AjaxWindow() {
             .done(function(data) {
                 _this.id = data['id'];
                 console.log('done')
-                $('#photo-year').html(data['year'] == null ? '' : data['year'])
+                $('#photo-year').html(data['year'] == null ? '' : data['year'] + ',')
                 $('#photo-decade').html(data['decade'] == null ? '' : data['decade'] + '-ые')
                 $('#photo-uploader').html(data['uploader'] == null ? '' : data['uploader'])
                 $('#photo-uploaded').html(data['uploaded'] == null ? '' : data['uploaded'])

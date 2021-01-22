@@ -676,13 +676,13 @@ input, select {
 }
 
 .popup-img-frame .toggle-previous {
-    left: 3%;
+    left: -4rem;
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
 
 .popup-img-frame .toggle-next {
-    right: 3%;
+    right: -4rem;
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
 }
@@ -714,16 +714,17 @@ input, select {
 .img-slider .no-map-content {
     padding: 0;
     max-width: 100rem;
-    width: calc(100vw - 80px);
     background: #f6f6f2;
     border-radius: 2px;
     margin-top: 10rem;
+    width: calc(100vw - 20px);
 }
 
 .img-slider .popup-img-frame {
     min-height: 700px;
-    width: 100%;
     display: table;
+    width: 100%;
+    width: calc(100% + 1px);
 }
 
 .img-slider .popup-img-frame .img-inner {
@@ -743,18 +744,22 @@ input, select {
     text-decoration: none;
     position: absolute;
     top: -3rem;
+    right: 0;
     color: #c7c7c7;
 }
 /*----------------------- Попап----------------------------- */
 
 
 .leaflet-popup-content-wrapper {
-    marin-left: -400px
+    marin-left: -400px;
+    padding: 0;
+    border-radius: 2px;
 }
 
 .leaflet-popup-content {
     width: 640px !important;
     position: relative;
+    margin: 0;
 }
 
 
@@ -786,6 +791,7 @@ input, select {
 .leaflet-tooltip {
     min-width: 150px;
     min-height: 100px;
+    padding: 2px;
 }
 
 /*----------------------- Попап с формой ----------------------------- */
@@ -853,6 +859,83 @@ input, select {
     padding-left: 1em;
 }
 
+/*----------------------- АНИМАЦИИ ------------------------------ */
+/*------------------- Иконка загрузки --------------------------- */
+
+@-moz-keyframes throbber-loader {
+  0% {
+    background: #dde2e7;
+  }
+  10% {
+    background: #6b9dc8;
+  }
+  40% {
+    background: #dde2e7;
+  }
+}
+@-webkit-keyframes throbber-loader {
+  0% {
+    background: #dde2e7;
+  }
+  10% {
+    background: #6b9dc8;
+  }
+  40% {
+    background: #dde2e7;
+  }
+}
+@keyframes throbber-loader {
+  0% {
+    background: #dde2e7;
+  }
+  10% {
+    background: #6b9dc8;
+  }
+  40% {
+    background: #dde2e7;
+  }
+}
+
+.loader-icon {
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 1.6rem);
+}
+/* :not(:required) hides these rules from IE9 and below */
+.throbber-loader:not(:required) {
+  -moz-animation: throbber-loader 2000ms 300ms infinite ease-out;
+  -webkit-animation: throbber-loader 2000ms 300ms infinite ease-out;
+  animation: throbber-loader 2000ms 300ms infinite ease-out;
+  background: #dde2e7;
+  display: inline-block;
+  position: relative;
+  text-indent: -9999px;
+  width: 0.9em;
+  height: 1.5em;
+  margin: 0 1.6em;
+}
+.throbber-loader:not(:required):before, .throbber-loader:not(:required):after {
+  background: #dde2e7;
+  content: '\x200B';
+  display: inline-block;
+  width: 0.9em;
+  height: 1.5em;
+  position: absolute;
+  top: 0;
+}
+.throbber-loader:not(:required):before {
+  -moz-animation: throbber-loader 2000ms 150ms infinite ease-out;
+  -webkit-animation: throbber-loader 2000ms 150ms infinite ease-out;
+  animation: throbber-loader 2000ms 150ms infinite ease-out;
+  left: -1.6em;
+}
+.throbber-loader:not(:required):after {
+  -moz-animation: throbber-loader 2000ms 450ms infinite ease-out;
+  -webkit-animation: throbber-loader 2000ms 450ms infinite ease-out;
+  animation: throbber-loader 2000ms 450ms infinite ease-out;
+  right: -1.6em;
+}
+
 /*----------------------- Стили для устройств ------------------------------ */
 
 
@@ -892,12 +975,25 @@ input, select {
         margin-left: 0;
         float: none;
     }
+    .img-slider .no-map-content {
+        max-width: 120rem;
+    }
+    .img-slider .popup-img-frame {
+        min-height: 530px;
+    }
 }
 
 @media screen and (max-width: 800px) {
 
     html {
         font-size: 1.3vw;
+    }
+    .popup-img-frame .toggle-previous {
+        left: 2rem;
+    }
+
+    .popup-img-frame .toggle-next {
+        right: 2rem;
     }
 
 }
@@ -907,13 +1003,12 @@ input, select {
     h2 {
         font-size: 12px;
     }
-    .popup-img-frame img {
-        max-width: calc(80vw - 20px);
-    }
     #map {
         height: 100vh ;
     }
-
+    .no-map-content {
+        padding: 80px 10px 60px 10px;
+    }
 
     .leaflet-popup-content {
         width: 80vw !important;
@@ -939,11 +1034,20 @@ input, select {
     html {
         font-size: 2.2vw;
     }
+    .img-slider .popup-img-frame {
+        min-height: 380px;
+    }
+    .mobile-menu .menu-container {
+        width: calc(100% - 20px);
+    }
 }
 
 @media screen and (max-width: 380px) {
     html {
         font-size: 2.6vw;
+    }
+    .img-slider .popup-img-frame {
+        min-height: 280px;
     }
 }
 
