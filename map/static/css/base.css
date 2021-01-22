@@ -681,10 +681,12 @@ input, select {
 
 .popup-img-frame .toggle-previous {
     left: -6rem;
+    z-index: 564;
 }
 
 .popup-img-frame .toggle-next {
     right: -6rem;
+    z-index: 565;
 }
 
 .popup-img-frame .toggle-previous .toggle-badge {
