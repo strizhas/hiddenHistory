@@ -201,7 +201,7 @@ function AjaxWindow() {
         var timer = setTimeout(function() {
             img.addClass('img-toggling');
             loader = $('<div>', {
-                'class': 'throbber-loader loader-icon'
+                'class': 'three-quarters-loader loader-icon'
             }).appendTo($('#photo-img-inner'));
         }, 200);
 
