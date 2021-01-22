@@ -537,11 +537,14 @@ input, select {
     background: #1d1d1d;
     text-align: center;
     position: relative;
-    font-size: 0;
 }
 
 .popup-img-frame img {
     max-width: 100%;
+    -webkit-transition: opacity 0.2s;
+    -moz-transition: opacity 0.2s;
+    -o-transition: opacity 0.2s;
+    transition: opacity 0.2s;
 }
 
 
@@ -740,8 +743,18 @@ input, select {
 
 .img-slider .popup-img-frame .img-inner {
     width: 100%;
+    position: relative;
     display: table-cell;
     vertical-align: middle;
+}
+
+.img-slider .popup-img-frame .img-inner .loader-icon {
+    position: absolute;
+    z-index: 437;
+}
+
+.img-slider .popup-img-frame .img-inner .img-toggling {
+    opacity: 0.2;
 }
 
 .frame-header-section {

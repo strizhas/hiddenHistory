@@ -187,28 +187,63 @@ function AjaxWindow() {
     // и вносит данные в соответсвующие элементы
     this._get_new_context = function(url) {
 
+        var loader;
         var _this = this;
         this.loading = true;
+
+        var img = $('#photo-img');
+
+        // Через 200 миллисекунд добавляем значок
+        // загрузки на картинку. Делаем для пользователей
+        // с медленным интернетом (типа меня) чтобы показать,
+        // что загрузка идёт. Задержка - чтобы не возникало
+        // мерцания, если интернет норм
+        var timer = setTimeout(function() {
+            img.addClass('img-toggling');
+            loader = $('<div>', {
+                'class': 'throbber-loader loader-icon'
+            }).appendTo($('#photo-img-inner'));
+        }, 200);
+
+        var image_onload = function(new_img, data) {
+            $('#photo-year').html(data['year'] == null ? '' : data['year'] + ',');
+            $('#photo-decade').html(data['decade'] == null ? '' : data['decade'] + '-ые');
+            $('#photo-uploader').html(data['uploader'] == null ? '' : data['uploader']);
+            $('#photo-uploaded').html(data['uploaded'] == null ? '' : data['uploaded']);
+            $('#photo-author').html(data['author'] == null ? '' : data['author']);
+            $('#photo-source').html(data['source'] == null ? '' : data['source']);
+            $('#photo-edit-link').attr('href', '/mmz/edit_photo/' + data['id']);
+
+            $(new_img).attr('id', 'photo-img');
+            $(new_img).attr('alt', data['alt']);
+            $('#photo-img-inner').html(new_img);
+
+            //img.attr('src', data['url_large']).attr('alt', data['alt']);
+            _this._change_url(data['id']);
+            _this.loading = false;
+        }
+
         $.get(url)
             .done(function(data) {
+                var new_img = new Image();
+                new_img.onload = function() {
+                    image_onload(new_img, data)
+                };
+                new_img.src = data['url_large'];
                 _this.id = data['id'];
-
-                $('#photo-year').html(data['year'] == null ? '' : data['year'] + ',');
-                $('#photo-decade').html(data['decade'] == null ? '' : data['decade'] + '-ые');
-                $('#photo-uploader').html(data['uploader'] == null ? '' : data['uploader']);
-                $('#photo-uploaded').html(data['uploaded'] == null ? '' : data['uploaded']);
-                $('#photo-author').html(data['author'] == null ? '' : data['author']);
-                $('#photo-source').html(data['source'] == null ? '' : data['source']);
-                $('#photo-img').attr('src', data['url_large']).attr('alt', data['alt']);
-                $('#photo-edit-link').attr('href', '/mmz/edit_photo/' + data['id']);
-
-                _this._change_url(data['id'])
+            })
+            .fail(function() {
+                _this.loading = false;
+                clearTimeout(timer);
+                img.removeClass('img-toggling');
+                if (loader != undefined) {
+                    loader.remove();
+                }
             })
             .always(function() {
-                _this.loading = false;
+                clearTimeout(timer);
             });
     }
-
 
 
     this._change_url = function(p_id) {
@@ -228,7 +263,6 @@ function AjaxWindow() {
         } else {
             var url = base_url;
         }
-
 
         window.history.pushState( {} , '', url );
     };
