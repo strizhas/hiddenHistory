@@ -68,14 +68,15 @@ function AjaxWindow() {
 
         jQuery('body').swipe({
             swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-                if ($('#ajax-content').length == 0) {
+                if ($('#ajax-content').length == 0 || distance < 60) {
                     return
                 }
+
                 if (direction == 'left') {
-                    return _this._load_previous();
+                    return _this._load_next();
                 }
                 if (direction == 'right') {
-                    return _this._load_next();
+                    return _this._load_previous();
                 }
             }
         });
@@ -95,14 +96,20 @@ function AjaxWindow() {
 
         p_id = url.split('?')[0].split('/');
         p_id = p_id[p_id.length - 1];
-        change_url(p_id);
 
+        this._change_url(p_id);
         this.id = parseInt(p_id);
+
         $.get(url).done(function(data) {
             wrapper.html(data);
             _this.bind_events();
         });
 
+    }
+
+    this.remove_ajax_window = function() {
+        $('#ajax-content').remove();
+        this._change_url(null)
     }
 
     this.bind_events = function() {
@@ -136,6 +143,7 @@ function AjaxWindow() {
             if (_this.loading == false) {
                 _this._load_next();
             };
+
         })
 
         $('#toggle-photo-previous').on('click', function() {
@@ -148,19 +156,31 @@ function AjaxWindow() {
     this._load_previous = function() {
         var i = img_list.indexOf(this.id);
 
+        // В случае, если текущая фотография первая - выходим
+        // Если вторая - то убираем кнопку "предыдущая"
         if (i == 0) return;
+        if (i == 1) {
+            $('#toggle-photo-previous').addClass('disabled-button')
+        }
         var url = 'get_photo_context/' + img_list[i-1];
 
-        this._get_new_context(url)
+        this._get_new_context(url);
+        $('#toggle-photo-next').removeClass('disabled-button')
     }
 
     this._load_next = function() {
-
         var i = img_list.indexOf(this.id);
+
+        // В случае, если текущая фотография последняя - выходим
+        // Если предпоследняя - то убираем кнопку "следующая"
         if (i == img_list.length - 1) return;
+        if (i == img_list.length - 2) {
+            $('#toggle-photo-next').addClass('disabled-button')
+        }
         var url = 'get_photo_context/' + img_list[i+1]
 
-        this._get_new_context(url)
+        this._get_new_context(url);
+        $('#toggle-photo-previous').removeClass('disabled-button')
     }
 
     // Получает JSON с данными следующего изображения
@@ -172,51 +192,51 @@ function AjaxWindow() {
         $.get(url)
             .done(function(data) {
                 _this.id = data['id'];
-                console.log('done')
-                $('#photo-year').html(data['year'] == null ? '' : data['year'] + ',')
-                $('#photo-decade').html(data['decade'] == null ? '' : data['decade'] + '-ые')
-                $('#photo-uploader').html(data['uploader'] == null ? '' : data['uploader'])
-                $('#photo-uploaded').html(data['uploaded'] == null ? '' : data['uploaded'])
-                $('#photo-author').html(data['author'] == null ? '' : data['author'])
-                $('#photo-source').html(data['source'] == null ? '' : data['source'])
-                $('#photo-img').attr('src', data['url_large']).attr('alt', data['alt'])
 
-                $('#photo-edit-link').attr('href', '/mmz/edit_photo/' + data['id'])
+                $('#photo-year').html(data['year'] == null ? '' : data['year'] + ',');
+                $('#photo-decade').html(data['decade'] == null ? '' : data['decade'] + '-ые');
+                $('#photo-uploader').html(data['uploader'] == null ? '' : data['uploader']);
+                $('#photo-uploaded').html(data['uploaded'] == null ? '' : data['uploaded']);
+                $('#photo-author').html(data['author'] == null ? '' : data['author']);
+                $('#photo-source').html(data['source'] == null ? '' : data['source']);
+                $('#photo-img').attr('src', data['url_large']).attr('alt', data['alt']);
+                $('#photo-edit-link').attr('href', '/mmz/edit_photo/' + data['id']);
+
+                _this._change_url(data['id'])
             })
             .always(function() {
                 _this.loading = false;
             });
     }
 
-    this.remove_ajax_window = function() {
-        $('#ajax-content').remove();
-        change_url(null)
-    }
+
+
+    this._change_url = function(p_id) {
+
+        if (p_id == null) {
+            delete params['show']
+        } else {
+            params['show'] = p_id;
+        }
+
+        var p_arr = []
+        for (var key in params) {
+            p_arr.push(key + '=' + params[key])
+        }
+        if (p_arr.length > 0) {
+            var url = base_url + '?' + p_arr.join('&');
+        } else {
+            var url = base_url;
+        }
+
+
+        window.history.pushState( {} , '', url );
+    };
 }
 
 
 
-function change_url(p_id) {
 
-    if (p_id == null) {
-        delete params['show']
-    } else {
-        params['show'] = p_id;
-    }
-
-    var p_arr = []
-    for (var key in params) {
-        p_arr.push(key + '=' + params[key])
-    }
-    if (p_arr.length > 0) {
-        var url = base_url + '?' + p_arr.join('&');
-    } else {
-        var url = base_url;
-    }
-
-
-    window.history.pushState( {} , '', url );
-};
 
 function parse_url() {
     var url = location.href.split("?")

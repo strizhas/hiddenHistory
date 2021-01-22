@@ -661,32 +661,43 @@ input, select {
     color: #f6f6f2;
 }
 
-.popup-img-frame .disabled-button {
-    display: none;
-}
-
 .popup-img-frame .toggle-photo-button {
     position: absolute;
-    width: 1rem;
-    height: 1rem;
-    top: 50%;
-    border: solid black;
-    border-width: 0 3px 3px 0;
+    padding: 2rem;
     cursor: pointer;
+    top: 50%;
+    top: calc(50% - 2rem);
+}
+
+.popup-img-frame .toggle-photo-button .toggle-badge {
+    width: 2rem;
+    height: 2rem;
+    border: solid #c7c7c7;
+    border-width: 0 3px 3px 0;
 }
 
 .popup-img-frame .toggle-previous {
-    left: -4rem;
+    left: -6rem;
+}
+
+.popup-img-frame .toggle-next {
+    right: -6rem;
+}
+
+.popup-img-frame .toggle-previous .toggle-badge {
     transform: rotate(135deg);
     -webkit-transform: rotate(135deg);
 }
 
-.popup-img-frame .toggle-next {
-    right: -4rem;
+.popup-img-frame .toggle-next .toggle-badge {
     transform: rotate(-45deg);
     -webkit-transform: rotate(-45deg);
 }
 
+.popup-img-frame .disabled-button {
+   opacity: 0.2;
+   cursor: auto;
+}
 
 /*----------------------- AJAX окна----------------------------- */
 
@@ -989,11 +1000,11 @@ input, select {
         font-size: 1.3vw;
     }
     .popup-img-frame .toggle-previous {
-        left: 2rem;
+        left: 0;
     }
 
     .popup-img-frame .toggle-next {
-        right: 2rem;
+        right: 0;
     }
 
 }
