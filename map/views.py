@@ -127,7 +127,7 @@ def edit_photo(request, pk):
     sources = Source.objects.values()
 
     context = {
-        "url": p.img.url,
+        "url": p.img_medium.url,
         "author": p.author or '',
         'sources': sources,
         'filename': p.filename,
@@ -162,7 +162,7 @@ def save_changes(request, pk):
             response = {
                 "state": "success",
                 "message": "фотография обновлена",
-                "src": p.img.url,
+                "src": p.img_medium.url,
                 "name": p.img.name
             }
         else:

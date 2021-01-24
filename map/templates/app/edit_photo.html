@@ -9,7 +9,7 @@
 {% block content %}
     <div class="centered-content-wrapper">
         <span id="img-url-span" class="help-text">{{ filename }}</span>
-    <form action="/save_changes/{{pk}}" method="post" class="ajax-update-form" enctype="multipart/form-data">
+    <form action="/mmz/save_changes/{{pk}}" method="post" class="ajax-update-form" enctype="multipart/form-data">
         <div class="edit-img-container">
             <img width="100%" src="{{ url }}"/>
         </div>

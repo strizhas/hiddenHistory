@@ -49,8 +49,7 @@ const submitUpdateForm =  function(event, form, callback) {
         xhr: function() {
 
             var xhr = new window.XMLHttpRequest();
-
-            if (progressBar == null) {
+            if ($("#progressBar").length == 0) {
                 progressBar = $("<div>", {
                     "class": "form-progress-bar-section",
                     "html": '<progress id="progressBar" value="0" max="100"></progress>'
