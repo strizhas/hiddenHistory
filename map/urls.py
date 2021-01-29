@@ -30,6 +30,9 @@ urlpatterns = [
     path('zavod_v_poslevoennie_godi', TemplateView.as_view(
             template_name='longread/chapter_5/index.html'),
             name='zavod_v_poslevoennie_godi'),
+    path('zavod_v_godi_perestroiki', TemplateView.as_view(
+            template_name='longread/chapter_6/index.html'),
+            name='zavod_v_godi_perestroiki'),
     path('photos', views.show_photos, name='photos'),
     path('about', views.show_about, name='about'),
     path('map', views.show_map, name='map'),
