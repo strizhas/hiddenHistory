@@ -94,4 +94,17 @@ window['run_scrips'] = function() {
         load_next();
     })();
 
+    // Скролл к началу текста при нажатии на стрелочку на обложке
+    (function () {
+        var arrow = document.getElementById('header-arrow');
+        if (arrow == undefined) {
+            return;
+        }
+        arrow.addEventListener('click', function() {
+            window.scrollTo({
+                    top: document.getElementById('content-start').offsetTop,
+                    behavior: "smooth"
+                });
+        })
+    })();
 }
